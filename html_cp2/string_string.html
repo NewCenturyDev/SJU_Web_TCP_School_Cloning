@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>문자열</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 40px;
+    padding: 40px 0;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>37) 문자열</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div id="now" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+        <!-- 다음 강좌로 이동하는 버튼 -->
+        <a href="string_strFunc.html"><div class="button" id="next">다음 ▶</div></a>
+        <!-- 이전 강좌로 이동하는 버튼 -->
+        <a href="string_charFunc.html"><div class="button" id="prev">◀ 이전</div></a>
+
+    <br /><br />
+
+    <!-- 강좌 내용 -->
+    <h2>문자열</h2>
+    <hr />
+    <h3>문자열(string)</h3>
+    <p>C언어에서는 큰따옴표(&quot;&quot;)를 사용해 표현되는 문자열을 문자열 상수(string constant)라고 합니다.</p>
+    <p>상수라고 표현하는 이유는 해당 문자열이 이름을 가지고 있지 않으며, 문자열의 내용 또한 변경할 수 없기 때문입니다.</p>
+    <p>&nbsp;</p>
+    <p>C언어에서 문자열(string)은 메모리에 저장된 일련의 연속된 문자(character)들의 집합을 의미합니다.</p>
+    <p>따라서 문자형 배열을 선언하면 이 배열이 곧 문자열 변수가 됩니다.</p>
+    <p>&nbsp;</p>
+    <p>다음 예제는 문자열 상수 및 변수를 선언하는 여러 방법을 보여주는 예제입니다.</p>
+
+    <div class="codding-test">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #993333;">char</span> str01<span style="color: #009900;">[</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #ff0000;">&quot;This is a string.&quot;</span><span style="color: #339933;">;</span>&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">// 크기를 지정하지 않은 문자열 변수 선언</span></p>
+      <p class="textarea"><span style="color: #993333;">char</span> str02<span style="color: #009900;">[</span><span style="color: #0000dd;">7</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #ff0000;">&quot;string&quot;</span><span style="color: #339933;">;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span style="color: #666666; font-style: italic;">// 크기를 지정한 문자열 변수 선언</span></p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;이것은 문자열 상수입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 문자열 상수</span></p>
+      <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;문자열 str01에 저장되어 있는 문자열은 <span style="color: #000099; font-weight: bold;">\&quot;</span>%s<span style="color: #000099; font-weight: bold;">\&quot;</span>입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> str01<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;문자열 str02에 저장되어 있는 문자열은 <span style="color: #000099; font-weight: bold;">\&quot;</span>%s<span style="color: #000099; font-weight: bold;">\&quot;</span>입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> str02<span style="color: #009900;">)</span><span style="color: #339933;">;</span>&nbsp;&nbsp;</p>
+    </div>
+
+    <div class="syntax">
+      <h4>실행 결과</h4>
+      <p class="textarea">이것은 문자열 상수입니다.</p>
+      <p class="textarea">문자열 str01에 저장되어 있는 문자열은 &quot;This is a string.&quot;입니다.</p>
+      <p class="textarea">문자열 str02에 저장되어 있는 문자열은 &quot;string&quot;입니다.</p>
+    </div>
+
+    <p>&nbsp;</p>
+    <div class="tip">printf() 함수에서 사용된 &#39;%s&#39;는 문자열을 표현하기 위한 입출력 서식 문자입니다.</div>
+
+    <hr />
+
+    <h3>널(NULL) 문자</h3>
+    <p>문자형 배열로 선언된 문자열 변수는 문자열의 끝을 프로그램에 따로 알려주어야 합니다.</p>
+    <p>그래야만 프로그램이 실제 문자열에 속한 값과 그 외의 쓰레깃값을 구분할 수 있습니다.</p>
+    <p>&nbsp;</p>
+    <p>따라서 C언어에서는 문자열에 속한 데이터가 끝나면, 문자열의 끝을 의미하는 문자를 하나 더 삽입해 줍니다.</p>
+    <p>이 문자를 널(NULL) 문자라고 하며, &#39;\0&#39;으로 표시하고 아스키코드값은 0입니다.</p>
+    <p>&nbsp;</p>
+    <p>다음 예제는 널 문자를 이용하여 널 문자를 제외한 문자열의 길이를 계산하여 출력해주는 예제입니다.</p>
+
+    <div class="codding-test">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #993333;">int</span> str_len <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">char</span> str<span style="color: #009900;">[</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #ff0000;">&quot;string&quot;</span><span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea"><span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span>str<span style="color: #009900;">[</span>str_len<span style="color: #009900;">]</span> <span style="color: #339933;">!=</span> <span style="color: #ff0000;">&#39;<span style="color: #006699; font-weight: bold;">\0</span>&#39;</span><span style="color: #009900;">)</span> <span style="color: #666666; font-style: italic;">// 널 문자가 나올 때까지 길이를 증가함 </span></p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea">&nbsp; &nbsp; str_len<span style="color: #339933;">++;</span></p>
+      <p class="textarea"><span style="color: #009900;">}</span></p>
+      <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;이 문자열의 길이는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> str_len<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>실행 결과</h4>
+      <p class="textarea">이 문자열의 길이는 6입니다.</p>
+    </div>
+
+    <p>&nbsp;</p>
+    <p>다음 그림은 위 예제에서 사용된 문자열이 메모리 상에 어떻게 저장되어 있는지를 보여줍니다.</p>
+    <p>&nbsp;</p>
+    <p><img src="../_images/10.37 img_c_string.png" style="width: 382px; height: 296px;" /></p>
+    <hr />
+
+    <br/><br/>
+
+    <!-- 다음 강좌로 이동하는 버튼 -->
+    <a href="string_strFunc.html"><div class="button" id="next">다음 ▶</div></a>
+    <!-- 이전 강좌로 이동하는 버튼 -->
+    <a href="string_charFunc.html"><div class="button" id="prev">◀ 이전</div></a>
+
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+  </body>
+</html>

@@ -1,0 +1,301 @@
+html,body{ /* html과 body 모두에 적용할 속성들  */
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+body { /* body에 적용할 속성 */
+  overflow-y: scroll;
+}
+header { /* 헤더에 적용할 속성 */
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background-image: url("../_images/header_img.png");
+}
+#title{ /* 헤더의 SCP School div에 적용할 속성 */
+  position: absolute;
+  color: white;
+  width: 300px;
+  height: 60px;
+  top: 40px;
+  left: 80px;
+  font-size: 54px;
+  font-weight: 600;
+  line-height: 60px;
+  text-align: center;
+  cursor: pointer;
+}
+nav{ /* 상단 탭 메뉴에 적용할 속성*/
+  width: 100%;
+  height: 50px;
+}
+nav > div:nth-child(1){ /* 상단 첫 번째 탭 메뉴(SCP 메인)에 적용할 속성 */
+  width: 15%;
+  height: 48px;
+  background-color: rgba(0,20,100,0.8);
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 48px;
+  float: left;
+  cursor: pointer;
+}
+nav > div:nth-child(2){ /* 상단 두 번째 탭 메뉴(SCP 소개)에 적용할 속성 */
+  width: 15%;
+  height: 48px;
+  background-color: rgba(0,20,100,0.8);
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 48px;
+  float: left;
+  cursor: pointer;
+}
+nav > div:nth-child(3){ /* 상단 세 번째 탭 메뉴(일반 C)에 적용할 속성 */
+  width: 15%;
+  height: 48px;
+  background-color: rgba(0,20,100,0.8);
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 48px;
+  float: left;
+  cursor: pointer;
+}
+nav > div:nth-child(4){ /* 상단 네 번째 탭 메뉴(고급 C)에 적용할 속성 */
+  width: 15%;
+  height: 48px;
+  background-color: rgba(0,20,100,0.8);
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 48px;
+  float: left;
+  cursor: pointer;
+}
+nav > div:nth-child(5){ /* 상단 다섯 번째 탭 메뉴(FAQ)에 적용할 속성 */
+  width: 15%;
+  height: 48px;
+  background-color: rgba(0,20,100,0.8);
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 48px;
+  float: left;
+  cursor: pointer;
+}
+nav > div:nth-child(6){ /* 상단 탭에서 남는 공간에 적용할 속성 */
+  width: 25%;
+  height: 48px;
+  background-color: rgba(0,20,100,0.8);
+  float: left;
+}
+section{ /* 사이드(왼쪽) 메뉴에 적용할 속성 */
+  float: left;
+  width: 16%;
+  min-width: 100px;
+  background-color: #ffffff;
+  overflow: visible;
+}
+section > div{ /* 사이드(왼쪽) 메뉴의 각 탭마다 적용할 속성 */
+  height: 50px;
+  width: 100%;
+  margin-left: 10%;
+  margin-right: 5%;
+  color: #616468;
+  font-weight: 600;
+  text-align: left;
+  line-height: 50px;
+  border-bottom: 1px solid rgba(0,20,100,0.3);
+  cursor: pointer;
+  font-size: 17px;
+  overflow:hidden;
+}
+section > div:nth-child(1) { /* 사이드(왼쪽) 메뉴의 현재 제목 부분을 위한 속성 */
+  line-height: 40px;
+  text-align: center;
+  border-bottom: 2px solid rgba(0,0,0,0.5);
+  cursor: default;
+  font-size: 26px;
+  color: #303133;
+  overflow:visible;
+}
+#now { /* 사이드(왼쪽) 메뉴의 현재 페이지의 탭을 위한 속성 */
+  color: white;
+  background-color: rgba(0,20,100,0.8);
+}
+article{ /* 본문 내용 부분을 위한 속성 */
+  position: sticky;
+  width: 74%;
+  margin-right: 6%;
+  margin-top: 2.5%;
+  height: 95%;
+  float: right;
+}
+.category { /* 사이드(왼쪽) 메뉴의 큰 단원 부분을 위한 속성 */
+  height: 60px;
+  line-height: 60px;
+  font-size: 20px;
+  color: #47464c;
+  cursor: default;
+}
+#subtitle { /* 상단 탭 중에 현재 선택된 탭을 위한 속성 */
+  background-color: rgba(0,40,200,0.6);
+}
+
+a { /* a 태그를 위한 속성 */
+  text-decoration: none;
+}
+
+.button { /* 강좌마다 있는 이전, 다음 버튼을 위한 속성 */
+  width: 100px;
+  height: 32px;
+  background-color: #74777c;
+  color: white;
+  text-align: center;
+  line-height: 32px;
+}
+
+article > div { /* 본문을 위한 속성 */
+  float: left;
+  width: 100%;
+  height: 90%;
+}
+article > div > p { /* 본문의 글들을 위한 속성 */
+    margin: 6px 0;
+}
+article > div > hr { /* 본문의 밑줄(hr)들을 위한 속성 */
+  margin: 35px 0;
+}
+
+.sub_category:hover{ /* 사이드(왼쪽) 메뉴의 소단원 부분에 마우스 커서를 갖다댔을 때의 처리 */
+  background-color:#bdbdbd;
+  color: white;
+}
+
+#next{ /* 강좌의 다음 버튼을 위한 속성 */
+  float: right;
+}
+
+#prev { /* 강좌의 이전 버튼을 위한 속성 */
+  float: left;
+}
+
+.tb-2 { /* 본문 내용 중 표(테이블)를 위한 처리 */
+  width: 100%;
+  border: 1px solid #000000;
+  border-collapse: collapse;
+}
+
+.tb-2 th, .tb-2 td{ /* 본문 내용 중 표(테이블)의 선을 위한 처리 */
+  border: 1px solid #000000;
+}
+
+.tb-2 th { /* 본문 내용 중 표(테이블)의 제목 부분을 위한 처리 */
+  padding: 20px;
+  font-size: 15px;
+  background-color: #bdbdbd;
+}
+
+.tb-2 td { /* 본문 내용 중 표(테이블)의 내용 부분을 위한 처리 */
+  padding: 15px;
+  font-size: 14px;
+}
+
+.tb-2 td:nth-child(1) { /* 본문 내용 중 표(테이블)의 각 열의 첫 번째 내용 부분을 위한 처리 */
+  text-align: center;
+}
+
+.tip { /* 본문 내용 중 팁 부분에 대한 속성 */
+  border: 1px solid #bdbdbd;
+  padding: 10px 6px;
+  margin: 0 0 14px 0;
+  padding-left: 46px;
+  line-height: 180%;
+  font-size: 15px;
+  background:url(../_images/tip.png) no-repeat 11px 12px;
+  background-size:25px 25px;
+}
+
+article .codding-test { /* 본문 내용 중 코드 예제 부분에 대한 속성 */
+  width: 96.4%;
+  background-color: #ededed;
+  padding-left: 1.8%;
+  padding-right: 1.8%;
+  padding-top: 1.5%;
+  padding-bottom: 1.8%;
+  margin: 25px 0;
+}
+
+article .syntax { /* 본문 내용 중 코드 예제, 형식, 결과 등등의 박스에 적용할 속성 */
+  width: 96.4%;
+  background-color: #ededed;
+  padding-left: 1.8%;
+  padding-right: 1.8%;
+  padding-top: 1.5%;
+  padding-bottom: 1.8%;
+  margin: 15px 0;
+}
+
+article .textarea { /* 본문 내용 중 코드 예제의 코드들에 적용할 속성 */
+  background-color: white;
+  margin: 0px;
+  padding: 5px 0;
+}
+
+article h4 { /* 본문에 있는 제목에 적용할 속성 */
+  margin-top: 0;
+  margin-bottom: 1%;
+}
+
+/* 댓글 기능 */
+#reply {
+  float: left;
+  width: 100%;
+  height: 100px;
+  margin: 25px 0;
+  border: 1px solid grey;
+}
+
+/* 댓글 박스에 적용할 속성 */
+#reply > textarea {
+  float: left;
+  width: 90%;
+  height: 94px;
+}
+
+/* 댓글 작성 버튼에 적용할 속성 */
+#submitreply {
+  float: right;
+  width: 9%;
+  height: 100px;
+  background-color: darkgrey;
+  color: white;
+  text-align: center;
+  line-height: 94px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* 사이트 상단으로 이동하게 해주는 리모컨에 적용할 속성 */
+#remoteup {
+  height: 50px;
+  width: 50px;
+  border-top-left-radius: 5px;
+  position: fixed;
+  background: url(../_images/up.png) no-repeat;
+  right: 102px;
+  bottom: 0;
+}
+
+/* 사이트 하단으로 이동하게 해주는 리모컨에 적용할 속성 */
+#remotedown {
+  height: 50px;
+  width: 50px;
+  border-top-right-radius: 5px;
+  position: fixed;
+  background: url(../_images/down.png) no-repeat;
+  right: 50px;
+  bottom: 0;
+  border-left: 2px solid white;
+}

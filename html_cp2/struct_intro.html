@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>구조체의 기본</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 40px;
+    padding: 40px 0;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>40) 구조체의 기본</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div id="now" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+        <!-- 다음 강좌로 이동하는 버튼 -->
+        <a href="struct_pointer.html"><div class="button" id="next">다음 ▶</div></a>
+        <!-- 이전 강좌로 이동하는 버튼 -->
+        <a href="string_handling.html"><div class="button" id="prev">◀ 이전</div></a>
+
+    <br/><br/>
+
+    <!-- 강좌 내용 -->
+    <h2>구조체의 기본</h2>
+    <hr />
+    <h3>구조체란?</h3>
+    <p>구조체(structure type)란 사용자가 C언어의 기본 타입을 가지고 새롭게 정의할 수 있는 사용자 정의 타입입니다.</p>
+    <p>구조체는 기본 타입만으로는 나타낼 수 없는 복잡한 데이터를 표현할 수 있습니다.</p>
+    <p>&nbsp;</p>
+    <p>배열이 같은 타입의 변수 집합이라고 한다면, 구조체는 다양한 타입의 변수 집합을 하나의 타입으로 나타낸 것입니다.</p>
+    <p>이때 구조체를 구성하는 변수를 구조체의 멤버(member) 또는 멤버 변수(member variable)라고 합니다.</p>
+    <hr />
+    <h3>구조체의 정의와 선언</h3>
+    <p>C언어에서 구조체는 struct 키워드를 사용하여 다음과 같이 정의합니다.</p>
+
+    <div class="syntax">
+      <h4>문법</h4>
+      <p class="textarea"><span style="color: #993333;">struct</span> 구조체이름</p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea">&nbsp; &nbsp; 멤버변수1의타입 멤버변수1의이름<span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; 멤버변수2의타입 멤버변수2의이름<span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; ...<br /><span style="color: #009900;">}</span><span style="color: #339933;">;</span></p>
+    </div>
+
+    <p>&nbsp;</p>
+    <p>다음은 book이라는 이름의 구조체를 정의하는 그림입니다.</p>
+    <p>&nbsp;</p>
+    <p><img alt="구조체 선언" src="../_images/11.40 img_c_struct_structure.png" style="width: 360px; height: 378px;" /></p>
+    <p>struct라는 키워드를 사용하여 구조체의 시작을 알리고, 구조체 이름인 book으로 구조체를 정의하고 있습니다.</p>
+    <p>중괄호 사이에 char titile[30], char author[30], int price와 같은 변수들은 book의 멤버 변수들 입니다.</p>
+    <p>마지막 세이콜론은 구조체 정의를 종료한다는 의미입니다. 이렇게 정의된 book 구조체는 사용자 정의 자료형이라고 합니다.</p>
+    <p>이렇게 정의된 구조체 타입은 다음과 같이 구조체 변수로 선언하여 사용할 수 있습니다.</p>
+
+    <div class="syntax">
+      <h4>문법</h4>
+      <p class="textarea"><span style="color: #993333;">struct</span> 구조체이름 구조체변수이름<span style="color: #339933;">;</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #993333;">struct</span> book my_book<span style="color: #339933;">;</span></p>
+    </div>
+
+    <p>&nbsp;</p>
+    <p>또한, 구조체의 정의와 구조체 변수의 선언을 동시에 할 수도 있습니다.</p>
+
+    <div class="syntax">
+      <h4>문법</h4>
+      <p class="textarea"><span style="color: #993333;">struct</span> 구조체이름</p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea">&nbsp; &nbsp; 멤버변수1의타입 멤버변수1의이름<span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; 멤버변수2의타입 멤버변수2의이름<span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; ...</p>
+      <p class="textarea"><span style="color: #009900;">}</span> 구조체변수이름<span style="color: #339933;">;</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #993333;">struct</span> book</p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #993333;">char</span> title<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #993333;">char</span> author<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #993333;">int</span> price<span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #009900;">}</span> my_book<span style="color: #339933;">;</span></p>
+    </div>
+
+    <hr />
+    <h3>typedef 키워드</h3>
+    <p>C언어의 typedef 키워드는 이미 존재하는 타입에 새로운 이름을 붙일 때 사용합니다.</p>
+    <p>구조체 변수를 선언하거나 사용할 때에는 매번 struct 키워드를 사용하여 구조체임을 명시해야 합니다.</p>
+    <p>하지만 typedef 키워드를 사용하여 구조체에 새로운 이름을 선언하면 매번 struct 키워드를 사용하지 않아도 됩니다.</p>
+    <p>&nbsp;</p>
+    <p>typedef 키워드를 사용하여 새로운 이름을 선언하는 방법은 다음과 같습니다.</p>
+
+    <div class="syntax">
+      <h4>문법</h4>
+      <p class="textarea"><span style="color: #993333;">typedef</span> <span style="color: #993333;">struct</span> 구조체이름 구조체의새로운이름<span style="color: #339933;">;</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #993333;">typedef</span> <span style="color: #993333;">struct</span> book TEXTBOOK;</p>
+    </div>
+
+    <p>&nbsp;</p>
+    <p>또한, 구조체의 정의와 typedef 선언을 동시에 할 수도 있습니다.</p>
+
+    <div class="syntax">
+      <h4>문법</h4>
+      <p class="textarea"><span style="color: #993333;">typedef</span> <span style="color: #993333;">struct</span> <span style="color: #009900;">(</span>구조체이름<span style="color: #009900;">)</span></p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea">&nbsp; &nbsp; 멤버변수1의타입 멤버변수1의이름<span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; 멤버변수2의타입 멤버변수2의이름<span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; ...</p>
+      <p class="textarea"><span style="color: #009900;">}</span> 구조체의새로운이름<span style="color: #339933;">;</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #993333;">typedef</span> <span style="color: #993333;">struct</span> <span style="color: #009900;">{</span></p>
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #993333;">char</span> title<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #993333;">char</span> author<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #993333;">int</span> price<span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #009900;">}</span>&nbsp;TEXTBOOK<span style="color: #339933;">;</span></p>
+    </div>
+
+    <p>&nbsp;</p>
+    <div class="tip">구조체의 정의와 typedef 선언을 동시에 할 때에는 구조체의 이름을 생략할 수 있습니다.</div>
+
+    <hr />
+    <h3>구조체 멤버로의 접근 방법</h3>
+    <p>배열에서는 인덱스를 이용하여 배열 요소에 접근할 수 있습니다.</p>
+    <p>하지만 구조체에서 구조체 멤버로 접근하려고 할 때는 멤버 연산자(.)를 사용해야 합니다.</p>
+    <p>&nbsp;</p>
+    <p>구조체에서 구조체 멤버로의 접근 방법은 다음과 같습니다.</p>
+
+    <div class="syntax">
+      <h4>문법</h4>
+      <p class="textarea">구조체변수이름.멤버변수이름</p>
+    </div>
+
+    <div class="syntax">
+      <h4>예제</h4>
+      <p class="textarea">my_book.<span style="color: #202020;">author</span></p>
+    </div>
+
+    <p>&nbsp;</p>
+    <div class="tip">구조체의 주소값과 구조체의 첫 번째 멤버 변수의 주소값은 언제나 같습니다.</div>
+
+    <hr />
+    <h3>구조체 변수의 초기화</h3>
+    <p>구조체 변수를 초기화할 때에는 멤버 연산자(.)와 중괄호({})를 사용합니다.</p>
+    <p>&nbsp;</p>
+    <p>구조체 변수의 초기화 방법은 다음과 같습니다.</p>
+
+    <div class="syntax">
+      <h4>문법</h4>
+      <p class="textarea">구조체변수이름 <span style="color: #339933;">=</span> <span style="color: #009900;">{</span>.멤버변수1이름 <span style="color: #339933;">=</span> 초깃값<span style="color: #339933;">,</span> .멤버변수2이름 <span style="color: #339933;">=</span> 초깃값<span style="color: #339933;">,</span> ...<span style="color: #009900;">}</span><span style="color: #339933;">;</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>예제</h4>
+      <p class="textarea">my_book <span style="color: #339933;">=</span> <span style="color: #009900;">{</span>.<span style="color: #202020;">title</span> <span style="color: #339933;">=</span> <span style="color: #ff0000;">&quot;HTML과 CSS&quot;</span><span style="color: #339933;">,</span> .<span style="color: #202020;">author</span> <span style="color: #339933;">=</span> <span style="color: #ff0000;">&quot;홍길동&quot;</span><span style="color: #339933;">,</span> .<span style="color: #202020;">price</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">28000</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span></p>
+    </div>
+
+    <p>&nbsp;</p>
+    <p>이 방법을 사용하면 원하는 멤버 변수만을 초기화할 수 있습니다.</p>
+    <p>이때 멤버 변수가 정의된 순서와 초기화하는 순서는 아무런 상관이 없으며, 초기화하지 않은 멤버 변수는 0으로 초기화됩니다.</p>
+    <p>&nbsp;</p>
+    <p>또한, 배열의 초기화와 같은 방법으로 구조체 변수를 초기화할 수도 있습니다.</p>
+
+    <div class="syntax">
+      <h4>문법</h4>
+      <p class="textarea">구조체변수이름 <span style="color: #339933;">=</span> <span style="color: #009900;">{</span>멤버변수<span style="color: #0000dd;">1</span>의초깃값<span style="color: #339933;">,</span> 멤버변수<span style="color: #0000dd;">2</span>의초깃값<span style="color: #339933;">,</span> ...<span style="color: #009900;">}</span><span style="color: #339933;">;</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>예제</h4>
+      <p class="textarea">my_book <span style="color: #339933;">=</span> <span style="color: #009900;">{</span><span style="color: #ff0000;">&quot;HTML과 CSS&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;홍길동&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">28000</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span></p>
+    </div>
+
+    <p>&nbsp;</p>
+    <p>이때 구조체 정의에서 멤버 변수가 정의된 순서에 따라 차례대로 초깃값이 설정되며, 나머지 멤버 변수는 0으로 초기화됩니다.</p>
+    <p>&nbsp;</p>
+    <p>다음 예제는 앞서 살펴본 두 가지 방법을 사용하여 각각 구조체 변수를 초기화하는 예제입니다.</p>
+
+    <div class="codding-test">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span> &nbsp;</p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">struct</span> book</p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> title<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> author<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> price<span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; struct</span> book my_book <span style="color: #339933;">=</span> <span style="color: #009900;">{</span><span style="color: #ff0000;">&quot;HTML과 CSS&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;홍길동&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">28000</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; struct</span> book java_book <span style="color: #339933;">=</span> <span style="color: #009900;">{</span>.<span style="color: #202020;">title</span> <span style="color: #339933;">=</span> <span style="color: #ff0000;">&quot;Java language&quot;</span><span style="color: #339933;">,</span> .<span style="color: #202020;">price</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">30000</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;첫 번째 책의 제목은 %s이고, 저자는 %s이며, 가격은 %d원입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span>my_book.<span style="color: #202020;">title</span><span style="color: #339933;">,</span> my_book.<span style="color: #202020;">author</span><span style="color: #339933;">,</span> my_book.<span style="color: #202020;">price</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 번째 책의 제목은 %s이고, 저자는 %s이며, 가격은 %d원입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span>java_book.<span style="color: #202020;">title</span><span style="color: #339933;">,</span> java_book.<span style="color: #202020;">author</span><span style="color: #339933;">,</span> java_book.<span style="color: #202020;">price</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #009900;">}</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>실행 결과</h4>
+      <p class="textarea">첫 번째 책의 제목은 HTML과 CSS이고, 저자는 홍길동이며, 가격은 28000원입니다.</p>
+      <p class="textarea">두 번째 책의 제목은 Java language이고, 저자는 이며, 가격은 30000원입니다.</p>
+    </div>
+
+    <p>&nbsp;</p>
+    <p>다음 예제는 앞선 예제의 구조체에 typedef 키워드를 사용하여 새로운 이름을 선언한 후 사용하는 예제입니다.</p>
+
+    <div class="codding-test">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span> &nbsp;</p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">typedef struct</span></p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> title<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> author<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> price<span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #009900;">}&nbsp;</span>&nbsp;TEXTBOOK<span style="color: #339933;">;</span> &nbsp;</p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>TEXTBOOK my_book <span style="color: #339933;">=</span> <span style="color: #009900;">{</span><span style="color: #ff0000;">&quot;HTML과 CSS&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;홍길동&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">28000</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>TEXTBOOK java_book <span style="color: #339933;">=</span> <span style="color: #009900;">{</span>.<span style="color: #202020;">title</span> <span style="color: #339933;">=</span> <span style="color: #ff0000;">&quot;Java language&quot;</span><span style="color: #339933;">,</span> .<span style="color: #202020;">price</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">30000</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;첫 번째 책의 제목은 %s이고, 저자는 %s이며, 가격은 %d원입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span>my_book.<span style="color: #202020;">title</span><span style="color: #339933;">,</span> my_book.<span style="color: #202020;">author</span><span style="color: #339933;">,</span> my_book.<span style="color: #202020;">price</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 번째 책의 제목은 %s이고, 저자는 %s이며, 가격은 %d원입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span>java_book.<span style="color: #202020;">title</span><span style="color: #339933;">,</span> java_book.<span style="color: #202020;">author</span><span style="color: #339933;">,</span> java_book.<span style="color: #202020;">price</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #009900;">}</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>실행 결과</h4>
+      <p class="textarea">첫 번째 책의 제목은 HTML과 CSS이고, 저자는 홍길동이며, 가격은 28000원입니다.</p>
+      <p class="textarea">두 번째 책의 제목은 Java language이고, 저자는 이며, 가격은 30000원입니다.</p>
+    </div>
+
+    <p>&nbsp;</p>
+    <p>위 예제의 실행 결과처럼 typedef 키워드를 사용하여 구조체에 새로운 이름을 선언한 후 사용해도 structr 키워드를 그대로 사용한 것과 같은 결과를 얻을 수 있습니다.</p>
+    <hr />
+    <br/><br/>
+
+    <!-- 다음 강좌로 이동하는 버튼 -->
+    <a href="struct_pointer.html"><div class="button" id="next">다음 ▶</div></a>
+    <!-- 이전 강좌로 이동하는 버튼 -->
+    <a href="string_handling.html"><div class="button" id="prev">◀ 이전</div></a>
+
+        <!-- 댓글 -->
+        <div id="reply">
+          <textarea id="replycontent"></textarea>
+          <div id="submitreply">작성</div>
+        </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+  </body>
+</html>

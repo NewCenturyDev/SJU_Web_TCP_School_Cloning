@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>헤더 파일</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 40px;
+    padding: 40px 0;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>50) 헤더 파일</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div id="now" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+      <!-- 다음 강좌로 이동하는 버튼 -->
+      <a href="compile_module.html"><div class="button" id="next">다음 ▶</div></a>
+      <!-- 이전 강좌로 이동하는 버튼 -->
+      <a href="prepro_preMacro.html"><div class="button" id="prev">◀ 이전</div></a>
+      <br /><br />
+
+      <!-- 강좌 내용 -->
+      <h2>헤더 파일</h2>
+      <hr />
+      <h3>헤더 파일(header file)</h3>
+      <p>C언어에서 함수는 사용되기 전에 먼저 해당 함수의 원형이 선언되어야 합니다.</p>
+      <p>이 원칙은 표준 함수에도 그대로 적용되며, 표준 함수 또한 사용되기 전에 해당 함수의 원형이 선언되어야 합니다.</p>
+      <p>&nbsp;</p>
+
+      <p>이러한 표준 함수의 원형 및 표준 함수와 관련된 다양한 정보를 가지고 있는 파일을 표준 헤더 파일이라고 합니다.</p>
+      <p>또한, 사용자는 자신만의 사용자 헤더 파일을 자유롭게 만들 수도 있습니다.</p>
+      <p>헤더 파일의 확장자는 보통 .h를 사용하며, #include 선행처리 지시자를 사용하여 다른 파일에 포함시킬 수 있습니다.</p>
+
+      <hr />
+      <h3>표준 헤더 파일</h3>
+      <p>표준 함수의 원형 및 표준 함수와 관련된 다양한 정보를 가지고 있는 표준 헤더 파일은 그 크기가 상당히 큽니다.</p>
+      <p>하지만 크기가 큰 헤더 파일을 포함한다고 프로그램의 크기가 반드시 커지는 것은 아닙니다.</p>
+      <p>헤더 파일의 내용은 실행 파일에 추가되는 내용보다는 컴파일러가 실행 파일을 만드는 데 사용하는 정보가 대부분이기 때문입니다.</p>
+
+      <p>&nbsp;</p>
+      <p>표준 헤더 파일에 저장되는 정보는 다음과 같습니다.</p>
+
+      <p>&nbsp;</p>
+      <p>1. 표준 함수의 원형</p>
+      <p>2. 표준 함수의 매크로 상수</p>
+      <p>3. 표준 함수의 사용자 정의 타입(구조체, 공용체) 정의</p>
+      <p>4. 매크로 함수의 정의</p>
+
+      <hr />
+      <h3>사용자 헤더 파일</h3>
+      <p>많은 개발자가 자신의 프로그램에 사용하기 위해서 자신만의 헤더 파일을 작성합니다.</p>
+      <p>이러한 헤더 파일을 이용하면, 여러 파일에서 같이 공유하는 외부 변수를 선언할 수도 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 사용자가 직접 작성한 사용자 헤더 파일의 예제입니다.</p>
+      <div class="syntax">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+        <p class="textarea"><span style="color: #339933;">#define COND 2</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">struct</span> book</p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #993333;">char</span> title<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span
+            style="color: #339933;">;</span></p>
+        <p class="textarea">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #993333;">char</span> author<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span
+            style="color: #339933;">;</span></p>
+        <p class="textarea">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #993333;">int</span> price<span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span><span style="color: #339933;">;</span></p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">void</span> local<span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">int</span> bigNum <span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">,</span> <span style="color: #993333;">int</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      </div>
+
+      <hr />
+      <br /><br />
+
+      <!-- 다음 강좌로 이동하는 버튼 -->
+      <a href="compile_module.html"><div class="button" id="next">다음 ▶</div></a>
+      <!-- 이전 강좌로 이동하는 버튼 -->
+      <a href="prepro_preMacro.html"><div class="button" id="prev">◀ 이전</div></a>
+
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+</body>
+</html>

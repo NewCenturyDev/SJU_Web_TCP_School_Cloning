@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>구조체의 활용</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 40px;
+    padding: 40px 0;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>42) 구조체의 활용</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div id="now" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+        <!-- 다음 강좌로 이동하는 버튼 -->
+        <a href="struct_unionEnum.html"><div class="button" id="next">다음 ▶</div></a>
+        <!-- 이전 강좌로 이동하는 버튼 -->
+        <a href="struct_pointer.html"><div class="button" id="prev">◀ 이전</div></a>
+
+        <br/><br/>
+
+        <!-- 강좌 내용 -->
+        <h2>구조체의 활용</h2>
+        <hr />
+        <h3>함수와 구조체</h3>
+        <p>C언어에서는 함수를 호출할 때 전달되는 인수나, 함수가 종료될 때 반환되는 반환값으로 구조체를 사용할 수 있습니다.</p>
+        <p>그 방식은 기본 타입과 완전히 같으며, 구조체를 가리키는 포인터나 구조체의 한 멤버 변수만을 사용할 수도 있습니다.</p>
+        <p>&nbsp;</p>
+        <p>다음 예제는 구조체의 멤버 변수를 함수의 인수로 전달하는 예제입니다.</p>
+
+        <div class="codding-test">
+          <h4>예제</h4>
+          <p class="textarea"><span style="color: #993333;">typedef</span> <span style="color: #993333;">struct</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> savings<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> loan<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span> PROP<span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> hong_prop<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PROP hong <span style="color: #339933;">=</span> <span style="color: #009900;">{</span><span style="color: #0000dd;">10000000</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">4000000</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>hong_prop <span style="color: #339933;">=</span> calcProperty<span style="color: #009900;">(</span>hong.<span style="color: #202020;">savings</span><span style="color: #339933;">,</span> hong.<span style="color: #202020;">loan</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 구조체의 멤버 변수를 함수의 인수로 전달함 </span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;홍길동의 재산은 적금 %d원에 대출 %d원을 제외한 총 %d원입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span>hong.<span style="color: #202020;">savings</span><span style="color: #339933;">,</span> hong.<span style="color: #202020;">loan</span><span style="color: #339933;">,</span> hong_prop<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span></p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">홍길동의 재산은 적금 10000000원에 대출 4000000원을 제외한 총 6000000원입니다.</p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>위와 같이 구조체를 인수로 전달하는 방식은 함수가 원본 구조체의 복사본을 가지고 작업하므로 안전하다는 장점을 가집니다.</p>
+        <p>&nbsp;</p>
+        <p>다음 예제는 함수의 인수로 구조체의 주소를 직접 전달하는 예제입니다.</p>
+        <div class="codding-test">
+          <h4>예제</h4>
+          <p class="textarea"><span style="color: #993333;">int</span> hong_prop<span style="color: #339933;">;</span></p>
+          <p class="textarea">PROP hong <span style="color: #339933;">=</span> <span style="color: #009900;">{</span><span style="color: #0000dd;">10000000</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">4000000</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea">hong_prop <span style="color: #339933;">=</span> calcProperty<span style="color: #009900;">(</span><span style="color: #339933;">&amp;</span>hong<span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 구조체의 주소를 함수의 인수로 전달함. </span> &nbsp;</p>
+          <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;홍길동의 재산은 적금 %d원에 대출 %d원을 제외한 총 %d원입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> hong.<span style="color: #202020;">savings</span><span style="color: #339933;">,</span> hong.<span style="color: #202020;">loan</span><span style="color: #339933;">,</span> hong_prop<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">홍길동의 재산은 적금 100원에 대출 4000000원을 제외한 총 -3999900원입니다.</p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>위와 같이 구조체 포인터를 인수로 전달하는 방식은 구조체의 복사본이 아닌 주소 하나만을 전달하므로 처리가 빠릅니다.</p>
+        <p>하지만 호출된 함수에서 원본 구조체에 직접 접근하므로 원본 데이터의 보호 측면에서는 매우 위험합니다.</p>
+        <p>&nbsp;</p>
+        <p>따라서 다음 예제의 calcProperty() 함수처럼 const 키워드를 사용하여 함수에 전달된 인수를 함수 내에서는 직접 수정할 수 없도록 하는 것이 좋습니다.</p>
+        <div class="codding-test">
+          <h4>예제</h4>
+          <p class="textarea">PROP&nbsp;prop<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">int</span> hong_prop<span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea">prop <span style="color: #339933;">=</span> initProperty<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea">hong_prop <span style="color: #339933;">=</span> calcProperty<span style="color: #009900;">(</span><span style="color: #339933;">&amp;</span>prop<span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;홍길동의 재산은 적금 %d원에 대출 %d원을 제외한 총 %d원입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> prop.<span style="color: #202020;">savings</span><span style="color: #339933;">,</span> prop.<span style="color: #202020;">loan</span><span style="color: #339933;">,</span> hong_prop<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">홍길동의 재산은 적금 10000000원에 대출 4000000원을 제외한 총 6000000원입니다.</p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>위의 예제에서 initProperty() 함수는 반환값으로 구조체를 직접 반환합니다.</p>
+        <p>기본적으로 C언어의 함수는 한 번에 하나의 데이터만을 반환할 수 있습니다.</p>
+        <p>하지만 이렇게 구조체를 사용하면 여러 개의 데이터를 한 번에 반환할 수 있습니다.</p>
+
+        <hr />
+
+        <h3>중첩된 구조체</h3>
+        <p>C언어에서는 구조체를 정의할 때 멤버 변수로 또 다른 구조체를 포함할 수 있습니다.</p>
+
+        <div class="codding-test">
+          <h4>예제</h4>
+          <p class="textarea"><span style="color: #993333;">struct</span> name</p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> first<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> last<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">struct</span> friends</p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; struct</span> name friend_name<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> address<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> job<span style="color: #009900;">[</span><span style="color: #0000dd;">30</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; struct</span> friends hong <span style="color: #339933;">=</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span> <span style="color: #ff0000;">&quot;길동&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;홍&quot;</span> <span style="color: #009900;">}</span><span style="color: #339933;">,</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #ff0000;">&quot;서울시 강남구 역삼동&quot;</span><span style="color: #339933;">,</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #ff0000;">&quot;학생&quot;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%s<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> hong.<span style="color: #202020;">address</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%s%s에게,<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> hong.<span style="color: #202020;">friend_name</span>.<span style="color: #202020;">last</span><span style="color: #339933;">,</span> hong.<span style="color: #202020;">friend_name</span>.<span style="color: #202020;">first</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;그동안 잘 지냈니? 아직&nbsp;%s이지?<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> hong.<span style="color: #202020;">job</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;공부 잘 하고, 다음에 꼭 한번 보자.<span style="color: #000099; font-weight: bold;">\n</span>잘 지내^^&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">서울시 강남구 역삼동</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea">홍길동에게,</p>
+          <p class="textarea">그동안 잘 지냈니? 아직 학생이지?</p>
+          <p class="textarea">공부 잘 하고, 다음에 꼭 한번 보자.</p>
+          <p class="textarea">잘 지내^^</p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>위의 예제에서 friends 구조체는 또 다른 구조체인 name 구조체를 멤버 변수로 포함하고 있습니다.</p>
+
+        <hr />
+
+        <h3>구조체의 크기</h3>
+        <p>일반적으로 구조체의 크기는 멤버 변수들의 크기에 따라 결정됩니다.</p>
+        <p>하지만 구조체의 크기가 언제나 멤버 변수들의 크기 총합과 일치하는 것은 아닙니다.</p>
+
+        <div class="codding-test">
+          <h4>예제</h4>
+          <p class="textarea"><span style="color: #993333;">typedef</span> <span style="color: #993333;">struct</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> a<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> b<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; double</span> c<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span> TYPESIZE<span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;구조체 TypeSize의 각 멤버의 크기는 다음과 같습니다.&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d %d %d<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span><span style="color: #993333;">char</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span><span style="color: #993333;">double</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;구조체 TypeSize의 크기는 다음과 같습니다.&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span>TYPESIZE<span style="color: #009900;">))</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span></p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">구조체 TYPESIZE의 각 멤버의 크기는 다음과 같습니다.</p>
+          <p class="textarea">1 4 8</p>
+          <p class="textarea">구조체 TYPESIZE의 크기는 다음과 같습니다.</p>
+          <p class="textarea">16</p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>위의 예제에서 구조체 멤버 변수의 크기는 각각 1, 4, 8바이트입니다.</p>
+        <p>하지만 구조체의 크기는 멤버 변수들의 크기 총합인 13바이트가 아니라 16바이트가 됩니다.</p>
+
+        <hr />
+
+        <h3>바이트 패딩(byte padding)</h3>
+        <p>구조체를 메모리에 할당할 때 컴파일러는 프로그램의 속도 향상을 위해 바이트 패딩(byte padding)이라는 규칙을 이용합니다.</p>
+        <p>구조체는 다양한 크기의 타입을 멤버 변수로 가질 수 있는 타입입니다.</p>
+        <p>하지만 컴파일러는 메모리의 접근을 쉽게 하기 위해 크기가 가장 큰 멤버 변수를 기준으로 모든 멤버 변수의 메모리 크기를 맞추게 됩니다.</p>
+        <p>이것을 바이트 패딩이라고 하며, 이때 추가되는 바이트를 패딩 바이트(padding byte)라고 합니다.</p>
+        <p>&nbsp;</p>
+        <p><img src="../_images/11.42 img_c_bytepadding.png" style="width: 376px; height: 348px;" /></p>
+        <p>&nbsp;</p>
+        <p>앞선 예제에서는 크기가 가장 큰 double형 타입의 크기인 8바이트가 기준이 됩니다.</p>
+        <p>맨 처음 char형 멤버 변수를 위해 8바이트가 할당되며, 할당되는 1바이트를 제외한 7바이트가 남게 됩니다.</p>
+        <p>그다음 int형 멤버 변수는 남은 7바이트보다 작으므로, 그대로 7바이트 중 4바이트를 할당하고 3바이트가 남게 됩니다.</p>
+        <p>마지막 double형 멤버 변수는 8바이트인데 남은 공간은 3바이트뿐이므로 다시 8바이트를 할당받습니다.</p>
+        <p>따라서 이 구조체의 크기는 총 16바이트가 되며, 그중에서 패딩 바이트(padding byte)는 3바이트가 됩니다.</p>
+
+        <hr/>
+        <br/><br/>
+        
+        <!-- 다음 강좌로 이동하는 버튼 -->
+        <a href="struct_unionEnum.html"><div class="button" id="next">다음 ▶</div></a>
+        <!-- 이전 강좌로 이동하는 버튼 -->
+        <a href="struct_pointer.html"><div class="button" id="prev">◀ 이전</div></a>
+
+        <!-- 댓글 -->
+        <div id="reply">
+          <textarea id="replycontent"></textarea>
+          <div id="submitreply">작성</div>
+        </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+  </body>
+</html>

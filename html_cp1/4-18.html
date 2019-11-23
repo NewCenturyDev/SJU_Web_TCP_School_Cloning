@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SCP School - C Programming Part 1</title>
+  <link rel="stylesheet" href="../_css/cp1.css" />
+  <link rel="stylesheet" href="../_css/modal.css">
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+    section>div:nth-child(1) {
+      height: 40px;
+      padding: 40px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="title" onClick="window.location.href = './main.html';">
+      SCP School
+    </div>
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div id="subtitle" onclick="window.location.href = '1-1.html';">
+      일반 C
+    </div>
+    <div onclick="window.location.href = '../html_cp2/memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+  <section>
+    <div>18) 조건문</div>
+    <div class="category">1. C언어 시작</div>
+    <div class="sub_category" onclick="window.location.href = './1-1.html';">&nbsp&nbsp1) C언어 개요</div>
+    <div class="sub_category" onclick="window.location.href = './1-2.html';">&nbsp&nbsp2) C언어 기초</div>
+    <div class="sub_category" onclick="window.location.href = './1-3.html';">&nbsp&nbsp3) C프로그래밍</div>
+    <div class="sub_category" onclick="window.location.href = './1-4.html';">&nbsp&nbsp4) C프로그램의 특징</div>
+    <div class="sub_category" onclick="window.location.href = './1-5.html';">&nbsp&nbsp5) printf() 함수</div>
+    <div class="sub_category" onclick="window.location.href = './1-6.html';">&nbsp&nbsp6) scanf() 함수</div>
+    <div class="category">2. 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-7.html';">&nbsp&nbsp7) 변수</div>
+    <div class="sub_category" onclick="window.location.href = './2-8.html';">&nbsp&nbsp8) 상수</div>
+    <div class="sub_category" onclick="window.location.href = './2-9.html';">&nbsp&nbsp9) 기본 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-10.html';">&nbsp&nbsp10) 타입 변환</div>
+    <div class="category">3. 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-11.html';">&nbsp&nbsp11) 산술 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-12.html';">&nbsp&nbsp12) 대입 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-13.html';">&nbsp&nbsp13) 증갑 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-14.html';">&nbsp&nbsp14) 비교 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-15.html';">&nbsp&nbsp15) 논리 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-16.html';">&nbsp&nbsp16) 비트 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-17.html';">&nbsp&nbsp17) 기타 연산자</div>
+    <div class="category">4. 제어문</div>
+    <div id="now" onclick="window.location.href = './4-18.html';">&nbsp&nbsp18) 조건문</div>
+    <div class="sub_category" onclick="window.location.href = './4-19.html';">&nbsp&nbsp19) 반복문</div>
+    <div class="sub_category" onclick="window.location.href = './4-20.html';">&nbsp&nbsp20) 기타 제어문</div>
+    <div class="category">5. 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-21.html';">&nbsp&nbsp21) C언어 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-22.html';">&nbsp&nbsp22) 변수의 유효 범위</div>
+    <div class="sub_category" onclick="window.location.href = './5-23.html';">&nbsp&nbsp23) 재귀 호출</div>
+    <div class="category">6. 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-24.html';">&nbsp&nbsp24) 2차원 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-25.html';">&nbsp&nbsp25) 다차원 배열</div>
+    <div class="category">7. 포인터</div>
+    <div class="sub_category" onclick="window.location.href = './7-26.html';">&nbsp&nbsp26) 포인터의 개념</div>
+    <div class="sub_category" onclick="window.location.href = './7-27.html';">&nbsp&nbsp27) 포인터 연산</div>
+    <div class="sub_category" onclick="window.location.href = './7-28.html';">&nbsp&nbsp28) 인수 전달 방법</div>
+    <div class="sub_category" onclick="window.location.href = './7-29.html';">&nbsp&nbsp29) 다양한 포인터</div>
+    <div class="category">8. 포인터와 배열</div>
+    <div class="sub_category" onclick="window.location.href = './8-30.html';">&nbsp&nbsp30) 포인터와 배열의 관계</div>
+    <div class="sub_category" onclick="window.location.href = './8-31.html';">&nbsp&nbsp31) 포인터 배열과 배열 포인터</div>
+  </section>
+  <article>
+    <div>
+      <a href="./4-19.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./3-17.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <br /><br />
+      <h2>조건문</h2>
+      <hr />
+
+      <h3>제어문(control flow statements)</h3>
+
+      <p>C 프로그램은 절차적 프로그램(procedural program) 또는 명령형 프로그램(Imperative program)에 속합니다.</p>
+
+      <p>C 프로그램에는 수많은 명령문이 포함되어 있으며, 이 명령문은 처음부터 끝까지 순서대로 실행됩니다.</p>
+
+      <p>따라서 원하는 결과를 얻기 위해서는 프로그램의 이러한 순차적인 흐름을 제어해야만 합니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>이때 사용하는 명령문을 제어문이라고 하며, 이러한 제어문에는 조건문, 반복문 등이 있습니다.</p>
+
+      <p>이러한 제어문에 속하는&nbsp;명령문들은 중괄호({})로 둘러싸여 있으며,&nbsp;이러한 중괄호 영역을 블록(block)이라고&nbsp;합니다.</p>
+
+      <hr />
+      <h3>조건문(conditional statements)</h3>
+
+      <p>조건문은&nbsp;주어진 조건식의 결과에 따라 별도의&nbsp;명령을 수행하도록 제어하는 명령문입니다.</p>
+
+      <p>조건문 중에서도 가장 기본이 되는 명령문은 바로 if 문입니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 사용하는 대표적인 조건문의 형태는&nbsp;다음과 같습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>1. if&nbsp;문<br />
+        2. if / else&nbsp;문<br />
+        3. if / else if / else&nbsp;문<br />
+        4. switch 문</p>
+
+      <hr />
+      <h3>if 문</h3>
+
+      <p>if 문은 조건식의 결과가 참(true)이면 주어진 명령문을&nbsp;실행하며, 거짓(false)이면 아무것도 실행하지 않습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>if 문을 순서도로 표현하면 다음 그림과 같습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p><img alt="if 문" src="../_images/img_js_if.png" style="width: 300px; height: 289px;" /></p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 if 문의 문법은 다음과 같습니다.</p>
+
+      <div class="syntax">
+        <h4>문법</h4>
+
+        <p class="textarea"><span style="color:#794938">if</span> (조건식)&nbsp;</p>
+
+        <p class="textarea">{</p>
+
+        <p class="textarea">&nbsp; &nbsp; 조건식의 결과가 참일 때 실행하고자 하는 명령문;</p>
+
+        <p class="textarea">}</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 코드에서 블록에 속한 명령문은 중괄호({})를 기준으로&nbsp;오른쪽으로 들여쓰기가 되어 있는 것을 볼&nbsp;수 있습니다.</p>
+
+      <p>이처럼 들여쓰기를 통해 코드의 가독성을 높이는 것을&nbsp;인덴트(indent)라고 하며,&nbsp;될 수 있으면 모든 코드를&nbsp;인덴트하는 것이 좋습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 if 문을 3번 연속해서 사용하여, 사용자가 입력한 수와 숫자 5를&nbsp;비교하여&nbsp;그 결괏값을&nbsp;출력하는 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num <span style="color: #339933;">=</span> <span style="color: #0000dd;">3</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea"><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num <span style="color: #339933;">&lt;</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5보다 작습니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num <span style="color: #339933;">==</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num <span style="color: #339933;">&gt;</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5보다 큽니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">입력하신 수는 5보다 작습니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <div class="tip s5">if 문에서 실행될 명령문이 한 줄 뿐이라면 중괄호({})를 생략할 수&nbsp;있습니다.</div>
+
+      <hr />
+      <h3>if / else 문</h3>
+
+      <p>if 문과 함께 사용하는 else 문은 if 문과는 반대로 주어진&nbsp;조건식의 결과가 거짓(false)이면 주어진 명령문을 실행합니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>if / else 문을 순서도로 표현하면 다음 그림과 같습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p><img alt="else 문" src="../_images/img_js_else.png" style="width: 450px; height: 277px;" /></p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 else 문의 문법은 다음과 같습니다.</p>
+
+      <div class="syntax">
+        <h4>문법</h4>
+
+        <p class="textarea"><span style="color:#794938">if</span> (조건식)&nbsp;</p>
+
+        <p class="textarea">{</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span>조건식의 결과가 참일 때 실행하고자 하는 명령문;</p>
+
+        <p class="textarea">}&nbsp;</p>
+
+        <p class="textarea"><span style="color:#794938">else</span>&nbsp;</p>
+
+        <p class="textarea">{</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span>조건식의 결과가 거짓일 때 실행하고자 하는 명령문;</p>
+
+        <p class="textarea">}</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>else 문을 사용하면 앞선&nbsp;예제를 좀 더 직관적으로 표현할 수 있습니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num <span style="color: #339933;">=</span> <span style="color: #0000dd;">5</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea"><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num <span style="color: #339933;">&lt;</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5보다 작습니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">else</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num <span style="color: #339933;">==</span> <span style="color: #0000dd;">5</span><span
+            style="color: #009900;">)</span></p>
+
+        <p class="textarea">
+          <font color="#009900">&nbsp; &nbsp;&nbsp;</font><span style="color: #009900;">{</span>
+        </p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #339933;">&nbsp;&nbsp; &nbsp;</span><span style="color: #009900;">}</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">else</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp;&nbsp; &nbsp;</span><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5보다 큽니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #339933;">&nbsp;&nbsp; &nbsp;</span><span style="color: #009900;">}</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">입력하신 수는 5입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <div class="tip s5">else 문에서도 실행될 명령문이 한 줄뿐이라면 중괄호({})를 생략할 수 있습니다.</div>
+
+      <hr />
+      <h3>if / else if / else 문</h3>
+
+      <p>else if 문은&nbsp;if 문처럼 조건식을 가질 수 있기 때문에&nbsp;중첩된 if 문을 좀 더 간결하게 표현할 수 있도록 해줍니다.</p>
+
+      <p>하나의 조건문 안에서 if 문과 else 문은 단 한 번만 사용될 수 있습니다.</p>
+
+      <p>하지만 else if 문은 여러 번 사용될 수 있어서 복잡한&nbsp;조건도&nbsp;표현할 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>if / else if / else 문을 순서도로 표현하면 다음 그림과 같습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p><img alt="else if 문" src="../_images/img_js_elseif.png" style="width: 700px; height: 413px;" /></p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 else if&nbsp;문의 문법은 다음과 같습니다.</p>
+
+      <div class="syntax">
+        <h4>문법</h4>
+
+        <p class="textarea"><span style="color:#794938">if</span> (조건식1)&nbsp;</p>
+
+        <p class="textarea">{</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span>조건식1의 결과가 참일 때 실행하고자 하는 명령문;</p>
+
+        <p class="textarea">}&nbsp;</p>
+
+        <p class="textarea"><span style="color:#794938">else</span> <span style="color:#794938">if</span> (조건식2)&nbsp;</p>
+
+        <p class="textarea">{</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span>조건식2의 결과가 참일 때 실행하고자 하는 명령문;</p>
+
+        <p class="textarea">}&nbsp;</p>
+
+        <p class="textarea"><span style="color:#794938">else</span>&nbsp;</p>
+
+        <p class="textarea">{</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span>조건식1의 결과도 거짓이고, 조건식2의 결과도 거짓일 때 실행하고자 하는 명령문;</p>
+
+        <p class="textarea">}</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>else if 문을 사용하면 앞선 예제를 더욱 간결하게 표현할 수 있습니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num <span style="color: #339933;">=</span> <span style="color: #0000dd;">7</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea"><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num <span style="color: #339933;">&lt;</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5보다 작습니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">else</span> <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num <span style="color: #339933;">==</span> <span style="color: #0000dd;">5</span><span
+            style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">else</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5보다 큽니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">입력하신 수는 5보다 큽니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <div class="tip s5">else if&nbsp;문에서도 실행될 명령문이 한 줄뿐이라면 중괄호({})를 생략할 수 있습니다.</div>
+
+      <hr />
+      <h3>삼항 연산자에 의한 조건문</h3>
+
+      <p>C언어에서는 if / else 문을 삼항 연산자를 이용하여 간단히 표현할 수 있습니다.</p>
+
+      <div class="syntax">
+        <h4>문법</h4>
+
+        <p class="textarea">조건식&nbsp;<span style="color:#A52A2A;">?</span> 반환값1 <span style="color:#A52A2A;">:</span> 반환값2</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>삼항 연산자에 대한 더 자세한 사항은 C언어 기타 연산자 수업에서 확인할 수 있습니다.</p>
+
+      <p><a href="/c/c_operator_etc" target="_blank">C언어 기타 연산자 수업 확인 =&gt;</a></p>
+
+      <hr />
+      <h3>switch 문</h3>
+
+      <p>switch 문은 if / else 문과 마찬가지로 주어진 조건 값의 결과에 따라 프로그램이&nbsp;다른 명령을 수행하도록 하는 조건문입니다.</p>
+
+      <p>이러한 switch 문은 if / else 문보다 가독성이 더 좋으며, 컴파일러가 최적화를 쉽게 할 수 있어&nbsp;속도 또한 빠른 편입니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>하지만 switch 문의 조건 값으로는 int형으로&nbsp;승격할 수 있는(integer promotion)&nbsp;값만이 사용될&nbsp;수 있습니다.</p>
+
+      <p>즉, C언어에서는 char형, short형, int형&nbsp;변수나&nbsp;리터럴과 나중에 배우게 될 열거체까지&nbsp;사용할&nbsp;수 있습니다.</p>
+
+      <p>따라서&nbsp;if / else 문보다는 사용할 수 있는 상황이 적은 편입니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>열거체에 대한 더 자세한 사항은 C언어 공용체와 열거체&nbsp;수업에서 확인할 수 있습니다.</p>
+
+      <p><a href="/c/c_struct_unionEnum" target="_blank">C언어 공용체와 열거체 수업 확인 =&gt;</a></p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 switch 문의 문법은 다음과 같습니다.</p>
+
+      <div class="syntax">
+        <h4>문법</h4>
+
+        <p class="textarea"><span style="color:#794938">switch</span> (<span style="color:#006400;">조건 값</span>)&nbsp;</p>
+
+        <p class="textarea">{</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span><span style="color:#794938">case</span> <span style="color:#006400;">값1</span>:</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span><span style="color:#691c97">&nbsp; &nbsp; </span>조건 값이 값1일 때 실행하고자 하는 명령문;</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color:#794938">break</span>;</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span><span style="color:#794938">case</span> <span style="color:#006400;">값2</span>:</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span><span style="color:#691c97">&nbsp; &nbsp; </span>조건 값이 값2일 때 실행하고자 하는 명령문;</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color:#794938">break</span>;</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span>...</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; </span><span style="color:#794938">default</span>:</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; &nbsp; &nbsp; </span>조건 값이 어떠한&nbsp;case&nbsp;절에도 해당하지 않을&nbsp;때 실행하고자 하는 명령문;</p>
+
+        <p class="textarea"><span style="color:#691c97">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color:#794938">break</span>;</p>
+
+        <p class="textarea">}</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>default 절은 조건 값이 위에 나열된 어떠한 case&nbsp;절에도 해당하지 않을 때 실행됩니다.</p>
+
+      <p>이 구문은 반드시 존재해야 하는 것은 아니며&nbsp;필요할 때에만 선언할 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <div class="tip s5">default&nbsp;절의 위치가 반드시&nbsp;switch 문의&nbsp;맨 마지막일 필요는 없습니다.</div>
+
+      <p>&nbsp;</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num <span style="color: #339933;">=</span> <span style="color: #0000dd;">2</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea"><span style="color: #b1b100;">switch</span> <span style="color: #009900;">(</span>num<span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 1입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">2</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 2입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">3</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 3입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">4</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 4입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">5</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">default</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;1부터 5까지의 수만 입력해 주세요!&quot;</span><span style="color: #009900;">)</span><span
+            style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">입력하신 수는 2입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>각 case 절 및 default&nbsp;절은&nbsp;반드시 break 키워드를&nbsp;포함하고 있어야 합니다.</p>
+
+      <p>break 키워드는&nbsp;조건 값에 해당하는&nbsp;case 절이나 default 절이 실행된 뒤에 전체 switch 문을 빠져나가게 해줍니다.</p>
+
+      <p>만약에 break 키워드가 없다면, 조건에 해당하는 switch 문의 case 절 이후의 모든 case 절이&nbsp;전부 실행될 것입니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 앞서 살펴본 예제에서 break 키워드를 모두 삭제한 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num <span style="color: #339933;">=</span> <span style="color: #0000dd;">2</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea"><span style="color: #b1b100;">switch</span> <span style="color: #009900;">(</span>num<span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 1입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">2</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 2입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">3</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 3입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">4</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 4입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #0000dd;">5</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 수는 5입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">default</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;1부터 5까지의 수만 입력해 주세요!&quot;</span><span style="color: #009900;">)</span><span
+            style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">입력하신 수는 2입니다.</p>
+
+        <p class="textarea">입력하신 수는 3입니다.</p>
+
+        <p class="textarea">입력하신 수는 4입니다.</p>
+
+        <p class="textarea">입력하신 수는 5입니다.</p>
+
+        <p class="textarea">1부터 5까지의 수만 입력해 주세요!</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제처럼&nbsp;break 키워드가 없으면, 조건 값에 해당하는 case 절뿐만 아니라 그 이후에 등장하는 모든 case 절과 default 절이 전부 실행됨을 알 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 조건 값으로 여러 개의 char형 문자를 검사하는 예제입니다.</p>
+
+      <p>이렇게 switch 문의 조건으로 여러 개의 case 절을 사용하여 여러 개의&nbsp;조건을 한 번에&nbsp;검사할 수&nbsp;있습니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">char</span> ch <span style="color: #339933;">=</span> <span style="color: #ff0000;">&#39;a&#39;</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea"><span style="color: #b1b100;">switch</span> <span style="color: #009900;">(</span>ch<span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;a&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;A&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;이 학생의 학점은 A입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;b&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;B&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;이 학생의 학점은 B입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;c&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;C&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;이 학생의 학점은 C입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;d&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;D&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;이 학생의 학점은 D입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;f&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> <span style="color: #ff0000;">&#39;F&#39;</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;이 학생의 학점은 F입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">default</span><span style="color: #339933;">:</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;학점을 정확히 입력해 주세요!(A, B, C, D, F)&quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">이 학생의 학점은 A입니다.</p>
+      </div>
+
+      <hr /><br /><br />
+      <a href="./4-19.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./3-17.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <script src="../_js/modal.js"></script>
+<div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div></body>
+
+</html>

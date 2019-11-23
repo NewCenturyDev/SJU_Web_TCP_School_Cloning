@@ -1,0 +1,155 @@
+html,body{
+  /*전체 속성 (초기화)*/
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    /*본문 초과되었을 때 스크롤 처리하도록 함*/
+    overflow-y: scroll;
+  }
+  header{
+    /*상단 로고, 이미지 부분*/
+    position: relative;
+    width: 100%;
+    height: 250px;
+    background-image: url("../_images/header_img.png");
+  }
+  #title{
+    /*상단 로고 부분*/
+    position: absolute;
+    color: white;
+    width: 300px;
+    height: 60px;
+    top: 40px;
+    left: 80px;
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  nav{
+    /*상단 네비게이션 메뉴 부분*/
+    width: 100%;
+    height: 50px;
+  }
+  nav > div:nth-child(1){
+    /*상단메뉴 SCP 메인 부분*/
+    width: 15%;
+    height: 48px;
+    background-color: rgba(0,20,100,0.8);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 48px;
+    float: left;
+    cursor: pointer;
+  }
+  nav > div:nth-child(2){
+    /*상단메뉴 SCP 소개 부분*/
+    width: 15%;
+    height: 48px;
+    background-color: rgba(0,20,100,0.8);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 48px;
+    float: left;
+    cursor: pointer;
+  }
+  nav > div:nth-child(3){
+    /*상단메뉴 일반C 부분*/
+    width: 15%;
+    height: 48px;
+    background-color: rgba(0,20,100,0.8);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 48px;
+    float: left;
+    cursor: pointer;
+  }
+  nav > div:nth-child(4){
+    /*상단메뉴 고급C 부분*/
+    width: 15%;
+    height: 48px;
+    background-color: rgba(0,20,100,0.8);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 48px;
+    float: left;
+    cursor: pointer;
+  }
+  nav > div:nth-child(5){
+    /*상단메뉴 FAQ 부분*/
+    width: 15%;
+    height: 48px;
+    background-color: rgba(0,20,100,0.8);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 48px;
+    float: left;
+    cursor: pointer;
+  }
+  nav > div:nth-child(6){
+    /*상단메뉴 우측 여백 부분*/
+    width: 25%;
+    height: 48px;
+    background-color: rgba(0,20,100,0.8);
+    float: left;
+  }
+  article{
+    /*본문 내용 부분*/
+    position: sticky;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .category {
+    /*카테고리 부분*/
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    color: #47464c;
+  }
+  #subtitle {
+    /*현재 선택된 상단메뉴 색상 별도처리*/
+    background-color: rgba(0,40,200,0.6);
+  }
+  
+  a {
+    /*a태그 밑줄 제거*/
+    text-decoration: none;
+  }
+  
+  .button {
+    /*버튼 역할을 하는 div들*/
+    width: 100px;
+    height: 32px;
+    background-color: #74777c;
+    color: white;
+    text-align: center;
+    line-height: 32px;
+  }
+  
+  article > div {
+    /*본문 부분 박스*/
+    float: left;
+    width: 100%;
+    height: 90%;
+  }
+  
+  #next{
+    /*다음 버튼 (예비용)*/
+    float: right;
+  }
+  
+  #prev {
+    /*이전 버튼 (예비용)*/
+    float: left;
+  }
+  

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SCP School - C Programming Part 1</title>
+  <link rel="stylesheet" href="../_css/cp1.css" />
+  <link rel="stylesheet" href="../_css/modal.css">
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+    section>div:nth-child(1) {
+      height: 40px;
+      padding: 40px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="title" onClick="window.location.href = './main.html';">
+      SCP School
+    </div>
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div id="subtitle" onclick="window.location.href = '1-1.html';">
+      일반 C
+    </div>
+    <div onclick="window.location.href = '../html_cp2/memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+  <section>
+    <div>10) 타입 변환</div>
+    <div class="category">1. C언어 시작</div>
+    <div class="sub_category" onclick="window.location.href = './1-1.html';">&nbsp&nbsp1) C언어 개요</div>
+    <div class="sub_category" onclick="window.location.href = './1-2.html';">&nbsp&nbsp2) C언어 기초</div>
+    <div class="sub_category" onclick="window.location.href = './1-3.html';">&nbsp&nbsp3) C프로그래밍</div>
+    <div class="sub_category" onclick="window.location.href = './1-4.html';">&nbsp&nbsp4) C프로그램의 특징</div>
+    <div class="sub_category" onclick="window.location.href = './1-5.html';">&nbsp&nbsp5) printf() 함수</div>
+    <div class="sub_category" onclick="window.location.href = './1-6.html';">&nbsp&nbsp6) scanf() 함수</div>
+    <div class="category">2. 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-7.html';">&nbsp&nbsp7) 변수</div>
+    <div class="sub_category" onclick="window.location.href = './2-8.html';">&nbsp&nbsp8) 상수</div>
+    <div class="sub_category" onclick="window.location.href = './2-9.html';">&nbsp&nbsp9) 기본 타입</div>
+    <div id="now" onclick="window.location.href = './2-10.html';">&nbsp&nbsp10) 타입 변환</div>
+    <div class="category">3. 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-11.html';">&nbsp&nbsp11) 산술 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-12.html';">&nbsp&nbsp12) 대입 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-13.html';">&nbsp&nbsp13) 증갑 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-14.html';">&nbsp&nbsp14) 비교 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-15.html';">&nbsp&nbsp15) 논리 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-16.html';">&nbsp&nbsp16) 비트 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-17.html';">&nbsp&nbsp17) 기타 연산자</div>
+    <div class="category">4. 제어문</div>
+    <div class="sub_category" onclick="window.location.href = './4-18.html';">&nbsp&nbsp18) 조건문</div>
+    <div class="sub_category" onclick="window.location.href = './4-19.html';">&nbsp&nbsp19) 반복문</div>
+    <div class="sub_category" onclick="window.location.href = './4-20.html';">&nbsp&nbsp20) 기타 제어문</div>
+    <div class="category">5. 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-21.html';">&nbsp&nbsp21) C언어 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-22.html';">&nbsp&nbsp22) 변수의 유효 범위</div>
+    <div class="sub_category" onclick="window.location.href = './5-23.html';">&nbsp&nbsp23) 재귀 호출</div>
+    <div class="category">6. 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-24.html';">&nbsp&nbsp24) 2차원 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-25.html';">&nbsp&nbsp25) 다차원 배열</div>
+    <div class="category">7. 포인터</div>
+    <div class="sub_category" onclick="window.location.href = './7-26.html';">&nbsp&nbsp26) 포인터의 개념</div>
+    <div class="sub_category" onclick="window.location.href = './7-27.html';">&nbsp&nbsp27) 포인터 연산</div>
+    <div class="sub_category" onclick="window.location.href = './7-28.html';">&nbsp&nbsp28) 인수 전달 방법</div>
+    <div class="sub_category" onclick="window.location.href = './7-29.html';">&nbsp&nbsp29) 다양한 포인터</div>
+    <div class="category">8. 포인터와 배열</div>
+    <div class="sub_category" onclick="window.location.href = './8-30.html';">&nbsp&nbsp30) 포인터와 배열의 관계</div>
+    <div class="sub_category" onclick="window.location.href = './8-31.html';">&nbsp&nbsp31) 포인터 배열과 배열 포인터</div>
+  </section>
+  <article>
+    <div>
+      <a href="./3-11.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./2-9.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <br /><br />
+      <h2>타입 변환</h2>
+      <hr />
+
+      <h3>타입 변환(type conversion)</h3>
+
+      <p>C언어에서 다른 타입끼리의 연산은 우선 피연산자들을 모두 같은 타입으로 만든 후에 수행됩니다.</p>
+
+      <p>이처럼 하나의 타입을 다른 타입으로 바꾸는 행위를&nbsp;타입 변환(type conversion)이라고 합니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>표현 범위가 좁은 타입에서&nbsp;표현 범위가 더 넓은 타입으로의 타입 변환은 큰 문제가 되지 않습니다.</p>
+
+      <p>하지만 반대의 경우인 표현 범위가 좁은 타입으로의 타입 변환에서는&nbsp;데이터의 손실이 발생합니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>타입 변환은 크게 다음과 같이 두 가지 방식으로 나눌 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>1. 묵시적 타입 변환(자동 타입 변환)</p>
+
+      <p>2. 명시적 타입 변환(강제 타입 변환)</p>
+
+      <hr />
+      <h3>묵시적 타입 변환(자동 타입 변환, implicit type conversion)</h3>
+
+      <p>묵시적 타입 변환은 대입 연산이나 산술 연산에서 C 컴파일러가 자동으로 실행해주는 타입 변환을 가리킵니다.</p>
+
+      <p>C언어에서는&nbsp;대입 연산 시&nbsp;연산자의 오른쪽에 존재하는 데이터의 타입이 연산자의 왼쪽에 존재하는 데이터의 타입으로 묵시적 타입 변환이 진행됩니다.</p>
+
+      <p>또한,&nbsp;산술 연산에서는 데이터의 손실이 최소화되는 방향으로 묵시적 타입 변환이 진행됩니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 대입 연산에서&nbsp;일어나는 묵시적 타입 변환을 보여줍니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">char</span> ch <span style="color: #339933;">=</span> <span style="color: #0000dd;">200</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num01 <span style="color: #339933;">=</span> <span style="color:#800080;">3.14</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">double</span> num02 <span style="color: #339933;">=</span> <span style="color: #0000dd;">5</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot; &nbsp; ch에 저장된 값은 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #339933;">,</span> ch<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;num01에 저장된 값은 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #339933;">,</span> num01<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;num02에 저장된 값은 %f입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #339933;">,</span> num02<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">&nbsp; &nbsp;ch에 저장된 값은 -56입니다.</p>
+
+        <p class="textarea">num01에 저장된 값은 3입니다.</p>
+
+        <p class="textarea">num02에 저장된 값은 5.000000입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제에서는 char형 변수에 char형 변수가 표현할 수 있는 범위를 넘는 데이터를 저장합니다.</p>
+
+      <p>따라서 전달된 데이터의&nbsp;상위 비트가 자동으로 삭제되어&nbsp;데이터의 손실이 발생합니다.</p>
+
+      <p>또한, int형 변수에&nbsp;실수를 저장했기 때문에 소수 부분이 자동으로 삭제되어&nbsp;데이터의 손실이 발생합니다.</p>
+
+      <p>하지만 double형 변수에&nbsp;int형 데이터를 저장하는 것은 데이터가 double형으로&nbsp;자동 타입 변환되지만, 데이터의 손실은 발생하지 않습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 산술 연산에서 일어나는 묵시적 타입 변환을 보여줍니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">double</span> result01 <span style="color: #339933;">=</span> <span style="color: #0000dd;">5</span> <span style="color: #339933;">+</span> <span style="color:#800080;">3.14</span><span
+            style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">double</span> result02 <span style="color: #339933;">=</span> <span style="color:#800080;">5.0f</span> <span style="color: #339933;">+</span> <span style="color:#800080;">3.14</span><span
+            style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;result01에 저장된 값은 %f입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #339933;">,</span> result01<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;result02에 저장된 값은 %f입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #339933;">,</span> result02<span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">result01에 저장된 값은 8.140000입니다.</p>
+
+        <p class="textarea">result02에 저장된 값은 8.140000입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제에서 첫 번째 연산은 int형 데이터와&nbsp;double형 데이터의 산술 연산입니다.&nbsp;</p>
+
+      <p>따라서 데이터의 손실이 최소화되도록&nbsp;int형 데이터가 double형 데이터로 자동 타입 변환됩니다.</p>
+
+      <p>두 번째 연산은 float형 데이터와&nbsp;double형 데이터의 산술 연산입니다.</p>
+
+      <p>위와 마찬가지로 데이터의 손실이&nbsp;최소화되도록&nbsp;float형 데이터가 double형 데이터로 자동 타입 변환됩니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>이렇게 컴파일러가 자동으로 수행하는 타입 변환은 언제나 데이터의 손실이 최소화되는 방향으로 이루어집니다.</p>
+
+      <p>따라서 C 컴파일러는 다음과 같은 순서대로&nbsp;자동 타입 변환을 수행하게 됩니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>char 형 &rarr; short 형 &rarr; int 형 &rarr; long 형 &rarr; float 형 &rarr; double 형 &rarr; long double 형</p>
+
+      <hr />
+      <h3>명시적 타입 변환(강제 타입 변환, explicit type conversion)</h3>
+
+      <p>명시적 타입 변환은 사용자가 타입 캐스트(type cast) 연산자를 사용하여 강제적으로 수행하는 타입 변환을 가리킵니다.</p>
+
+      <p>변환하고자 하는 데이터의 앞에 괄호(())를 추가하고, 그 안에 변환할&nbsp;타입을 적으면 됩니다.</p>
+
+      <p>C언어에서는 이 괄호(())를 타입 캐스트(type cast) 연산자라고 합니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 명시적 타입 변환을 보여주는 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num01 <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num02 <span style="color: #339933;">=</span> <span style="color: #0000dd;">4</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">double</span> result01 <span style="color: #339933;">=</span> num01 <span style="color: #339933;">/</span> num02<span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">double</span> result02 <span style="color: #339933;">=</span> <span style="color: #009900;">(</span><span style="color: #993333;">double</span><span style="color: #009900;">)</span>num01 <span
+            style="color: #339933;">/</span> num02<span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;result01에 저장된 값은 %f입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #339933;">,</span> result01<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;result02에 저장된 값은 %f입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #339933;">,</span> result02<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">result01에 저장된 값은 0.000000입니다.</p>
+
+        <p class="textarea">result02에 저장된 값은 0.250000입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제에서 첫 번째 연산의 결괏값은 0.000000으로 출력됩니다.</p>
+
+      <p>그 이유는 산술 연산에 대한 결괏값의 타입은 피연산자의 타입과 언제나 일치하기 때문입니다.</p>
+
+      <p>즉 int형 데이터끼리의 산술 연산에 대한 결괏값은 언제나 int형 데이터로 나옵니다.</p>
+
+      <p>따라서 두 번째 연산에서처럼 하나의 피연산자를&nbsp;명시적으로 double형으로 지정해야만 정확한 결괏값을 얻을 수 있습니다.</p>
+
+      <hr /><br /><br />
+      <a href="./3-11.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./2-9.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <script src="../_js/modal.js"></script>
+<div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div></body>
+
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>콘솔 입출력</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 40px;
+    padding: 40px 0;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>44) 콘솔 입출력</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div id="now" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+        <!-- 다음 강좌로 이동하는 버튼 -->
+        <a href="io_file.html"><div class="button" id="next">다음 ▶</div></a>
+        <!-- 이전 강좌로 이동하는 버튼 -->
+        <a href="struct_unionEnum.html"><div class="button" id="prev">◀ 이전</div></a>
+        <br/><br/>
+
+        <!-- 강좌 내용 -->
+        <h2>콘솔 입출력</h2>
+        <hr />
+        <h3>콘솔 입출력</h3>
+        <p>콘솔 입출력을 이해하기 위해서는 우선 C언어의 기본적인 입출력 방식에 대해 알고 있어야 합니다.</p>
+        <p>C언어의 입출력 방식에 대한 더 자세한 사항은 C언어 기본적인 입출력 수업에서 확인할 수 있습니다.</p>
+        <p>&nbsp;</p>
+        <p><a href="string_io.html" target="_blank">C언어 기본적인 입출력 수업 확인 =&gt;</a></p>
+
+        <hr />
+
+        <h3>버퍼(buffer)</h3>
+        <p>지금까지 우리가 사용한 printf(), scanf(), puts() 함수 등은 C언어의 표준 입출력 함수입니다.</p>
+        <p>이러한 표준 입출력 함수를 사용할 때에는 버퍼(buffer)라는 임시 메모리 공간을 사용하게 됩니다.</p>
+        <p>&nbsp;</p>
+        <p><img src="../_images/12.44 img_c_buffer_vs_nobuffer.png" style="width: 670px; height: 330px;" /></p>
+        <p>&nbsp;</p>
+        <p>버퍼를 사용하면서 얻을 수 있는 장점은 다음과 같습니다.</p>
+        <p>&nbsp;</p>
+        <p>1. 문자를 하나씩 전달하는 것이 아닌 묶어서 한 번에 전달하므로, 전송 시간이 적게 걸려 성능이 향상됩니다.</p>
+        <p>2. 사용자가 문자를 잘못 입력했을 경우 수정을 할 수가 있습니다.</p>
+        <p>&nbsp;</p>
+        <p>하지만 입력 작업에 버퍼를 사용하는 것이 반드시 좋은 것만은 아닙니다.</p>
+        <p>빠른 반응이 요구되는 게임과 같은 프로그램에서는 키를 누르는 즉시 바로 전달되어야만 합니다.</p>
+        <p>&nbsp;</p>
+        <p>이렇게 버퍼를 사용하는 입력과 버퍼를 사용하지 않는 입력은 서로 다른 용도로 사용됩니다.</p>
+        <p>따라서 자신의 목적에 맞게 버퍼의 사용 여부를 판단해야 합니다.</p>
+
+        <hr />
+
+        <h3>버퍼링 방식</h3>
+        <p>입출력에 사용되는 버퍼링에는 다음과 같이 두 가지 방식이 있습니다.</p>
+        <p>&nbsp;</p>
+        <p>1. 완전 버퍼링(fully buffered)</p>
+        <p>2. 라인 버퍼링(line-buffered)</p>
+        <p>&nbsp;</p>
+        <p>완전 버퍼링은 버퍼가 가득 차면 버퍼 안의 내용을 목적지로 보내는 방식입니다.</p>
+        <p>이 방식은 보통 파일 입출력에서 사용됩니다.</p>
+        <p>&nbsp;</p>
+        <p>라인 버퍼링은 입력된 문자 중 개행 문자가 나타날 때마다 버퍼 안의 내용을 목적지로 보내는 방식입니다.</p>
+        <p>이 방식은 보통 키보드 입력에서 사용됩니다.</p>
+        <p>&nbsp;</p>
+        <p>이러한 입력 작업뿐만 아니라 printf() 함수 등을 통해 모니터에 데이터를 출력할 때도 버퍼를 사용합니다.</p>
+        <p>출력하고자 하는 데이터는 일단 출력 버퍼에 저장되었다가 출력 스트림을 통해 모니터로 전송됩니다.</p>
+
+        <hr />
+
+        <h3>fflush() 함수</h3>
+        <p>fflush() 함수는 인수로 전달된 스트림에 연결된 버퍼를 비워줍니다.</p>
+        <p>&nbsp;</p>
+        <p>fflush() 함수의 원형은 다음과 같습니다.</p>
+
+        <div class="syntax">
+          <h4>원형</h4>
+          <p class="textarea"><span style="color: rgb(51, 153, 51);">#include &lt;stdio.h&gt;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">int</span> <span style="color: rgb(0, 0, 102);">fflush</span><span style="color: rgb(0, 153, 0);">(</span>FILE <span style="color: rgb(51, 153, 51);">*</span>stream<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>인수로 전달되는 스트림이 입력 스트림과는 관련이 없으며, 출력 스트림과 관련이 있습니다.</p>
+        <p>출력 스트림이 인수로 전달되면 출력 버퍼 안에 있는 데이터를 즉시 목적지로 보내줍니다.</p>
+        <p>&nbsp;</p>
+        <p>만약에 널 포인터가 인수로 전달되면, 해당 프로그램에서 앞서 정의한 모든 스트림에 대한 버퍼를 전부 비워줍니다.</p>
+        <p>fflush() 함수는 버퍼를 성공적으로 비우면 0을 반환하고, 버퍼를 비우는 데 실패하면 EOF를 반환합니다.</p>
+        <p>&nbsp;</p>
+
+        <div class="syntax">
+          <h4>예제</h4>
+          <p class="textarea"><span style="color: rgb(51, 153, 51);">#include &lt;stdio.h&gt;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">int</span> main<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(153, 51, 51);">void</span><span style="color: rgb(0, 153, 0);">)</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">{</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; char</span> str<span style="color: rgb(0, 153, 0);">[</span><span style="color: rgb(0, 0, 221);">20</span><span style="color: rgb(0, 153, 0);">]</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; char</span> ch<span style="color: rgb(51, 153, 51);">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">puts</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신의 이름을 적어주세요 : &quot;</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">scanf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;%s&quot;</span><span style="color: rgb(51, 153, 51);">,</span> str<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">puts</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신의 성별을 약자로 적어주세요 : &quot;</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">puts</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;(남성=M, 여성=F)&quot;</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">scanf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;%c&quot;</span><span style="color: rgb(51, 153, 51);">,</span> <span style="color: rgb(51, 153, 51);">&amp;</span>ch<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(177, 177, 0);">if</span> <span style="color: rgb(0, 153, 0);">(</span>ch<span style="color: rgb(51, 153, 51);">==</span><span style="color: rgb(255, 0, 0);">&#39;m&#39;</span> <span style="color: rgb(51, 153, 51);">|</span> ch<span style="color: rgb(51, 153, 51);">==</span><span style="color: rgb(255, 0, 0);">&#39;M&#39;</span><span style="color: rgb(0, 153, 0);">)</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; {</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">printf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신은 남성인 %s입니다.<span style="color: rgb(0, 0, 153); font-weight: bold;">\n</span>&quot;</span><span style="color: rgb(51, 153, 51);">,</span> str<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; }</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(177, 177, 0);">else</span> <span style="color: rgb(177, 177, 0);">if</span><span style="color: rgb(0, 153, 0);">(</span>ch<span style="color: rgb(51, 153, 51);">==</span><span style="color: rgb(255, 0, 0);">&#39;f&#39;</span> <span style="color: rgb(51, 153, 51);">|</span> ch<span style="color: rgb(51, 153, 51);">==</span><span style="color: rgb(255, 0, 0);">&#39;F&#39;</span><span style="color: rgb(0, 153, 0);">)</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; {</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">printf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신은 여성인 %s입니다.<span style="color: rgb(0, 0, 153); font-weight: bold;">\n</span>&quot;</span><span style="color: rgb(51, 153, 51);">,</span> str<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; }</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(177, 177, 0);">else</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; {</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">printf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;%s님, 성별을 잘못 입력하셨습니다.<span style="color: rgb(0, 0, 153); font-weight: bold;">\n</span>&quot;</span><span style="color: rgb(51, 153, 51);">,</span> str<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; }</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(177, 177, 0);">return</span> <span style="color: rgb(0, 0, 221);">0</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">}</span></p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">당신의 이름을 적어주세요 :</p>
+          <p class="textarea">홍길동</p>
+          <p class="textarea">당신의 성별을 약자로 적어주세요 :</p>
+          <p class="textarea">&lt;남성=M, 여성=F&gt;</p>
+          <p class="textarea">홍길동님, 성별을 잘못 입력하셨습니다.</p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>위의 예제를 실행하면 사용자가 이름을 입력할 수 있지만, 성별은 입력하지 못하고 프로그램이 종료됩니다.</p>
+        <p>그 이유는 이름을 입력받을 때 마지막으로 입력한 엔터(Enter) 키가 입력 버퍼에 남아있기 때문입니다.</p>
+        <p>이렇게 입출력 함수는 입력 버퍼에 데이터가 남아 있으면, 키보드로부터 데이터를 입력받지 않고 버퍼에 남아있는 데이터를 먼저 사용합니다.</p>
+        <p>따라서 이 프로그램이 제대로 동작하기 위해서는 다음과 같이 fflush() 함수를 이용해 버퍼에 남아있는 데이터를 비워야 합니다.</p>
+        <p>&nbsp;</p>
+
+        <div class="syntax">
+          <h4>예제</h4>
+          <p class="textarea">...</p>
+          <p class="textarea"><span style="color: rgb(0, 0, 102);">puts</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신의 이름을 적어주세요 : &quot;</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 0, 102);">scanf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;%s&quot;</span><span style="color: rgb(51, 153, 51);">,</span> str<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: rgb(0, 0, 102);">fflush</span><span style="color: rgb(0, 153, 0);">(</span>stdin<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(102, 102, 102); font-style: italic;">// 표준 입력 스트림의 입력 버퍼를 비움 </span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: rgb(0, 0, 102);">puts</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신의 성별을 약자로 적어주세요 : &quot;</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 0, 102);">puts</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;(남성=M, 여성=F)&quot;</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 0, 102);">scanf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;%c&quot;</span><span style="color: rgb(51, 153, 51);">,</span> <span style="color: rgb(51, 153, 51);">&amp;</span>ch<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea">...</p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">당신의 이름을 적어주세요 :</p>
+          <p class="textarea">홍길동</p>
+          <p class="textarea">당신의 성별을 약자로 적어주세요 :</p>
+          <p class="textarea">&lt;남성=M, 여성=F&gt;</p>
+          <p class="textarea">M</p>
+          <p class="textarea">당신은 남성인 홍길동입니다.</p>
+        </div>
+
+        <div class="tip">fflush()은 입력스트림과 관련이 있다고 알고 있지만, 결과적으로는 출력스트림에만 관련이 있습니다. 출력스트림으론 stdout, stderr이 있습니다. Visual Studio 2013에서는 비표준함수인 fflush()를 허용해주고 있지만, Visual Studio2015부터 비표준함수인 fflush()가 사라졌기 때문에 위의 예제에서 fflush(stdin)을 사용하더라도 똑같은 현상이 반복될 것입니다. 그렇기 때문에 입력 버퍼를 지우기 위해서는 fflush()함수가 아닌 getchar() 함수를 이용하여야 합니다.</div>
+
+        <div class="syntax">
+          <h4>예제</h4>
+          <p class="textarea"><span style="color: rgb(51, 153, 51);">#include &lt;stdio.h&gt;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">int</span> main<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(153, 51, 51);">void</span><span style="color: rgb(0, 153, 0);">)</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">{</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; char</span> str<span style="color: rgb(0, 153, 0);">[</span><span style="color: rgb(0, 0, 221);">20</span><span style="color: rgb(0, 153, 0);">]</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; char</span> ch<span style="color: rgb(51, 153, 51);">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">puts</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신의 이름을 적어주세요 : &quot;</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">scanf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;%s&quot;</span><span style="color: rgb(51, 153, 51);">,</span> str<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea">&nbsp; &nbsp;&nbsp;<span style="color: rgb(0, 0, 128);">getchar</span><span style="color: rgb(0, 128, 128);">();</span></p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">puts</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신의 성별을 약자로 적어주세요 : &quot;</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">puts</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;(남성=M, 여성=F)&quot;</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">scanf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;%c&quot;</span><span style="color: rgb(51, 153, 51);">,</span> <span style="color: rgb(51, 153, 51);">&amp;</span>ch<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(177, 177, 0);">if</span> <span style="color: rgb(0, 153, 0);">(</span>ch<span style="color: rgb(51, 153, 51);">==</span><span style="color: rgb(255, 0, 0);">&#39;m&#39;</span> <span style="color: rgb(51, 153, 51);">|</span> ch<span style="color: rgb(51, 153, 51);">==</span><span style="color: rgb(255, 0, 0);">&#39;M&#39;</span><span style="color: rgb(0, 153, 0);">)</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; {</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">printf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신은 남성인 %s입니다.<span style="color: rgb(0, 0, 153); font-weight: bold;">\n</span>&quot;</span><span style="color: rgb(51, 153, 51);">,</span> str<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; }</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(177, 177, 0);">else</span> <span style="color: rgb(177, 177, 0);">if</span><span style="color: rgb(0, 153, 0);">(</span>ch<span style="color: rgb(51, 153, 51);">==</span><span style="color: rgb(255, 0, 0);">&#39;f&#39;</span> <span style="color: rgb(51, 153, 51);">|</span> ch<span style="color: rgb(51, 153, 51);">==</span><span style="color: rgb(255, 0, 0);">&#39;F&#39;</span><span style="color: rgb(0, 153, 0);">)</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; {</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">printf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;당신은 여성인 %s입니다.<span style="color: rgb(0, 0, 153); font-weight: bold;">\n</span>&quot;</span><span style="color: rgb(51, 153, 51);">,</span> str<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; }</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(177, 177, 0);">else</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; {</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: rgb(0, 0, 102);">printf</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(255, 0, 0);">&quot;%s님, 성별을 잘못 입력하셨습니다.<span style="color: rgb(0, 0, 153); font-weight: bold;">\n</span>&quot;</span><span style="color: rgb(51, 153, 51);">,</span> str<span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">&nbsp; &nbsp; }</span></p>
+          <p class="textarea"><span style="color: rgb(153, 51, 51);">&nbsp; &nbsp; </span><span style="color: rgb(177, 177, 0);">return</span> <span style="color: rgb(0, 0, 221);">0</span><span style="color: rgb(51, 153, 51);">;</span></p>
+          <p class="textarea"><span style="color: rgb(0, 153, 0);">}</span></p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">당신의 이름을 적어주세요 :</p>
+          <p class="textarea">홍길동</p>
+          <p class="textarea">당신의 성별을 약자로 적어주세요 :</p>
+          <p class="textarea">&lt;남성=M, 여성=F&gt;</p>
+          <p class="textarea">M</p>
+          <p class="textarea">당신은 남성인 홍길동입니다.</p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>위의 예제에서 getchar()함수를 이용하면 이름을 입력받을 때 마지막으로 입력한(Enter)키를 입력버퍼에서 비워주기 때문에 프로그램이 정상적으로 작동합니다. fflush()함수는 출력스트림만 관련있기 때문에 fflush()함수를 이용해 입력버퍼를 비우기보다는 getchar()함수를 이용하여 입력버퍼를 지워주셔야 합니다.</p>
+        <p>&nbsp;</p>
+
+        <hr/>
+        <br/><br/>
+
+        <!-- 다음 강좌로 이동하는 버튼 -->
+        <a href="io_file.html"><div class="button" id="next">다음 ▶</div></a>
+        <!-- 이전 강좌로 이동하는 버튼 -->
+        <a href="struct_unionEnum.html"><div class="button" id="prev">◀ 이전</div></a>
+
+        <!-- 댓글 -->
+        <div id="reply">
+          <textarea id="replycontent"></textarea>
+          <div id="submitreply">작성</div>
+        </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+</body>
+</html>

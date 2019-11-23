@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>조건부 컴파일</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css-->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <style>
+    /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    section>div:nth-child(1) {
+      height: 40px;
+      padding: 40px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>52) 조건부 컴파일</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div id="now" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+
+      <!-- 이전 강좌로 이동하는 버튼 -->
+      <a href="compile_module.html"><div class="button" id="prev">◀ 이전</div></a>
+      <!-- 마지막 강좌라서 다음 강좌로 이동하는 버튼은 없음 -->
+
+      <br /><br />
+
+      <!-- 강좌 내용 -->
+      <h2>조건부 컴파일</h2>
+      <hr />
+      <h3>조건부 컴파일(conditional compile)</h3>
+      <p>조건부 컴파일을 사용하면 지정한 조건에 따라 코드의 일정 부분을 컴파일할지 안 할지를 지정할 수 있습니다.</p>
+      <p>이러한 조건부 컴파일에 사용할 수 있는 조건부 컴파일 지시자(conditional compile directive)는 다음과 같습니다.</p>
+
+      <p>&nbsp;</p>
+      <p>1. #if</p>
+      <p>2. #ifdef</p>
+      <p>3. #ifndef</p>
+
+      <hr />
+      <h3>#if</h3>
+      <p>#if 지시자를 이용한 조건부 컴파일의 사용법은 C언어의 if 조건문과 매우 비슷합니다.</p>
+      <p>&nbsp;</p>
+      <p>#if 지시자를 이용한 조건부 컴파일의 형식은 다음과 같습니다.</p>
+
+      <!-- 형식 -->
+      <div class="syntax">
+        <h4>형식</h4>
+        <p class="textarea"><span style="color: #339933;">#if 조건식1</span></p>
+        <p class="textarea">&nbsp;&nbsp; &nbsp;컴파일할 명령문1</p>
+        <p class="textarea"><span style="color: #339933;">#elif 조건식2</span></p>
+        <p class="textarea">&nbsp;&nbsp; &nbsp;컴파일할 명령문2</p>
+        <p class="textarea"><span style="color: #339933;">#else</span></p>
+        <p class="textarea"><span style="color: #339933;">&nbsp;</span> &nbsp;&nbsp;컴파일할 명령문3</p>
+        <p class="textarea"><span style="color: #339933;">#endif</span></p>
+        <p class="textarea">&nbsp;</p>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>#if 지시자 다음에 나오는 조건식1의 결과가 0이 아니면 참, 0이면 거짓으로 간주합니다.</p>
+      <p>또한, #elif 지시자를 사용하여 조건식을 여러 개 사용할 수도 있습니다.</p>
+      <p>#else 지시자를 사용하여 모든 조건에 해당하지 않는 경우를 지정할 수도 있습니다.</p>
+
+      <p>&nbsp;</p>
+      <!-- 팁 -->
+      <div class="tip">하지만 C언어의 조건문과는 달리 #endif 지시자를 사용하여 반드시 조건부 컴파일의 끝을 명시해야 합니다.</div>
+
+      <p>&nbsp;</p>
+
+      <!-- 예제 코드 -->
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+        <p class="textarea"><span style="color: #339933;">#define COND 2</span></p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#if COND == 1</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;매크로 상수 COND가 선언되어 있으며 그 값은 1입니다.&quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#elif COND == 2</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;매크로 상수 COND가 선언되어 있으며 그 값은 2입니다.&quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#elif COND == 3</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;매크로 상수 COND가 선언되어 있으며 그 값은 3입니다.&quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#endif</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+      </div>
+
+      <!-- 실행 결과 -->
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">매크로 상수 COND가 선언되어 있으며, 그 값은 2입니다.</p>
+      </div>
+
+      <!-- 팁 -->
+      <p>&nbsp;</p>
+      <div class="tip">위의 예제는 단지 조건부 컴파일 지시자의 개념을 설명하기 위해 만든 예제입니다.<br />실제로는 위와 같이 조건부 컴파일 지시자를 조건문처럼 사용하지는 않습니다.</div>
+
+      <hr />
+      <h3>#ifdef</h3>
+      <p>여러 개의 헤더 파일을 작성한 후에 전부 합치다 보면, 같은 이름의 변수나 함수가 중복으로 선언되어 있을 가능성이 있습니다.</p>
+
+      <p>이러한 경우에는 #ifdef 지시자를 사용하여 중복 선언의 가능성을 없앨 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+      <p>#ifdef 지시자를 이용한 조건부 컴파일의 형식은 다음과 같습니다.</p>
+
+      <!-- 형식 -->
+      <div class="syntax">
+        <h4>형식</h4>
+        <p class="textarea"><span style="color: #339933;">#ifdef 매크로이름</span></p>
+        <p class="textarea">&nbsp;&nbsp; &nbsp;컴파일할 명령문1</p>
+        <p class="textarea"><span style="color: #339933;">#elif 조건식</span></p>
+        <p class="textarea">&nbsp;&nbsp; &nbsp;컴파일할 명령문2</p>
+        <p class="textarea"><span style="color: #339933;">#else</span></p>
+        <p class="textarea"><span style="color: #339933;">&nbsp;</span> &nbsp;&nbsp;컴파일할 명령문3</p>
+        <p class="textarea"><span style="color: #339933;">#endif</span> &nbsp;</p>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>#ifdef는 &#39;if defined&#39;라는 문장을 줄여서 만든 것으로&nbsp; #ifdef 지시자 다음에 나오는 매크로 이름과 같은 이름의 매크로가 이미 정의되어 있으면, 컴파일할 명령문1이 컴파일될 것입니다.</p>
+      <p>만약 매크로 이름과 같은 이름의 매크로가 정의되어 있지 않으면, 컴파일할 명령문1은 컴파일되지 않고 넘어갈 것입니다.</p>
+      <p>또한, #elif 지시자와 #else 지시자를 사용하여 컴파일의 조건을 확장할 수도 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <!-- 예제 코드 -->
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+        <p class="textarea"><span style="color: #339933;">#define PI 3.14 // 이 부분을 주석처리하고 난 후에 다시 실행시켜 보세요! </span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#ifdef PI</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;매크로 상수 PI가 선언되어 있으며 그 값은 %.2f입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> PI<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#else</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;매크로 상수 PI가 선언되어 있지 않습니다.&quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#endif</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+      </div>
+
+      <!-- 실행 결과 -->
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">매크로 상수 PI가 선언되어 있으며 그 값은 3.14입니다.</p>
+      </div>
+
+      <hr />
+      <h3>#ifndef</h3>
+      <p>#ifndef 지시자를 이용한 조건부 컴파일의 사용법은 #ifdef 지시자를 이용한 조건부 컴파일과 거의 같습니다.</p>
+      <p>다만 #ifndef 지시자는 #ifdef 지시자와는 정반대의 조건을 검사하게 됩니다.</p>
+
+      <p>&nbsp;</p>
+      <p>#ifndef 지시자를 이용한 조건부 컴파일의 형식은 다음과 같습니다.</p>
+
+
+      <div class="syntax">
+        <h4>형식</h4>
+        <p class="textarea"><span style="color: #339933;">#ifndef 매크로이름</span></p>
+        <p class="textarea">&nbsp;&nbsp; &nbsp;컴파일할 명령문1</p>
+        <p class="textarea"><span style="color: #339933;">#elif 조건식</span></p>
+        <p class="textarea">&nbsp;&nbsp; &nbsp;컴파일할 명령문2</p>
+        <p class="textarea"><span style="color: #339933;">#else</span></p>
+        <p class="textarea"><span style="color: #339933;">&nbsp;</span> &nbsp;&nbsp;컴파일할 명령문3</p>
+        <p class="textarea"><span style="color: #339933;">#endif</span> &nbsp;</p>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>#ifndef는 &#39;if not defined&#39;라는 문장을 줄여서 만든 것으로 #ifndef 지시자 다음에 나오는 매크로 이름과 같은 이름의 매크로가 앞서 정의되어 있지 않으면, 컴파일할 명령문1이 컴파일될 것입니다.</p>
+      <p>만약 매크로 이름과 같은 이름의 매크로가 앞서 정의되어 있으면, 컴파일할 명령문1은 컴파일되지 않고 넘어갈 것입니다.</p>
+      <p>또한, #elif 지시자와 #else 지시자를 사용하여 컴파일의 조건을 확장할 수도 있습니다.</p>
+
+      <p>&nbsp;</p>
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span> <span style="color: #666666; font-style: italic;">//#define PI 3.14 // 이 부분의 주석처리를 없애고 난 후에 다시 실행시켜 보세요! </span> &nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#ifndef PI</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;매크로 상수 PI가 선언되어 있지 않습니다.&quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#else</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; &nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;매크로 상수 PI가 선언되어 있으며 그 값은 %.2f입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> PI<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #339933;">#endif</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">매크로 상수 PI가 선언되어 있지 않습니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+      <div class="tip">사용자 헤더 파일을 선언할 때에는 중복 선언을 피하기 위해 파일 내의 모든 내용을 #ifdef나 #ifndef, #endif 지시자로 감싸는 것이 좋습니다.</div>
+
+      <hr />
+      <br /><br />
+
+
+      <!-- 이전 강좌로 이동하는 버튼 -->
+      <a href="compile_module.html"><div class="button" id="prev">◀ 이전</div></a>
+      <!-- 마지막 강좌라서 다음 강좌로 이동하는 버튼은 없음 -->
+
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+
+    </div>
+
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+      <h2> SCP School - Register </h2>
+      <form>
+        <input id="regid" type="text" name="id" placeholder="아이디"></input>
+        <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+        <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+        <input type="text" name="studentnum" placeholder="학번"></input>
+        <input type="text" name="studentname" placeholder="성명"></input>
+        <input type="text" name="studentdept" placeholder="학과"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+        <br />
+        사이트 관리자 연락처 : smyun99hyper@naver.com
+        <br />
+        <br />
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div>
+  <div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+</body>
+
+</html>

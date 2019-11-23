@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SCP School - C Programming Part 1</title>
+  <link rel="stylesheet" href="../_css/cp1.css" />
+  <link rel="stylesheet" href="../_css/modal.css">
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+    section>div:nth-child(1) {
+      height: 40px;
+      padding: 40px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="title" onClick="window.location.href = './main.html';">
+      SCP School
+    </div>
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div id="subtitle" onclick="window.location.href = '1-1.html';">
+      일반 C
+    </div>
+    <div onclick="window.location.href = '../html_cp2/memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+  <section>
+    <div>20) 기타 제어문</div>
+    <div class="category">1. C언어 시작</div>
+    <div class="sub_category" onclick="window.location.href = './1-1.html';">&nbsp&nbsp1) C언어 개요</div>
+    <div class="sub_category" onclick="window.location.href = './1-2.html';">&nbsp&nbsp2) C언어 기초</div>
+    <div class="sub_category" onclick="window.location.href = './1-3.html';">&nbsp&nbsp3) C프로그래밍</div>
+    <div class="sub_category" onclick="window.location.href = './1-4.html';">&nbsp&nbsp4) C프로그램의 특징</div>
+    <div class="sub_category" onclick="window.location.href = './1-5.html';">&nbsp&nbsp5) printf() 함수</div>
+    <div class="sub_category" onclick="window.location.href = './1-6.html';">&nbsp&nbsp6) scanf() 함수</div>
+    <div class="category">2. 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-7.html';">&nbsp&nbsp7) 변수</div>
+    <div class="sub_category" onclick="window.location.href = './2-8.html';">&nbsp&nbsp8) 상수</div>
+    <div class="sub_category" onclick="window.location.href = './2-9.html';">&nbsp&nbsp9) 기본 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-10.html';">&nbsp&nbsp10) 타입 변환</div>
+    <div class="category">3. 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-11.html';">&nbsp&nbsp11) 산술 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-12.html';">&nbsp&nbsp12) 대입 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-13.html';">&nbsp&nbsp13) 증갑 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-14.html';">&nbsp&nbsp14) 비교 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-15.html';">&nbsp&nbsp15) 논리 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-16.html';">&nbsp&nbsp16) 비트 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-17.html';">&nbsp&nbsp17) 기타 연산자</div>
+    <div class="category">4. 제어문</div>
+    <div class="sub_category" onclick="window.location.href = './4-18.html';">&nbsp&nbsp18) 조건문</div>
+    <div class="sub_category" onclick="window.location.href = './4-19.html';">&nbsp&nbsp19) 반복문</div>
+    <div id="now" onclick="window.location.href = './4-20.html';">&nbsp&nbsp20) 기타 제어문</div>
+    <div class="category">5. 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-21.html';">&nbsp&nbsp21) C언어 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-22.html';">&nbsp&nbsp22) 변수의 유효 범위</div>
+    <div class="sub_category" onclick="window.location.href = './5-23.html';">&nbsp&nbsp23) 재귀 호출</div>
+    <div class="category">6. 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-24.html';">&nbsp&nbsp24) 2차원 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-25.html';">&nbsp&nbsp25) 다차원 배열</div>
+    <div class="category">7. 포인터</div>
+    <div class="sub_category" onclick="window.location.href = './7-26.html';">&nbsp&nbsp26) 포인터의 개념</div>
+    <div class="sub_category" onclick="window.location.href = './7-27.html';">&nbsp&nbsp27) 포인터 연산</div>
+    <div class="sub_category" onclick="window.location.href = './7-28.html';">&nbsp&nbsp28) 인수 전달 방법</div>
+    <div class="sub_category" onclick="window.location.href = './7-29.html';">&nbsp&nbsp29) 다양한 포인터</div>
+    <div class="category">8. 포인터와 배열</div>
+    <div class="sub_category" onclick="window.location.href = './8-30.html';">&nbsp&nbsp30) 포인터와 배열의 관계</div>
+    <div class="sub_category" onclick="window.location.href = './8-31.html';">&nbsp&nbsp31) 포인터 배열과 배열 포인터</div>
+  </section>
+  <article>
+    <div>
+      <a href="./5-21.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./4-19.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <br /><br />
+      <h2>기타 제어문</h2>
+      <hr />
+
+      <h3>루프의 제어</h3>
+
+      <p>일반적으로 조건식의 검사를 통해 루프로 진입하면,&nbsp;다음 조건식을&nbsp;검사하기 전까지 루프 안에 있는 모든 명령문을 실행합니다.</p>
+
+      <p>하지만 continue 문과 break 문은&nbsp;이러한 일반적인 루프의 흐름을 사용자가 직접 제어할 수 있도록&nbsp;해줍니다.</p>
+
+      <hr />
+      <h3>continue 문</h3>
+
+      <p>continue 문은&nbsp;루프 내에서 사용하여 해당 루프의 나머지 부분을 건너뛰고, 바로 다음 조건식의 판단으로 넘어가게 합니다.</p>
+
+      <p>보통 반복문 내에서 특정 조건에 대한&nbsp;예외 처리를 하고자 할 때 자주&nbsp;사용됩니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 1부터 100까지의 정수 중에서 3의 배수를 제외하고 출력하는 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> i<span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> except_num <span style="color: #339933;">=</span> <span style="color: #0000dd;">3</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #b1b100;">for</span> <span style="color: #009900;">(</span>i <span style="color: #339933;">=</span>&nbsp;<span style="color: #0000dd;">1</span><span style="color: #339933;">;</span> i <span
+            style="color: #339933;">&lt;=</span> <span style="color: #0000dd;">100</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; if</span> <span style="color: #009900;">(</span>i <span style="color: #339933;">%</span> except_num <span style="color: #339933;">==</span> <span
+            style="color: #0000dd;">0</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">&nbsp; &nbsp; {</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; &nbsp; &nbsp; continue</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">&nbsp; &nbsp; }</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d &quot;</span><span style="color: #339933;">,</span>
+          i<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span>&nbsp;&nbsp;</p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">1</p>
+
+        <p class="textarea">2</p>
+
+        <p class="textarea">4</p>
+
+        <p class="textarea">5</p>
+
+        <p class="textarea">7</p>
+
+        <p class="textarea">...</p>
+
+        <p class="textarea">97</p>
+
+        <p class="textarea">98</p>
+
+        <p class="textarea">100</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제에서&nbsp;변수 i의 값이&nbsp;3의 배수인 경우에는 continue 문을 이용하여 for 문의 printf() 함수 부분을 건너뛰고 있습니다.</p>
+
+      <hr />
+      <h3>break 문</h3>
+
+      <p>break 문은 루프 내에서 사용하여&nbsp;해당 반복문을 완전히 종료시킨 뒤, 반복문 바로 다음에 위치한 명령문을 실행합니다.</p>
+
+      <p>즉 루프 내에서 조건식의 판단 결과에 상관없이 반복문을 완전히 빠져나가고 싶을 때 사용합니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 1부터&nbsp;10까지의 합을 구하는 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> start_num <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> end_num <span style="color: #339933;">=</span> <span style="color: #0000dd;">10</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> sum <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span><span style="color: #0000dd;">1</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span>sum <span style="color: #339933;">+=</span> start_num<span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; if</span> <span style="color: #009900;">(</span>start_num <span style="color: #339933;">==</span> end_num<span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">&nbsp; &nbsp; {</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">&nbsp; &nbsp; }</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span>start_num<span style="color: #339933;">++;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">1부터 10까지 더한 값은 55입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제에서는 변수 start_num의 값이 end_num의 값과 같아지면, 무조건 while 문을 종료하게 됩니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 구구단에서 5단까지 각&nbsp;단의 수만큼만&nbsp;출력하는 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> i<span style="color: #339933;">,</span> j<span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #b1b100;">for</span> <span style="color: #009900;">(</span>i <span style="color: #339933;">=</span> <span style="color: #0000dd;">2</span><span style="color: #339933;">;</span> i <span
+            style="color: #339933;">&lt;=</span> <span style="color: #0000dd;">5</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; for</span> <span style="color: #009900;">(</span>j <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span> j <span
+            style="color: #339933;">&lt;=</span> <span style="color: #0000dd;">9</span><span style="color: #339933;">;</span> j<span style="color: #339933;">++</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d
+            * %d = %d<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> i<span style="color: #339933;">,</span> j<span style="color: #339933;">,</span> i <span
+            style="color: #339933;">*</span> j<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; &nbsp; &nbsp; if</span> <span style="color: #009900;">(</span>i <span style="color: #339933;">==</span> j<span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span
+            style="color: #009900;">(</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span
+            style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span></p>
+
+        <p class="textarea"><span style="color: #b1b100;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span>&nbsp;</p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">2 * 1 = 2</p>
+
+        <p class="textarea">2 * 2 = 4</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea">3 * 1 = 3</p>
+
+        <p class="textarea">3 * 2 = 6</p>
+
+        <p class="textarea">3 * 3 = 9</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea">4 * 1 = 4</p>
+
+        <p class="textarea">4 * 2 = 8</p>
+
+        <p class="textarea">4 * 3 = 12</p>
+
+        <p class="textarea">4 * 4 = 16</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea">5 * 1 = 5</p>
+
+        <p class="textarea">5 * 2 = 10</p>
+
+        <p class="textarea">5 * 3 = 15</p>
+
+        <p class="textarea">5 * 4 = 20</p>
+
+        <p class="textarea">5 * 5 = 25</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제는 두 개의 for 문을 중첩해서&nbsp;사용하여&nbsp;구구단을 출력하고 있습니다.</p>
+
+      <p>이때 내부의 for 문은 변수 i와 j의 값이 같아지면, break 문을 호출하여 내부의 for 문을 빠져나갑니다.</p>
+
+      <p>따라서 구구단의 각 단이&nbsp;해당 단의 수만큼만 출력될 수 있습니다.</p>
+
+      <hr />
+      <h3>goto 문</h3>
+
+      <p>goto 문은 프로그램의 흐름을 지정된 레이블(label)로 무조건 변경시키는&nbsp;명령문입니다.</p>
+
+      <p>goto 문은 다른 제어문과는 달리&nbsp;아무런 조건 없이 프로그램의 흐름을&nbsp;옮겨줍니다.</p>
+
+      <p>따라서 가장 손쉽게 사용할 수 있지만, 반면에 프로그램의 흐름을 매우 복잡하게 만들기도 합니다.</p>
+
+      <p>이러한 단점 때문에 현재는 디버깅 이외에는 거의 사용되지 않습니다.</p>
+
+
+      <hr /><br /><br />
+      <a href="./5-21.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./4-19.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <script src="../_js/modal.js"></script>
+<div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div></body>
+
+</html>

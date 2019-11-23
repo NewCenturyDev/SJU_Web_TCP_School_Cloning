@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>메모리의 동적할당</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 80px;
+    padding: 20px 0;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>34) 메모리의 동적 할당</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div id="now" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+
+      <!-- 다음 강좌로 이동하는 버튼 -->
+      <a href="string_io.html"><div class="button" id="next">다음 ▶</div></a>
+      <!-- 이전 강좌로 이동하는 버튼 -->
+      <a href="memory_stackframe.html"><div class="button" id="prev">◀ 이전</div></a>
+
+      <br/><br/>
+
+      <!-- 강좌 내용 -->
+      <h2>메모리의 동적할당</h2>
+      <hr />
+      <h3>메모리의 동적할당(dynamic allocation)</h3>
+
+      <p>데이터 영역과 스택 영역에 할당되는 메모리의 크기는 컴파일 타임(compile time)에 미리 결정됩니다.</p>
+      <p>하지만 힙 영역의 크기는 프로그램이 실행되는 도중인 런 타임(run time)에 사용자가 직접 결정하게 됩니다.</p>
+      <p>이렇게 런 타임에 메모리를 할당받는 것을 메모리의 동적 할당(dynamic allocation)이라고 합니다.</p>
+      <hr />
+      <h3>malloc() 함수</h3>
+      <p>malloc() 함수는 프로그램이 실행 중일 때 사용자가 직접 힙 영역에 메모리를 할당할 수 있게 해줍니다.</p>
+      <p>&nbsp;</p>
+      <p>malloc() 함수의 원형은 다음과 같습니다.</p>
+
+      <div class="syntax">
+        <h4>원형</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdlib.h&gt;</span></p>
+        <p class="textarea"><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #000066;">malloc</span><span style="color: #009900;">(</span><span style="color: #993333;">size_t</span> size<span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>malloc() 함수는 인수로 할당받고자 하는 메모리의 크기를 바이트 단위로 전달받습니다.</p>
+      <p>이 함수는 전달받은 메모리 크기에 맞고, 아직 할당되지 않은 적당한 블록을 찾습니다.</p>
+      <p>이렇게 찾은 블록의 첫 번째 바이트를 가리키는 주소값을 반환합니다.</p>
+      <p>&nbsp;</p>
+      <p>힙 영역에 할당할 수 있는 적당한 블록이 없을 때에는 널 포인터를 반환합니다.</p>
+      <p>주소값을 반환받기 때문에 힙 영역에 할당된 메모리 공간으로 접근하려면 포인터를 사용해야 합니다.</p>
+      <p>&nbsp;</p>
+      <div class="tip">malloc() 함수의 원형에서 볼 수 있는 size_t&nbsp;타입은 부호없는 정수라고 이해하면 됩니다.</div>
+      <hr />
+
+      <h3>free() 함수</h3>
+      <p>free() 함수는 힙 영역에 할당받은 메모리 공간을 다시 운영체제로 반환해 주는 함수입니다.</p>
+      <p>데이터 영역이나 스택 영역에 할당되는 메모리의 크기는 컴파일 타임에 결정되어, 프로그램이 실행되는 내내 고정됩니다.</p>
+      <p>하지만 메모리의 동적 할당으로 힙 영역에 생성되는 메모리의 크기는 런 타임 내내 변화됩니다.</p>
+      <p>따라서 free() 함수를 사용하여 다 사용한 메모리를 해제해 주지 않으면, 메모리가 부족해지는 현상이 발생할 수 있습니다.</p>
+      <p>이처럼 사용이 끝난 메모리를 해제하지 않아서 메모리가 부족해지는 현상을 메모리 누수(memory leak)라고 합니다.</p>
+      <p>&nbsp;</p>
+      <p>free() 함수의 원형은 다음과 같습니다.</p>
+
+      <div class="syntax">
+        <h4>원형</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdlib.h&gt;</span></p>
+        <p class="textarea"><span style="color: #993333;">void</span> <span style="color: #000066;">free</span><span style="color: #009900;">(</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span>ptr<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      </div>
+      <p>&nbsp;</p>
+
+      <p>free() 함수는 인수로 해제하고자 하는 메모리 공간을 가리키는 포인터를 전달받습니다.</p>
+      <p>인수의 타입이 void형 포인터로 선언되어 있으므로, 어떠한 타입의 포인터라도 인수로 전달될 수 있습니다.</p>
+      <p>&nbsp;</p>
+      <p>다음 예제는 크기가 고정된 배열이 아닌 런 타임에 크기가 결정되는 배열을 생성하는 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea">ptr_arr <span style="color: #339933;">=</span> <span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span><span style="color: #009900;">)</span> <span style="color: #000066;">malloc</span><span style="color: #009900;">(</span>arr_len <span style="color: #339933;">*</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 메모리의 동적 </span>할당<span style="color: #666666; font-style: italic;"> </span> &nbsp;</p>
+        <p class="textarea"><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>ptr_arr <span style="color: #339933;">==</span> NULL<span style="color: #009900;">)</span> <span style="color: #666666; font-style: italic;">// 메모리의 동적 </span>할당<span style="color: #666666; font-style: italic;">이 실패할 경우</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;메모리의 동적 할당에 실패했습니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; exit</span><span style="color: #009900;">(</span><span style="color: #0000dd;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;동적으로 할당받은 메모리의 초깃값은 다음과 같습니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #b1b100;">for</span> <span style="color: #009900;">(</span>i <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> arr_len<span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">)</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+            <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d</span><font color="#000099"><b>&nbsp;</b></font><font color="#ff0000">&quot;</font><span style="color: #339933;">,</span> ptr_arr<span style="color: #009900;">[</span>i<span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea"><span style="color: #009900;">}</span></p>
+            <p class="textarea">&nbsp;</p>
+            <p class="textarea"><span style="color: #000066;">free</span><span style="color: #009900;">(</span>ptr_arr<span style="color: #009900;">)</span><span style="color: #339933;">;</span>&nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #666666; font-style: italic;">// 동적으로 할당된 메모리의 반환 </span> &nbsp;</p>
+      </div>
+
+          <div class="syntax">
+            <h4>실행 결과</h4>
+            <p class="textarea">동적으로 할당받은 메모리의 초기값은 다음과 같습니다.</p>
+            <p class="textarea">0 0 0&nbsp;</p>
+          </div>
+
+          <hr />
+          <h3>calloc() 함수</h3>
+          <p>calloc() 함수는 malloc() 함수와 마찬가지로 힙 영역에 메모리를 동적으로 할당해주는 함수입니다.</p>
+          <p>이 함수가 malloc() 함수와 다른 점은 할당하고자 하는 메모리의 크기를 두 개의 인수로 나누어 전달받는 점입니다.</p>
+          <p>&nbsp;</p>
+          <p>또한, calloc() 함수는 메모리를 할당받은 후에 해당 메모리의 모든 비트값을 전부 0으로 초기화해 줍니다.</p>
+          <p>calloc() 함수도 malloc() 함수와 마찬가지로 free() 함수를 통해 할당받은 메모리를 해제해 주어야 합니다.</p>
+          <p>&nbsp;</p>
+          <p>calloc() 함수의 원형은 다음과 같습니다.</p>
+
+          <div class="syntax">
+            <h4>원형</h4>
+            <p class="textarea"><span style="color: #339933;">#include &lt;stdlib.h&gt;</span></p>
+            <p class="textarea"><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #000066;">calloc</span><span style="color: #009900;">(</span><span style="color: #993333;">size_t</span> nmemb<span style="color: #339933;">,</span> <span style="color: #993333;">size_t</span> size<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          </div>
+
+          <p>&nbsp;</p>
+
+          <p>calloc() 함수의 첫 번째 인수는 메모리 블록의 개수를 나타내며, 두 번째 인수는 각 블록의 바이트 수를 나타냅니다.</p>
+          <p>따라서 calloc() 함수는 힙 영역에 size 크기의 메모리 블록을 nmemb개 할당받을 수 있도록 요청합니다.</p>
+          <p>&nbsp;</p>
+          <p>앞선 예제에서 사용한 malloc() 함수와 다음 예제의 calloc() 함수는 똑같은 동작을 수행합니다.</p>
+
+          <div class="syntax">
+            <h4>예제</h4>
+            <p class="textarea">1. <span style="color: #202020;">ptr_arr</span>&nbsp;<span style="color: #339933;">=</span> <span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span><span style="color: #009900;">)</span> <span style="color: #000066;">malloc</span><span style="color: #009900;">(</span>arr_len&nbsp;<span style="color: #339933;">*</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea">2. <span style="color: #202020;">ptr_arr</span>&nbsp;<span style="color: #339933;">=</span> <span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span><span style="color: #009900;">)</span> <span style="color: #000066;">calloc</span><span style="color: #009900;">(</span>arr_len<span style="color: #339933;">,</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          </div>
+
+          <hr />
+          <h3>realloc() 함수</h3>
+          <p>realloc() 함수는 이미 할당된 메모리의 크기를 바꾸어 재할당할 때 사용하는 함수입니다.</p>
+          <p>&nbsp;</p>
+          <p>realloc() 함수의 원형은 다음과 같습니다.</p>
+
+          <div class="syntax">
+            <h4>원형</h4>
+            <p class="textarea"><span style="color: #339933;">#include &lt;stdlib.h&gt;</span></p>
+            <p class="textarea"><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #000066;">realloc</span><span style="color: #009900;">(</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span>ptr<span style="color: #339933;">,</span> <span style="color: #993333;">size_t</span> size<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          </div>
+
+          <p>&nbsp;</p>
+          <p>realloc() 함수의 첫 번째 인수는 크기를 바꾸고자 하는 메모리 공간을 가리키는 포인터를 전달받습니다.</p>
+          <p>두 번째 인수로는 해당 메모리 공간에 재할당할 크기를 전달합니다.</p>
+          <p>따라서 첫 번째 인수로 NULL이 전달되면, malloc() 함수와 정확히 같은 동작을 하게 됩니다.</p>
+          <p>&nbsp;</p>
+          <p>다음 예제는 런 타임에 크기가 결정된 배열의 크기를 realloc() 함수를 사용해 다시 한 번 늘려주는 예제입니다.</p>
+
+          <div class="codding-test">
+            <h4>예제</h4>
+            <p class="textarea">ptr_arr <span style="color: #339933;">=</span> <span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span><span style="color: #009900;">)</span> <span style="color: #000066;">malloc</span><span style="color: #009900;">(</span>arr_len <span style="color: #339933;">*</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 메모리의 동적 </span>할당 &nbsp;</p>
+            <p class="textarea"><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>ptr_arr <span style="color: #339933;">==</span> NULL<span style="color: #009900;">)</span> <span style="color: #666666; font-style: italic;">// 메모리의 동적 </span>할당<span style="color: #666666; font-style: italic;">이 실패할 경우</span></p>
+            <p class="textarea"><span style="color: #009900;">{</span></p>
+            <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;메모리의 동적 할당에 실패했습니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; exit</span><span style="color: #009900;">(</span><span style="color: #0000dd;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+            <p class="textarea">&nbsp;</p>
+            <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;동적으로 할당받은 메모리의 초깃값은 다음과 같습니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea"><span style="color: #b1b100;">for</span> <span style="color: #009900;">(</span>i <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> arr_len<span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">)</span></p>
+            <p class="textarea"><span style="color: #009900;">{</span></p>
+            <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d</span><font color="#000099"><b>&nbsp;</b></font><font color="#ff0000">&quot;</font><span style="color: #339933;">,</span> ptr_arr<span style="color: #009900;">[</span>i<span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea"><span style="color: #009900;">}</span></p>
+            <p class="textarea">&nbsp;</p>
+            <p class="textarea">total_len <span style="color: #339933;">=</span> arr_len <span style="color: #339933;">+</span> add_len<span style="color: #339933;">;</span></p>
+            <p class="textarea">ptr_arr <span style="color: #339933;">=</span> <span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span><span style="color: #009900;">)</span> <span style="color: #000066;">realloc</span><span style="color: #009900;">(</span>ptr_arr<span style="color: #339933;">,</span> <span style="color: #009900;">(</span>total_len <span style="color: #339933;">*</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 메모리의 추가 할당</span></p>
+            <p class="textarea"><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>ptr_arr <span style="color: #339933;">==</span> NULL<span style="color: #009900;">)</span> <span style="color: #666666; font-style: italic;">// 메모리의 추가 할당에 실패할 경우</span></p>
+            <p class="textarea"><span style="color: #009900;">{</span></p>
+            <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;메모리의 추가 할당에 실패했습니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; exit</span><span style="color: #009900;">(</span><span style="color: #0000dd;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+            <p class="textarea">&nbsp;</p>
+            <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>추가로 할당받은 메모리의 초깃값은 다음과 같습니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea"><span style="color: #b1b100;">for</span> <span style="color: #009900;">(</span>i <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> total_len<span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">)</span></p>
+            <p class="textarea"><span style="color: #009900;">{</span></p>
+            <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d</span><font color="#000099"><b>&nbsp;</b></font><font color="#ff0000">&quot;</font><span style="color: #339933;">,</span> ptr_arr<span style="color: #009900;">[</span>i<span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+            <p class="textarea"><span style="color: #009900;">}</span></p>
+            <p class="textarea">&nbsp;</p>
+            <p class="textarea"><span style="color: #000066;">free</span><span style="color: #009900;">(</span>ptr_arr<span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 동적으로 할당된 메모리의 반환</span></p>
+          </div>
+
+          <div class="syntax">
+            <h4>실행 결과</h4>
+            <p class="textarea">동적으로 할당받은 메모리의 초기값은 다음과 같습니다.</p>
+            <p class="textarea">0 0 0&nbsp;</p>
+            <p class="textarea">추가로 할당받은 메모리의 초기값은 다음과 같습니다.</p>
+            <p class="textarea">0 0 0 0 0&nbsp;</p>
+          </div>
+
+          <p>&nbsp;</p>
+          <p>realloc() 함수는 만약 기존의 메모리 위치에 충분한 공간이 있다면 바로 이어서 추가 메모리 공간을 할당해 줍니다.</p>
+          <p>하지만 기존의 메모리 위치에 충분한 공간이 없으면 메모리의 다른 공간에 기존의 데이터를 복사한 후, 이어서 추가 메모리 공간을 할당하게 됩니다.</p>
+          <hr />
+          <br/><br/>
+
+          <!-- 다음 강좌로 이동하는 버튼 -->
+          <a href="string_io.html"><div class="button" id="next">다음 ▶</div></a>
+          <!-- 이전 강좌로 이동하는 버튼 -->
+          <a href="memory_stackframe.html"><div class="button" id="prev">◀ 이전</div></a>
+
+          <!-- 댓글 -->
+          <div id="reply">
+            <textarea id="replycontent"></textarea>
+            <div id="submitreply">작성</div>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+  </body>
+</html>

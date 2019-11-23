@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>문자 입출력 함수</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 80px;
+    padding: 20px 0;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>36) 문자 입출력<br/>함수</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div id="now" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+        <!-- 다음 강좌로 이동하는 버튼 -->
+        <a href="string_string.html"><div class="button" id="next">다음 ▶</div></a>
+        <!-- 이전 강좌로 이동하는 버튼 -->
+        <a href="string_io.html"><div class="button" id="prev">◀ 이전</div></a>
+
+    <br/><br/>
+
+    <!-- 강좌 내용 -->
+    <h2>문자 입출력 함수</h2>
+    <hr />
+
+    <h3>단일 문자 입력 함수</h3>
+    <p>C언어에서 하나의 문자를 입력할 때에는 getchar() 함수나 fgetc() 함수를 사용합니다.</p>
+    <hr />
+
+    <h3>getchar() 함수</h3>
+    <p>getchar() 함수는 표준 입력 스트림(stdin)인 키보드로부터 하나의 문자를 입력받는 함수입니다.</p>
+    <p>&nbsp;</p>
+    <p>getchar() 함수의 원형은 다음과 같습니다.</p>
+
+    <div class="syntax">
+      <h4>원형</h4>
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+      <p class="textarea"><span style="color: #993333;">int</span> <span style="color: #000066;">getchar</span><span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+    </div>
+
+    <hr />
+    <h3>fgetc() 함수</h3>
+    <p>fgetc() 함수는 getchar() 함수와 마찬가지로 표준 입력 스트림(stdin)인 키보드로부터 하나의 문자를 입력받는 함수입니다.</p>
+    <p>하지만 getchar() 함수와는 달리 문자를 입력받을 스트림을 인수로 전달하여 직접 지정할 수 있습니다.</p>
+    <p>따라서 fgetc() 함수는 키보드뿐만 아니라 파일을 통해서도 문자를 입력받을 수 있습니다.</p>
+    <p>&nbsp;</p>
+    <p>fgetc() 함수의 원형은 다음과 같습니다.</p>
+
+    <div class="syntax">
+      <h4>원형</h4>
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+      <p class="textarea"><span style="color: #993333;">int</span> <span style="color: #000066;">fgetc</span><span style="color: #009900;">(</span>FILE <span style="color: #339933;">*</span>stream<span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+    </div>
+
+    <hr />
+
+    <h3>단일 문자 출력 함수</h3>
+    <p>C언어에서 하나의 문자를 출력할 때에는 putchar() 함수나 fputc() 함수를 사용합니다.</p>
+    <hr />
+
+    <h3>putchar() 함수</h3>
+    <p>putchar() 함수는 표준 출력 스트림(stdout)인 모니터에 하나의 문자를 출력하는 함수입니다.</p>
+    <p>&nbsp;</p>
+    <p>putchar() 함수의 원형은 다음과 같습니다.</p>
+
+    <div class="syntax">
+      <h4>원형</h4>
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+      <p class="textarea"><span style="color: #993333;">int</span> <span style="color: #000066;">putchar</span><span style="color: #009900;">(</span><span style="color: #993333;">int</span> c<span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+    </div>
+
+    <hr />
+
+    <h3>fputc() 함수</h3>
+    <p>fputc() 함수는 putchar() 함수와 마찬가지로 표준 출력 스트림(stdout)인 모니터에 하나의 문자를 출력하는 함수입니다.</p>
+    <p>하지만 putchar() 함수와는 달리 문자를 출력할 스트림을 인수로 전달하여 직접 지정할 수 있습니다.</p>
+    <p>따라서 fputc() 함수는 모니터뿐만 아니라 파일을 통해서도 문자를 출력(저장)할 수 있습니다.</p>
+    <p>&nbsp;</p>
+    <p>fputc() 함수의 원형은 다음과 같습니다.</p>
+
+    <div class="syntax">
+      <h4>원형</h4>
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+      <p class="textarea"><span style="color: #993333;">int</span> <span style="color: #000066;">fputc</span><span style="color: #009900;">(</span><span style="color: #993333;">int</span> c<span style="color: #009900;">,&nbsp;</span>FILE <span style="color: #339933;">*</span>stream<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+    </div>
+    <p>&nbsp;</p>
+
+    <p>다음 예제는 단일 문자 입출력 함수를 사용하여, &#39;x&#39;문자가 입력될 때까지 계속해서 영문자를 입력받고 출력하는 예제입니다.</p>
+
+    <div class="syntax">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span> &nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; char</span> ch<span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;x가 입력될 때까지 영문자를 계속 입력받습니다 :<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span><span style="color: #009900;">(</span>ch <span style="color: #339933;">=</span> <span style="color: #000066;">getchar</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span> <span style="color: #339933;">!=</span> <span style="color: #ff0000;">&#39;x&#39;</span><span style="color: #009900;">)</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">putchar</span><span style="color: #009900;">(</span>ch<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span> &nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;x를 입력하셨습니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+      <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+      <p class="textarea"><span style="color: #009900;">}</span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>실행 결과</h4>
+      <p class="textarea">x가 입력될 때까지 영문자를 계속 입력받습니다 :&nbsp;</p>
+      <p class="textarea">c</p>
+      <p class="textarea">c</p>
+      <p class="textarea">d</p>
+      <p class="textarea">d</p>
+      <p class="textarea">x</p>
+      <p class="textarea">x를 입력하셨습니다.</p>
+    </div>
+
+    <hr />
+
+    <br/><br/>
+
+    <!-- 다음 강좌로 이동하는 버튼 -->
+    <a href="string_string.html"><div class="button" id="next">다음 ▶</div></a>
+    <!-- 이전 강좌로 이동하는 버튼 -->
+    <a href="string_io.html"><div class="button" id="prev">◀ 이전</div></a>
+
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+  </body>
+</html>

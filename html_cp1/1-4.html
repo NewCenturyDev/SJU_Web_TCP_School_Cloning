@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SCP School - C Programming Part 1</title>
+  <link rel="stylesheet" href="../_css/cp1.css" />
+  <link rel="stylesheet" href="../_css/modal.css">
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+    section>div:nth-child(1) {
+      height: 80px;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="title" onClick="window.location.href = './main.html';">
+      SCP School
+    </div>
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div id="subtitle" onclick="window.location.href = '1-1.html';">
+      일반 C
+    </div>
+    <div onclick="window.location.href = '../html_cp2/memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+  <section>
+    <div>4) C 프로그램의 특징</div>
+    <div class="category">1. C언어 시작</div>
+    <div class="sub_category" onclick="window.location.href = './1-1.html';">&nbsp&nbsp1) C언어 개요</div>
+    <div class="sub_category" onclick="window.location.href = './1-2.html';">&nbsp&nbsp2) C언어 기초</div>
+    <div class="sub_category" onclick="window.location.href = './1-3.html';">&nbsp&nbsp3) C프로그래밍</div>
+    <div id="now" onclick="window.location.href = './1-4.html';">&nbsp&nbsp4) C프로그램의 특징</div>
+    <div class="sub_category" onclick="window.location.href = './1-5.html';">&nbsp&nbsp5) printf() 함수</div>
+    <div class="sub_category" onclick="window.location.href = './1-6.html';">&nbsp&nbsp6) scanf() 함수</div>
+    <div class="category">2. 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-7.html';">&nbsp&nbsp7) 변수</div>
+    <div class="sub_category" onclick="window.location.href = './2-8.html';">&nbsp&nbsp8) 상수</div>
+    <div class="sub_category" onclick="window.location.href = './2-9.html';">&nbsp&nbsp9) 기본 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-10.html';">&nbsp&nbsp10) 타입 변환</div>
+    <div class="category">3. 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-11.html';">&nbsp&nbsp11) 산술 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-12.html';">&nbsp&nbsp12) 대입 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-13.html';">&nbsp&nbsp13) 증갑 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-14.html';">&nbsp&nbsp14) 비교 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-15.html';">&nbsp&nbsp15) 논리 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-16.html';">&nbsp&nbsp16) 비트 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-17.html';">&nbsp&nbsp17) 기타 연산자</div>
+    <div class="category">4. 제어문</div>
+    <div class="sub_category" onclick="window.location.href = './4-18.html';">&nbsp&nbsp18) 조건문</div>
+    <div class="sub_category" onclick="window.location.href = './4-19.html';">&nbsp&nbsp19) 반복문</div>
+    <div class="sub_category" onclick="window.location.href = './4-20.html';">&nbsp&nbsp20) 기타 제어문</div>
+    <div class="category">5. 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-21.html';">&nbsp&nbsp21) C언어 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-22.html';">&nbsp&nbsp22) 변수의 유효 범위</div>
+    <div class="sub_category" onclick="window.location.href = './5-23.html';">&nbsp&nbsp23) 재귀 호출</div>
+    <div class="category">6. 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-24.html';">&nbsp&nbsp24) 2차원 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-25.html';">&nbsp&nbsp25) 다차원 배열</div>
+    <div class="category">7. 포인터</div>
+    <div class="sub_category" onclick="window.location.href = './7-26.html';">&nbsp&nbsp26) 포인터의 개념</div>
+    <div class="sub_category" onclick="window.location.href = './7-27.html';">&nbsp&nbsp27) 포인터 연산</div>
+    <div class="sub_category" onclick="window.location.href = './7-28.html';">&nbsp&nbsp28) 인수 전달 방법</div>
+    <div class="sub_category" onclick="window.location.href = './7-29.html';">&nbsp&nbsp29) 다양한 포인터</div>
+    <div class="category">8. 포인터와 배열</div>
+    <div class="sub_category" onclick="window.location.href = './8-30.html';">&nbsp&nbsp30) 포인터와 배열의 관계</div>
+    <div class="sub_category" onclick="window.location.href = './8-31.html';">&nbsp&nbsp31) 포인터 배열과 배열 포인터</div>
+  </section>
+  <article>
+    <div>
+      <a href="./1-5.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./1-3.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <br /><br />
+      <h2>C 프로그램의 특징</h2>
+      <hr />
+      <h3>C 프로그램의 구조</h3>
+
+      <p>간단한 C 프로그램의 기본 구조는 다음 예제와 같습니다.</p>
+
+      <p>언제나 다음과 같이 구성되는 것은 아니지만, 대부분의 C 프로그램이 이와 비슷한 형태로 구성됩니다.</p>
+
+      <div class="syntax">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color: #339933;">#include 문</span></p>
+
+      <p class="textarea"><span style="color: #339933;">#define 문</span></p>
+
+      <p class="textarea">&nbsp;</p>
+
+      <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+
+      <p class="textarea">&nbsp; &nbsp; 명령문<span style="color: #339933;">;</span></p>
+
+      <p class="textarea">&nbsp; &nbsp; ...</p>
+
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #b1b100;">return</span> 문<span style="color: #339933;">;</span></p>
+
+      <p class="textarea"><span style="color: #009900;">}</span></p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <div class="codding-test">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+
+      <p class="textarea"><span style="color: #339933;">#define TEXT &quot;Welcome to C Programming!!&quot;</span> &nbsp;</p>
+
+      <p class="textarea">&nbsp;</p>
+
+      <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #009900;">)</span></p>
+
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #000066;">printf</span><span style="color: #009900;">(</span>TEXT<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+
+      <p class="textarea"><span style="color: #009900;">}</span></p>
+
+      </div>
+
+      <div class="syntax">
+      <h4>실행 결과</h4>
+
+      <p class="textarea">Welcome to C Programming!!</p>
+      </div>
+
+      <hr />
+      <h3>C 프로그램의 특징</h3>
+
+      <p>C언어로 작성된 프로그램이 가지는 일반적인 특징은 다음과 같습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>1. C 프로그램의 기본 단위는 함수입니다.</p>
+
+      <p>2. 함수 내의 각 명령문은 세미콜론(;)으로 끝나야 합니다.</p>
+
+      <p>3. C언어는 대소문자를 구분합니다.</p>
+
+      <p>4. C언어는 자유 형식(free-format)을 허용합니다.</p>
+
+      <hr />
+      <h3>C 프로그램의 기본 단위는 함수입니다.</h3>
+
+      <p>C 프로그램은 하나 또는 그 이상의 함수(function)로 이루어집니다.</p>
+
+      <p>또한, C언어로 구현되는 모든 프로그램은 반드시 main()&nbsp;함수를 가지고 있어야 합니다.</p>
+
+      <p>C 프로그램이 실행되면 컴퓨터는 제일 먼저 main() 함수를 찾아서 호출하기 때문입니다.</p>
+
+      <div class="syntax">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+
+      <p class="textarea"><span style="color: #339933;">#define TEXT &quot;Welcome to C Programming!!&quot;</span></p>
+
+      <p class="textarea">&nbsp;</p>
+
+      <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #009900;">)</span></p>
+
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> &nbsp; &nbsp; <span style="color: #666666; font-style: italic;">// main() 함수의 모든 명령문을 수행한 후에는&nbsp;0을 반환함.</span></p>
+
+      <p class="textarea"><span style="color: #009900;">}</span></p>
+      </div>
+
+      <hr />
+      <h3>함수 내의 각 명령문은 세미콜론(;)으로 끝나야 합니다.</h3>
+
+      <p>함수는 언제나 기능을 가지고 있어야 합니다.</p>
+
+      <p>C언어에서 이러한 기능을 정의하기 위해&nbsp;사용되는 문장을 명령문(statement)이라고 합니다.</p>
+
+      <p>함수 내의 명령문은 언제나 위에서부터 아래로 순차적으로 실행되며, 언제나 세미콜론(;)으로 끝나야 합니다.</p>
+
+      <div class="syntax">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;C언어&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 정상적으로 출력됨.</span></p>
+
+      <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;C언어&quot;</span><span style="color: #009900;">)</span> &nbsp;<span style="color: #666666; font-style: italic;">// 오류가 발생함.</span></p>
+      </div>
+
+      <hr />
+      <h3>C언어는 대소문자를 구분합니다.</h3>
+
+      <p>C언어에서&nbsp;변수나 함수의 이름을 작성할 때나&nbsp;키워드나 예약어 등을 사용할 때는 대소문자를 정확히 구분하여 사용해야 합니다.</p>
+
+      <div class="syntax">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;C언어&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 정상적으로 출력됨.</span></p>
+
+      <p class="textarea">Printf<span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;C언어&quot;</span><span style="color: #009900;">)</span> &nbsp;<span style="color: #666666; font-style: italic;">// 오류가 발생함.</span></p>
+      </div>
+
+      <hr />
+      <h3>C언어는 자유 형식(free-format)을 허용합니다.</h3>
+
+      <p>C언어에서는 문법만 맞으면 여러 개의 명령문을 한 줄에 쓸 수도 있고, 하나의 명령문을 여러 줄에 나누어 쓸 수도 있습니다.</p>
+
+      <p>하지만 프로그램의 구조를 한눈에 파악할 수 있도록, 될 수 있으면 들여쓰기 등을 잘 활용해 보기 좋게 작성하는 것이 좋습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>따라서 다음 두 예제는 정확히 같은 동작을 수행할 것입니다.</p>
+
+      <div class="syntax">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color: #993333;">int</span> func<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;C언어는 재밌어요!&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #009900;">}</span></p>
+      </div>
+
+      <div class="syntax">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color: #993333;">int</span> func<span style="color: #009900;">(</span><span style="color: #009900;">)</span></p>
+
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;C언어는 재밌어요!&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+      <p class="textarea"><span style="color: #009900;">}</span></p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <div class="tip s5">하지만 코드의 가독성을 위해 두 번째 예제처럼 적절한 들여쓰기를 하여 코드를 작성하는 것이 좋습니다.</div>
+
+      <hr />
+      <h3>주석(comments)</h3>
+
+      <p>주석은 코드에 대한 이해를 돕는 설명을 적거나 디버깅을 위해 작성합니다.</p>
+
+      <p>C언어 주석의 장점은 프로그램 내의 어디에나 올 수 있다는 점입니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어의 한 줄 주석은 시작위치에 //을 사용하고, 여러 줄&nbsp;주석은 /*로 시작해서 반드시 */로 끝나야 합니다.</p>
+
+      <div class="syntax">
+      <h4>문법</h4>
+
+      <p class="textarea"><span style="color:#0000FF;"><span style="font-style: italic;">// 한 줄 주석</span></span></p>
+
+      <p class="textarea"><span style="color:#0000FF;"><span style="font-style: italic;">/* 여러</span></span></p>
+
+      <p class="textarea"><span style="color:#0000FF;"><span style="font-style: italic;">&nbsp; &nbsp;줄</span></span></p>
+
+      <p class="textarea"><span style="color:#0000FF;"><span style="font-style: italic;">&nbsp; &nbsp;주석 */</span></span></p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는&nbsp;여러 줄 주석 안에 또 다른 한 줄 주석을 중첩해서 삽입하는 예제입니다.</p>
+
+      <div class="syntax">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color:#0000FF;"><i>/* 여러 줄</i></span></p>
+
+      <p class="textarea"><span style="color:#0000FF;"><span style="font-style: italic;">&nbsp; &nbsp; // 이렇게 두 줄 주석 안에 또 다른 한 줄 주석을 삽입할 수 있습니다.</span></span></p>
+
+      <p class="textarea"><span style="color:#0000FF;"><i>주석입니다. */</i></span></p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제처럼 C언어에서는 여러 줄 주석 안에 또 다른 한 줄 주석은 삽입할 수&nbsp;있습니다.</p>
+
+      <p>하지만 다음 예제처럼 여러 줄 주석 안에 또 다른 여러&nbsp;줄 주석은&nbsp;중첩해서 삽입할 수&nbsp;없습니다.</p>
+
+      <div class="syntax">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color:#800000;"><strong>①</strong></span><span style="color:#0000FF;"><i>&nbsp;/* 여러 줄</i></span></p>
+
+      <p class="textarea"><span style="color:#800000;"><strong>②</strong></span><span style="color:#0000FF;"><span style="font-style: italic;">&nbsp; &nbsp;&nbsp;</span><i>/* 또 다른 여러&nbsp;줄 주석입니다. */</i></span></p>
+
+      <p class="textarea"><span style="color:#800000;"><strong>③</strong></span>&nbsp;주석입니다. */</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제처럼 여러&nbsp;줄 주석 안에 또 다른 여러&nbsp;줄 주석을 삽입하면, ②번 라인에서 삽입한&nbsp;주석의 종료&nbsp;기호(*/)를 ①번 라인에서 시작한 첫 번째 주석이 자신의 종료&nbsp;기호(*/)로 잘못 인식하게 됩니다.</p>
+
+      <p>따라서 위&nbsp;예제의 ③번 라인은&nbsp;주석으로 인식되지 못하고,&nbsp;컴파일 시 오류가&nbsp;발생하게 됩니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>그러므로 C언어에서 여러&nbsp;줄 주석은 절대로 중첩해서 사용해서는 안 됩니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 앞서 살펴본 예제에 여러 주석을 추가한 예제입니다.</p>
+
+      <div class="syntax">
+      <h4>예제</h4>
+
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+
+      <p class="textarea"><span style="color: #339933;">#define TEXT &quot;Welcome to C Programming!!&quot;</span></p>
+
+      <p class="textarea">&nbsp;</p>
+
+      <p class="textarea"><span style="color: #666666; font-style: italic;">/* 여기서부터 main() 함수가 시작됨.</span></p>
+
+      <p class="textarea"><span style="color: #666666; font-style: italic;">&nbsp; &nbsp;작성자 : 홍길동 */</span></p>
+
+      <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #009900;">)</span></p>
+
+      <p class="textarea"><span style="color: #009900;">{</span></p>
+
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #000066;">printf</span><span style="color: #009900;">(</span>TEXT<span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// printf() 함수는 인수로 전달받은 데이터를 출력해주는 함수임.</span></p>
+
+      <p class="textarea">&nbsp; &nbsp; <span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> &nbsp; &nbsp; <span style="color: #666666; font-style: italic;">// main() 함수의 모든 명령문을 수행한 후에는&nbsp;0을 반환함.</span></p>
+
+      <p class="textarea"><span style="color: #009900;">}</span></p>
+      </div>
+
+      <hr /><br /><br />
+      <a href="./1-5.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./1-3.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <script src="../_js/modal.js"></script>
+<div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div></body>
+
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SCP School - C Programming Part 1</title>
+  <link rel="stylesheet" href="../_css/cp1.css" />
+  <link rel="stylesheet" href="../_css/modal.css">
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+    section>div:nth-child(1) {
+      height: 40px;
+      padding: 40px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="title" onClick="window.location.href = './main.html';">
+      SCP School
+    </div>
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div id="subtitle" onclick="window.location.href = '1-1.html';">
+      일반 C
+    </div>
+    <div onclick="window.location.href = '../html_cp2/memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+  <section>
+    <div>6) scanf() 함수</div>
+    <div class="category">1. C언어 시작</div>
+    <div class="sub_category" onclick="window.location.href = './1-1.html';">&nbsp&nbsp1) C언어 개요</div>
+    <div class="sub_category" onclick="window.location.href = './1-2.html';">&nbsp&nbsp2) C언어 기초</div>
+    <div class="sub_category" onclick="window.location.href = './1-3.html';">&nbsp&nbsp3) C프로그래밍</div>
+    <div class="sub_category" onclick="window.location.href = './1-4.html';">&nbsp&nbsp4) C프로그램의 특징</div>
+    <div class="sub_category" onclick="window.location.href = './1-5.html';">&nbsp&nbsp5) printf() 함수</div>
+    <div id="now" onclick="window.location.href = './1-6.html';">&nbsp&nbsp6) scanf() 함수</div>
+    <div class="category">2. 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-7.html';">&nbsp&nbsp7) 변수</div>
+    <div class="sub_category" onclick="window.location.href = './2-8.html';">&nbsp&nbsp8) 상수</div>
+    <div class="sub_category" onclick="window.location.href = './2-9.html';">&nbsp&nbsp9) 기본 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-10.html';">&nbsp&nbsp10) 타입 변환</div>
+    <div class="category">3. 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-11.html';">&nbsp&nbsp11) 산술 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-12.html';">&nbsp&nbsp12) 대입 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-13.html';">&nbsp&nbsp13) 증갑 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-14.html';">&nbsp&nbsp14) 비교 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-15.html';">&nbsp&nbsp15) 논리 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-16.html';">&nbsp&nbsp16) 비트 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-17.html';">&nbsp&nbsp17) 기타 연산자</div>
+    <div class="category">4. 제어문</div>
+    <div class="sub_category" onclick="window.location.href = './4-18.html';">&nbsp&nbsp18) 조건문</div>
+    <div class="sub_category" onclick="window.location.href = './4-19.html';">&nbsp&nbsp19) 반복문</div>
+    <div class="sub_category" onclick="window.location.href = './4-20.html';">&nbsp&nbsp20) 기타 제어문</div>
+    <div class="category">5. 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-21.html';">&nbsp&nbsp21) C언어 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-22.html';">&nbsp&nbsp22) 변수의 유효 범위</div>
+    <div class="sub_category" onclick="window.location.href = './5-23.html';">&nbsp&nbsp23) 재귀 호출</div>
+    <div class="category">6. 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-24.html';">&nbsp&nbsp24) 2차원 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-25.html';">&nbsp&nbsp25) 다차원 배열</div>
+    <div class="category">7. 포인터</div>
+    <div class="sub_category" onclick="window.location.href = './7-26.html';">&nbsp&nbsp26) 포인터의 개념</div>
+    <div class="sub_category" onclick="window.location.href = './7-27.html';">&nbsp&nbsp27) 포인터 연산</div>
+    <div class="sub_category" onclick="window.location.href = './7-28.html';">&nbsp&nbsp28) 인수 전달 방법</div>
+    <div class="sub_category" onclick="window.location.href = './7-29.html';">&nbsp&nbsp29) 다양한 포인터</div>
+    <div class="category">8. 포인터와 배열</div>
+    <div class="sub_category" onclick="window.location.href = './8-30.html';">&nbsp&nbsp30) 포인터와 배열의 관계</div>
+    <div class="sub_category" onclick="window.location.href = './8-31.html';">&nbsp&nbsp31) 포인터 배열과 배열 포인터</div>
+  </section>
+  <article>
+    <div>
+      <a href="./2-7.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./1-5.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <br /><br />
+      <h2>scanf() 함수</h2>
+      <hr />
+
+      <h3>scanf() 함수</h3>
+
+      <p>scanf() 함수는 C언어의 표준 입력 함수로,&nbsp;사용자로부터 다양한 데이터를 다양한 서식에 맞춰 입력받을 수 있게 해줍니다.</p>
+
+      <p>scanf() 함수의 원형은 다음과 같습니다.</p>
+
+      <div class="syntax">
+        <h4>함수 원형</h4>
+
+        <p class="textarea"><span style="color: #339900;">#include &lt;stdio.h&gt;</span></p>
+
+        <p class="textarea"><span style="color: #0000ff;">int</span> <span style="color: #0000dd;">scanf</span><span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span> <span
+            style="color: #000040;">*</span> restrict format, ...<span style="color: #008000;">)</span><span style="color: #008080;">;</span></p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>scanf() 함수의 f는 formatted의 약자이며, 서식화된 입력을 받는다는 의미입니다.</p>
+
+      <p>이 함수는 입력받은 데이터를 어떤 서식으로 변환할지 서식 지정자(format specifier)를 통해 직접 지정할 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 사용자로부터 정수를 두 번 입력받아서&nbsp;그 합을 출력하는 예제입니다.</p>
+
+      <div class="syntax">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span>&nbsp;num01<span style="color: #339933;">,</span> num02<span style="color: #339933;">;</span></p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;첫 번째 정수를 입력하세요 : &quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">scanf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d&quot;</span><span style="color: #339933;">,</span>
+          <span style="color: #339933;">&amp;</span>num01<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 번째 정수를 입력하세요 : &quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">scanf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d&quot;</span><span style="color: #339933;">,</span>
+          <span style="color: #339933;">&amp;</span>num02<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 두 정수의 합은 %d입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> num01&nbsp;<span style="color: #339933;">+</span> num02<span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+        </p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">첫 번째 정수를 입력하세요 : 10</p>
+
+        <p class="textarea">두 번째 정수를 입력하세요 : 20</p>
+
+        <p class="textarea">입력하신 두 정수의 합은 30입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 데이터를 입력받으려면 입력받고자 하는&nbsp;데이터의 타입에 해당하는 크기의 메모리를 우선 할당받아야 합니다.</p>
+
+      <p>이처럼 데이터를 저장하기 위해 프로그램에 의해 이름을 할당받은 메모리 공간을 변수(variable)라고 합니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>앞선 예제에서 scanf() 함수에 포함된&nbsp;&#39;&amp;&#39;기호는 주소 연산자(&amp;)라고 합니다.</p>
+
+      <p>이 주소 연산자는 입력받은 데이터를 뒤에 나오는 변수에 저장하라는 의미입니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>변수와 관련된 더 자세한 사항은 C언어 변수&nbsp;수업에서 확인할 수 있습니다.</p>
+
+      <p><a href="/c/c_datatype_variable" target="_blank">C언어 변수&nbsp;수업 확인 =&gt;</a></p>
+
+      <p>&nbsp;</p>
+
+      <p>주소 연산자와 관련된 더 자세한 사항은 C언어 포인터 수업에서 확인할 수 있습니다.</p>
+
+      <p><a href="/c/c_pointer_intro" target="_blank">C언어 포인터 수업 확인 =&gt;</a></p>
+
+      <hr />
+      <h3>서식 지정자의 동시 사용</h3>
+
+      <p>여러 개의 서식 지정자를 동시에 사용하여,&nbsp;여러 데이터를 서로 다른 서식으로 한 번에 입력받을 수 있습니다.</p>
+
+      <p>단, 이때에는 서식 지정자의&nbsp;순서와 저장할 변수의 순서가 반드시 같아야 합니다.</p>
+
+      <p>입력받는&nbsp;데이터의 구분은 공백(줄 바꿈, 탭, 띄어쓰기 등)을 기준으로 삼습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 사용자로부터 두 개의 정수를 한 번에 입력받아, 각각 8진수와 16진수로 출력하는 예제입니다.</p>
+
+      <div class="syntax">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> num01<span style="color: #339933;">,</span> num02<span style="color: #339933;">;</span></p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 개의 정수를 입력하세요 : &quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">scanf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d %d&quot;</span><span
+            style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span>num01<span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span>num02<span style="color: #009900;">)</span><span
+            style="color: #339933;">;</span></p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 두 정수를 8진수로 나타내면 %o와 %o가 되고,<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> num01<span style="color: #339933;">,</span> num02<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 두 정수를 16진수로 나타내면 %x와 %x가 됩니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> num01<span style="color: #339933;">,</span> num02<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">두 개의 정수를 입력하세요 :&nbsp;10 20</p>
+
+        <p class="textarea">입력하신 두 정수를 8진수로 나타내면 12와 24가 되고,</p>
+
+        <p class="textarea">입력하신 두 정수를 16진수로 나타내면 a와 14가 됩니다.</p>
+      </div>
+
+      <hr />
+      <h3>double형 실수의 입력</h3>
+
+      <p>scanf() 함수로 float형 실수를 입력받을 때는 서식 지정자로 &#39;%f&#39;를 사용하면 됩니다.</p>
+
+      <p>하지만 double형 실수를 입력받을 때는 printf() 함수에서처럼&nbsp;&#39;%f&#39;를 사용하면 안 됩니다.</p>
+
+      <p>scanf() 함수로 double형 실수를 입력받을 때는 반드시 &#39;%lf&#39;&nbsp;서식 지정자를 사용해야 정확한 값으로 입력받을 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 예제는 사용자로부터 두 개의 실수를 한 번에 입력받아 출력하는 예제입니다.</p>
+
+      <div class="syntax">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span> &nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; float</span> num01<span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; double</span> num02<span style="color: #339933;">;</span></p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 개의 실수를 입력하세요 : &quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">scanf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%f %f&quot;</span><span
+            style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span>num01<span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span>num02<span style="color: #009900;">)</span><span
+            style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 두 실수는 %f와 %f입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> num01<span style="color: #339933;">,</span> num02<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력받은&nbsp;두 실수 중 두 번째&nbsp;double형 변수에는 전혀 다른 값이
+            저장되었습니다.<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;다시 한 번 두 개의 실수를 입력하세요 : &quot;</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">scanf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%f %lf&quot;</span><span
+            style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span>num01<span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span>num02<span style="color: #009900;">)</span><span
+            style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;입력하신 두 실수는 %f와 %f입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> num01<span style="color: #339933;">,</span> num02<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;이번에는 두 실수 모두 제대로 저장되었습니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">두 개의 실수를 입력하세요 : 1.2 3.4</p>
+
+        <p class="textarea">입력하신 두 실수는 1.200000와 0.000000입니다.</p>
+
+        <p class="textarea">입력받은 두 실수 중 두 번째 double형 변수에는 전혀 다른 값이 저장되었습니다.</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea">다시 한 번 두 개의 실수를 입력하세요 : 1.2 3.4</p>
+
+        <p class="textarea">입력하신 두 실수는 1.200000와 3.400000입니다.</p>
+
+        <p class="textarea">이번에는 두 실수 모두 제대로 저장되었습니다.</p>
+      </div>
+
+      <hr /><br /><br />
+      <a href="./2-7.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./1-5.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <script src="../_js/modal.js"></script>
+<div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div></body>
+
+</html>

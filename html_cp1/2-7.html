@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SCP School - C Programming Part 1</title>
+  <link rel="stylesheet" href="../_css/cp1.css" />
+  <link rel="stylesheet" href="../_css/modal.css">
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+    section>div:nth-child(1) {
+      height: 40px;
+      padding: 40px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="title" onClick="window.location.href = './main.html';">
+      SCP School
+    </div>
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div id="subtitle" onclick="window.location.href = '1-1.html';">
+      일반 C
+    </div>
+    <div onclick="window.location.href = '../html_cp2/memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+  <section>
+    <div>7) 변수</div>
+    <div class="category">1. C언어 시작</div>
+    <div class="sub_category" onclick="window.location.href = './1-1.html';">&nbsp&nbsp1) C언어 개요</div>
+    <div class="sub_category" onclick="window.location.href = './1-2.html';">&nbsp&nbsp2) C언어 기초</div>
+    <div class="sub_category" onclick="window.location.href = './1-3.html';">&nbsp&nbsp3) C프로그래밍</div>
+    <div class="sub_category" onclick="window.location.href = './1-4.html';">&nbsp&nbsp4) C프로그램의 특징</div>
+    <div class="sub_category" onclick="window.location.href = './1-5.html';">&nbsp&nbsp5) printf() 함수</div>
+    <div class="sub_category" onclick="window.location.href = './1-6.html';">&nbsp&nbsp6) scanf() 함수</div>
+    <div class="category">2. 타입</div>
+    <div id="now" onclick="window.location.href = './2-7.html';">&nbsp&nbsp7) 변수</div>
+    <div class="sub_category" onclick="window.location.href = './2-8.html';">&nbsp&nbsp8) 상수</div>
+    <div class="sub_category" onclick="window.location.href = './2-9.html';">&nbsp&nbsp9) 기본 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-10.html';">&nbsp&nbsp10) 타입 변환</div>
+    <div class="category">3. 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-11.html';">&nbsp&nbsp11) 산술 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-12.html';">&nbsp&nbsp12) 대입 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-13.html';">&nbsp&nbsp13) 증갑 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-14.html';">&nbsp&nbsp14) 비교 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-15.html';">&nbsp&nbsp15) 논리 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-16.html';">&nbsp&nbsp16) 비트 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-17.html';">&nbsp&nbsp17) 기타 연산자</div>
+    <div class="category">4. 제어문</div>
+    <div class="sub_category" onclick="window.location.href = './4-18.html';">&nbsp&nbsp18) 조건문</div>
+    <div class="sub_category" onclick="window.location.href = './4-19.html';">&nbsp&nbsp19) 반복문</div>
+    <div class="sub_category" onclick="window.location.href = './4-20.html';">&nbsp&nbsp20) 기타 제어문</div>
+    <div class="category">5. 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-21.html';">&nbsp&nbsp21) C언어 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-22.html';">&nbsp&nbsp22) 변수의 유효 범위</div>
+    <div class="sub_category" onclick="window.location.href = './5-23.html';">&nbsp&nbsp23) 재귀 호출</div>
+    <div class="category">6. 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-24.html';">&nbsp&nbsp24) 2차원 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-25.html';">&nbsp&nbsp25) 다차원 배열</div>
+    <div class="category">7. 포인터</div>
+    <div class="sub_category" onclick="window.location.href = './7-26.html';">&nbsp&nbsp26) 포인터의 개념</div>
+    <div class="sub_category" onclick="window.location.href = './7-27.html';">&nbsp&nbsp27) 포인터 연산</div>
+    <div class="sub_category" onclick="window.location.href = './7-28.html';">&nbsp&nbsp28) 인수 전달 방법</div>
+    <div class="sub_category" onclick="window.location.href = './7-29.html';">&nbsp&nbsp29) 다양한 포인터</div>
+    <div class="category">8. 포인터와 배열</div>
+    <div class="sub_category" onclick="window.location.href = './8-30.html';">&nbsp&nbsp30) 포인터와 배열의 관계</div>
+    <div class="sub_category" onclick="window.location.href = './8-31.html';">&nbsp&nbsp31) 포인터 배열과 배열 포인터</div>
+  </section>
+  <article>
+    <div>
+      <a href="./2-8.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./1-6.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <br /><br />
+      <h2>변수</h2>
+      <hr />
+
+      <h3>변수(variable)</h3>
+
+      <p>변수(variable)란 데이터(data)를 저장하기 위해 프로그램에 의해 이름을 할당받은 메모리 공간을 의미합니다.</p>
+
+      <p>즉, 변수란 데이터(data)를 저장할 수 있는 메모리 공간을 의미하며, 이렇게 저장된&nbsp;값은&nbsp;변경될 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 숫자 표현에 관련된 변수는&nbsp;정수형 변수와 실수형 변수로 구분할 수 있습니다.</p>
+
+      <p>또다시 정수형 변수는 char형, int형, long형 변수로, 실수형 변수는 float형, double형 변수로 나눌 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>또한, 데이터가 저장된 메모리의 주소를 저장하고 처리하는 포인터 변수가 있습니다.</p>
+
+      <p>관련된 정보를 한 번에 묶어서 처리하는 사용자 정의 구조체 변수도 있습니다.</p>
+
+      <hr />
+      <h3>변수의 이름 생성 규칙</h3>
+
+      <p>C언어에서는 변수의 이름을&nbsp;비교적 자유롭게 지을 수 있습니다.</p>
+
+      <p>하지만 변수의 이름은 해당&nbsp;변수에 저장될&nbsp;데이터의 의미를 잘 나타내도록 짓는 것이 가장 좋습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 변수의 이름을 생성할 때에 반드시 지켜야 하는 규칙은 다음과 같습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>1. 변수의 이름은 영문자(대소문자), 숫자, 언더스코어(_)로만 구성됩니다.</p>
+
+      <p>2. 변수의 이름은 숫자로 시작될 수 없습니다.</p>
+
+      <p>3. 변수의 이름 사이에는 공백을 포함할&nbsp;수 없습니다.</p>
+
+      <p>4. 변수의 이름으로 C언어에서 미리 정의된 키워드(keyword)는 사용할 수 없습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 표는 변수의 이름을 생성할 때에 지겨야하는 규칙의 예시입니다.</p>
+
+      <table class="tb-2" summary="">
+        <thead>
+          <tr class="bg">
+            <th style="width: 30%;">변수의 이름이 올바른 경우</th>
+            <th style="width: 30%;">변수의 이름이 잘못된 경우</th>
+            <th style="width: 40%;">잘못된 이유</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>int tcp</td>
+            <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int t!cp*</td>
+            <td>
+              변수&nbsp;이름이 영문자,숫자, _ 외에 특수문자 사용하였음
+            </td>
+          </tr>
+          <tr>
+            <td>int school</td>
+            <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int 6school</td>
+            <td>변수 이름이 숫자로 시작하였음</td>
+          </tr>
+          <tr>
+            <td>int tcpschool</td>
+            <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int tcp school</td>
+            <td>
+              변수 이름 tcp와 school 사이에 공백이 있음
+            </td>
+          </tr>
+          <tr>
+            <td>int int</td>
+            <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int int</td>
+            <td>변수 이름에 int라는 키워드를 사용하였음</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>&nbsp;</p>
+
+      <div class="tip s2">C언어에서는 변수의 이름에&nbsp;대소문자를 구분하므로 이 점에 주의해야 합니다.<br />
+        ex) int tcp&nbsp; 과&nbsp;&nbsp;int Tcp 는 같은 변수가 아닙니다.</div>
+
+      <div class="tip s2">
+        다음은 C언어에서 사용되는 키워드(Keyword)들입니다.<br />
+        키워드(Keyword)는 고유한 의미를 가지는 예약어입니다. C언어에는 32개의 키워드가 있으며, 이러한 키워드들은 미국표준협회 ANSI에서 지정한 키워드들 입니다. 아래의 키워드들은 위의 예시처럼 변수의 이름으로 사용할 수 없습니다.
+        &nbsp;
+
+        <table align="center" border="1" cellpadding="1" cellspacing="1" style="width: 700px;">
+          <tbody>
+            <tr>
+              <td>&nbsp;auto</td>
+              <td>&nbsp;beak</td>
+              <td>&nbsp;case</td>
+              <td>&nbsp;char</td>
+              <td>&nbsp;const</td>
+              <td>&nbsp;continue</td>
+              <td>&nbsp;default</td>
+            </tr>
+            <tr>
+              <td>&nbsp;do</td>
+              <td>&nbsp;double</td>
+              <td>&nbsp;else</td>
+              <td>&nbsp;enum</td>
+              <td>&nbsp;extern</td>
+              <td>&nbsp;float</td>
+              <td>&nbsp;for</td>
+            </tr>
+            <tr>
+              <td>&nbsp;goto</td>
+              <td>&nbsp;if</td>
+              <td>&nbsp;int</td>
+              <td>&nbsp;long</td>
+              <td>&nbsp;register</td>
+              <td>&nbsp;return</td>
+              <td>&nbsp;short</td>
+            </tr>
+            <tr>
+              <td>&nbsp;signed&nbsp;&nbsp;</td>
+              <td>&nbsp;sizeof</td>
+              <td>&nbsp;static</td>
+              <td>struct</td>
+              <td>&nbsp;switch</td>
+              <td>&nbsp;typedef</td>
+              <td>&nbsp;union</td>
+            </tr>
+            <tr>
+              <td>&nbsp;unsigend</td>
+              <td>&nbsp;void&nbsp;</td>
+              <td>&nbsp;volatile</td>
+              <td>&nbsp;while</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>&nbsp;</p>
+      </div>
+
+      <hr />
+      <h3>비트(bit)와 바이트(byte)</h3>
+
+      <p>컴퓨터는 모든 데이터를&nbsp;2진수로 표현하고 처리합니다.</p>
+
+      <p>비트(bit)란 컴퓨터가 데이터를&nbsp;처리하기 위해 사용하는 데이터의 최소 단위입니다.</p>
+
+      <p>이러한 비트에는 2진수의&nbsp;값(0과 1)을 단 하나만 저장할 수 있습니다.</p>
+
+      <p>바이트(byte)란 위와 같은&nbsp;비트가 8개 모여서 구성되며,&nbsp;한 문자를 표현할 수 있는 최소 단위입니다.</p>
+
+      <hr />
+      <h3>변수와 메모리 구조</h3>
+
+      <p>변수는 기본적으로 메모리의 주소(address)를 기억하는 역할을 합니다.</p>
+
+      <p>메모리&nbsp;주소란 물리적인 메모리 공간을 서로 구분하기 위해 사용되는 일종의 식별자입니다.</p>
+
+      <p>즉, 메모리 주소란 메모리 공간에서의 정확한 위치를 식별하기 위한 고유 주소를 의미합니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>변수를 참조할 때는 메모리의 주소를 참조하는 것이 아닌, 해당&nbsp;주소에 저장된 데이터를 참조하게 됩니다.</p>
+
+      <p>따라서 변수는 데이터가 저장된 메모리의 주소뿐만 아니라, 저장된&nbsp;데이터의 길이와 형태에 관한 정보도 같이 기억해야 합니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>다음 그림은 메모리 상에 변수가 어떤 식으로&nbsp;저장되는지를&nbsp;보여줍니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p><img alt="C 변수" src="../_images/img_c_variable.png" style="width: 376px; height: 292px;" /></p>
+
+      <p>&nbsp;</p>
+
+      <p>위의 그림처럼 하나의 메모리 공간에는&nbsp;8개의 비트로 이루어진&nbsp;1바이트의 데이터가 저장됩니다.</p>
+
+      <p>따라서 메모리의 주소 또한&nbsp;1바이트씩 증가되며,&nbsp;낮은 주소부터 차례대로 데이터가 저장됩니다.</p>
+
+      <p>위의 그림에서 변수의 길이가&nbsp;총 4개의 메모리 공간을 포함하므로, 해당 변수에는 4바이트의 데이터가 저장되어 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>이때 변수의 이름은 첫 번째 메모리 주소인 0x10만을 가리키게 됩니다.</p>
+
+      <p>따라서 변수의 길이가 4이며, 변수가 어떤 형태로 구성되는지도 알아야만 해당 변수에서 데이터를 올바르게 참조할 수 있습니다.</p>
+
+      <hr />
+      <h3>변수의 선언</h3>
+
+      <p>C언어에서는&nbsp;변수를 사용하기 전에 반드시&nbsp;먼저 해당 변수를 저장하기 위한 메모리 공간을 할당받아야&nbsp;합니다.</p>
+
+      <p>이렇게 해당 변수만을&nbsp;위한 메모리 공간을 할당받는 행위를&nbsp;변수의 선언이라고 부릅니다.</p>
+
+      <p>만약 선언되지 않은&nbsp;변수를 사용하려고 하면, C 컴파일러는&nbsp;오류를 발생시킵니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 변수를&nbsp;선언하는 방법은&nbsp;다음과 같이 두 가지 방법이 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>1. 변수의 선언만 하는 방법</p>
+
+      <p>2. 변수의 선언과 동시에 초기화하는 방법</p>
+
+      <hr />
+      <h3>변수의 선언만 하는 방법</h3>
+
+      <p>이 방법은 먼저 변수를 선언하여 메모리 공간만을 할당받고,&nbsp;나중에 변수를 초기화하는 방법입니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>C언어에서 변수를 선언하는 방법은 다음과 같습니다.</p>
+
+      <div class="syntax">
+        <h4>문법</h4>
+
+        <p class="textarea"><span style="color: #993333;">타입</span>&nbsp;변수이름<span style="color: #339933;">;</span></p>
+      </div>
+
+      <div class="syntax">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num<span style="color: #339933;">;</span></p>
+
+        <p class="textarea">...</p>
+
+        <p class="textarea"><span style="color: #202020;">num</span>&nbsp;<span style="color: #339933;">=</span> <span style="color: #0000dd;">20</span><span style="color: #339933;">;</span></p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제처럼 정수를 저장하기 위한 메모리 공간을 할당받으면, 반드시 해당&nbsp;타입의 데이터만을 저장해야 합니다.</p>
+
+      <p>그렇지 않고 다른 타입의 데이터를&nbsp;저장할 경우에는 저장된 데이터에 변형 및 손실이 일어날 수도 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>변수의 초기화란 해당 변수를 사용할 수 있도록 초기값을 설정하는 행위입니다.</p>
+
+      <p>초기화되지 않은 변수에는 아무런 의미&nbsp;없는 값인 쓰레깃값만이 들어가 있습니다.</p>
+
+      <div class="syntax">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num<span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #0000dd;">printf</span><span style="color: #008000;">(</span><span style="color: #FF0000;">&quot;%d&quot;</span>, num<span style="color: #008000;">)</span><span style="color: #008080;">;</span></p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제에서 변수 num은 선언만 하고 아직 초기화되지 않았습니다.</p>
+
+      <p>하지만 printf() 함수에서 변수 num을 사용하여 해당 변수에 저장된 값을 출력하려고 하고 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>이와 같은 경우에&nbsp;C 컴파일러는 오류를 발생시키지는 않겠지만, 프로그램은 사용자가 의도하지 않은&nbsp;결과를 출력할 것입니다.</p>
+
+      <p>따라서 C언어에서는 초기화되지 않은 변수는 절대로 사용해서는 안됩니다.</p>
+
+      <hr />
+      <h3>변수의 선언과 동시에 초기화하는 방법</h3>
+
+      <p>C언어에서 변수는&nbsp;선언과 동시에 그 값을 초기화할 수&nbsp;있습니다.</p>
+
+      <p>또한, 선언하고자 하는 변수들의 타입만&nbsp;같다면&nbsp;여러 변수를&nbsp;동시에 선언할 수도 있습니다.</p>
+
+      <div class="syntax">
+        <h4>문법</h4>
+
+        <p class="textarea">1. <span style="color: #993333;">타입</span> 변수이름[<span style="color: #339933;">,</span> 변수이름]<span style="color: #339933;">;</span></p>
+
+        <p class="textarea">2. <span style="color: #993333;">타입</span> 변수이름 <span style="color: #339933;">=</span> <span style="color:#800080;">초깃값</span>[<span style="color: #339933;">,</span>&nbsp;변수이름 <span
+            style="color: #339933;">=&nbsp;</span><span style="color:#800080;">초깃값</span>]<span style="color: #339933;">;</span></p>
+      </div>
+
+      <div class="syntax">
+        <h4>예제</h4>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> num01<span style="color: #339933;">,</span> num02<span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">double</span>&nbsp;num03 <span style="color: #339933;">=</span> <span style="color:#800080;">1.23</span><span style="color: #339933;">,</span> num04 <span style="color: #339933;">=</span>
+          <span style="color:#800080;">4.56</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea">&nbsp;</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <div class="tip s2">선언하고자 하는 변수의 타입이 서로 다르면 동시에 선언할 수 없습니다.</div>
+
+
+      <hr /><br /><br />
+      <a href="./2-8.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./1-6.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <script src="../_js/modal.js"></script>
+<div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div></body>
+
+</html>

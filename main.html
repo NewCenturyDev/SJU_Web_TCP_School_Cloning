@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SCP School - Main</title>
+    <link rel="stylesheet" href="./_css/main.css">
+    <link rel="stylesheet" href="./_css/modal.css">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <!--여백, 폰트조정 별도처리-->
+    <style>
+      article{
+        text-align: center;
+      }
+      article > h1{
+        font-size: 32px;
+        font-weight: 800;
+      }
+      article > p{
+        font-size: 18px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!--상단 이미지, 로고, 회원 관련 버튼 부분-->
+      <div id="title" onClick="window.location.href = './main.html';">
+        SCP School
+      </div>
+      <div id="regbtn" onClick="ShowReg();">회원가입</div>
+      <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+      <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+      <div id="logoutbtn" onClick="logout();">로그아웃</div>
+    </header>
+    <nav>
+      <!--상단메뉴-->
+      <div id="subtitle" onClick="window.location.href = './main.html';">
+        SCP 메인
+      </div>
+      <div onclick="window.location.href = './html_intro/intro_1.html';">
+        SCP 소개
+      </div>
+      <div onclick="window.location.href = './html_cp1/1-1.html';">
+        일반 C
+      </div>
+      <div onclick="window.location.href = './html_cp2/memory_structure.html';">
+        고급 C
+      </div>
+      <div onclick="window.location.href = './faq.html';">
+        FAQ
+      </div>
+      <div>
+      </div>
+    </nav>
+    <article>
+      <!--내용-->
+      <h1>Sejong C Programming School</h1>
+      <br/>
+      <p>컴퓨터공학과 신입생 여러분!</p>
+      <p>처음 접하는 프로그래밍이 너무 어려우셨나요?</p>
+      <br/>
+      <p>여기에 쉽게 풀어 설명한 가이드와 팁이 있습니다!</p>
+    </article>
+
+
+    <!-- 로그인 모달창 -->
+    <div class="modal" id="auth">
+      <div class="auth-content">
+        <h2> SCP School - Login </h2>
+        <form>
+          <input id="authid" type="text" name="id" placeholder="아이디"></input>
+          <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+          </br>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="login();">로그인</div>
+      </div>
+    </div>
+
+    <!-- 회원가입 모달창 -->
+    <div class="modal" id="reg">
+      <div class="reg-content">
+          <h2> SCP School - Register </h2>
+          <form>
+            <input id="regid" type="text" name="id" placeholder="아이디"></input>
+            <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+            <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+            <input type="text" name="studentnum" placeholder="학번"></input>
+            <input type="text" name="studentname" placeholder="성명"></input>
+            <input type="text" name="studentdept" placeholder="학과"></input>
+          </form>
+          <p>
+            아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+            <br/>
+            사이트 관리자 연락처 : smyun99hyper@naver.com
+            <br/>
+            <br/>
+            <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+          </p>
+          <div onclick="register();">회원가입</div>
+      </div>
+    </div>
+    <script src="./_js/modal.js"></script>
+  </body>
+</html>

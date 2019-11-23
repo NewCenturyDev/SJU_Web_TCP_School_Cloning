@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>미리 정의된 매크로</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 80px;
+    padding: 20px 0;
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>49) 미리 정의된<br/>매크로</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div id="now" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+
+      <!-- 다음 강좌로 이동하는 버튼 -->
+      <a href="compile_headerFile.html"><div class="button" id="next">다음 ▶</div></a>
+      <!-- 이전 강좌로 이동하는 버튼 -->
+      <a href="prepro_macroFunc.html"><div class="button" id="prev">◀ 이전</div></a>
+
+      <br /><br />
+
+      <!-- 강좌 내용 -->
+      <h2>미리 정의된 매크로</h2>
+      <hr />
+
+      <h3>미리 정의된 매크로(predefined macro)</h3>
+      <p>C언어에서는 컴파일러가 참고해야 할 정보를 알려주기 위해서 몇몇 매크로를 미리 정의하여 제공하고 있습니다.</p>
+      <p>미리 정의된 매크로는 #define 선행처리 지시자로 정의하지 않아도 사용할 수 있으나, 사용자가 재정의할 수는 없습니다.</p>
+
+      <p>&nbsp;</p>
+      <p>C언어에서 제공하는 미리 정의된 매크로는 다음과 같습니다.</p>
+
+      <table class="tb-2">
+        <thead>
+          <tr>
+            <th>미리 정의된 매크로</th>
+            <th>설명</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>__DATE__</td>
+            <td>선행처리가 수행된 날짜를 &quot;Mmm dd yyyy&quot;형식으로 나타낸 문자열</td>
+          </tr>
+          <tr>
+            <td>__TIME__</td>
+            <td>선행처리가 수행된 시간을 &quot;hh:mm:ss&quot;형식으로 나타낸 문자열</td>
+          </tr>
+          <tr>
+            <td>__FILE__</td>
+            <td>현재 소스 파일의 이름을 나타내는 문자열</td>
+          </tr>
+          <tr>
+            <td>__LINE__</td>
+            <td>현재 소스 파일에서 처리중인 라인 번호를 나타내는 문자열</td>
+          </tr>
+          <tr>
+            <td>__STDC__</td>
+            <td>컴파일러가 C언어 표준을 따르면 1로 설정함.</td>
+          </tr>
+          <tr>
+            <td>__STDC_HOSTED__</td>
+            <td>호스트 환경이 아니면 0, 호스트 환경이면 1로 설정함.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>&nbsp;</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;선행처리가 수행된 날짜는 %s입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> __DATE__<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;선행처리가 수행된 시간은 %s입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> __TIME__<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;현재 소스 파일에서 처리중인 라인 번호는 %d입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> __LINE__<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;__STDC__ : %d<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span
+            style="color: #339933;">,</span> __STDC__<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;__STDC_HOSTED__ : %d<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> __STDC_HOSTED__<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">선행처리가 수행된 날짜는 Feb 15 2017입니다.</p>
+        <p class="textarea">선행처리가 수행된 시간은 17:03:55입니다.</p>
+        <p class="textarea">현재 소스 파일에서 처리중인 라인 번호는 7입니다.</p>
+        <p class="textarea">__STDC__ : 1</p>
+        <p class="textarea">__STDC_HOSTED__ : 1</p>
+      </div>
+
+      <hr />
+      <h3>#line</h3>
+      <p>#line 선행처리 지시자는 __LINE__ 매크로와 __FILE__ 매크로를 재정의할 수 있게 해줍니다.</p>
+      <p>라인 번호는 int형 타입으로, 파일명은 문자열로 전달됩니다.</p>
+      <p>이 선행처리 지시자는 사용자가 직접 사용하기보다는 주로 컴파일러가 오류 메시지를 위해 사용합니다.</p>
+
+      <hr />
+
+      <h3>#error</h3>
+      <p>#error 선행처리 지시자는 지정한 오류 메시지를 출력하고, 컴파일 과정을 중단시킵니다.</p>
+      <p>주로 조건부 컴파일 선행처리 지시자와 함께 사용하여 디버깅에 사용됩니다.</p>
+
+      <hr />
+      <h3>#undef</h3>
+      <p>#undef 선행처리 지시자는 #define 선행처리 지시지와 정확히 반대되는 동작을 수행합니다.</p>
+      <p>즉, 이미 정의되어 있는 매크로를 취소하는 동작을 수행합니다.</p>
+
+      <p>&nbsp;</p>
+      <p>따라서 #define 선행처리 지시자에 의해 정의되는 매크로가 치환하는 범위는 #define 지시자가 정의된 위치부터 #undef 지시자에 의해 취소되는 위치나 파일의 끝까지가 됩니다.</p>
+      <p>단, 위에서 살펴본 미리 정의된 매크로는 사용자가 임의로 정의를 취소할 수 없습니다.</p>
+
+      <hr />
+      <br /><br />
+
+      <!-- 다음 강좌로 이동하는 버튼 -->
+      <a href="compile_headerFile.html"><div class="button" id="next">다음 ▶</div></a>
+      <!-- 이전 강좌로 이동하는 버튼 -->
+      <a href="prepro_macroFunc.html"><div class="button" id="prev">◀ 이전</div></a>
+
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+  </body>
+</html>

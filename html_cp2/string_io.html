@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>기본적인 입출력</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 40px;
+    padding: 40px 0;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>35) 기본적인 입출력</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div id="now" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+        <!-- 다음 강좌로 이동하는 버튼 -->
+        <a href="string_charFunc.html"><div class="button" id="next">다음 ▶</div></a>
+        <!-- 이전 강좌로 이동하는 버튼 -->
+        <a href="memory_malloc.html"><div class="button" id="prev">◀ 이전</div></a>
+    <br /><br/>
+
+    <!-- 강좌 내용 -->
+    <h2>기본적인 입출력</h2>
+    <hr />
+    <h3>기본적인 입출력</h3>
+    <p>C언어에서는 기억장치에 저장되는 파일을 다루는 것과 마찬가지 방식으로 입출력 장치를 다룹니다.</p>
+    <p>따라서 키보드, 모니터와 같은 대부분의 콘솔 장치도 C 프로그램에서는 자동으로 열리는 파일처럼 다뤄집니다.</p>
+    <p>C언어에서는 stdin 표준 스트림을 통해 입력 장치를 다루며, stdout 표준 스트림을 통해 출력 장치를 다루게 됩니다.</p>
+    <hr />
+
+    <h3>스트림(stream)</h3>
+    <p>C 프로그램은 파일이나 콘솔의 입출력을 직접 다루지 않고, 스트림(stream)이라는 것을 통해 다룹니다.</p>
+    <p>스트림(stream)이란 실제의 입력이나 출력이 표현된 데이터의 이상화된 흐름을 의미합니다.</p>
+    <p>즉, 스트림은 운영체제에 의해 생성되는 가상의 연결 고리를 의미합니다.</p>
+    <p>&nbsp;</p>
+    <p><img src="../_images/10.35-1 img_c_stream.png" style="width: 556px; height: 292px;" /></p>
+    <p>&nbsp;</p>
+    <p>C언어에서 파일과의 연결을 위한 스트림은 사용자가 직접 생성하고 소멸시켜야 합니다.</p>
+    <p>하지만 콘솔 장치에 대한 스트림은 프로그램 실행 시 자동으로 생성되며, 프로그램 종료 시 자동으로 소멸합니다.</p>
+    <p>&nbsp;</p>
+    <p><img src="../_images/10.35-2 img_c_stream_input_output.png" style="width: 644px; height: 268px;" /></p>
+    <p>&nbsp;</p>
+    <p>C언어에서 기본적으로 제공되는 표준 스트림(standard stream)은 다음과 같습니다.</p>
+
+    <table class="tb-2">
+        <tr>
+          <th width="20%">표준 스트림</th>
+          <th width="80%">설명</th>
+        </tr>
+        <tr>
+          <td>stdin</td>
+          <td>표준 입력 스트림</td>
+        </tr>
+        <tr>
+          <td>stdout</td>
+          <td>표준 출력 스트림</td>
+        </tr>
+        <tr>
+          <td>stderr</td>
+          <td>표준 오류 스트림</td>
+        </tr>
+
+    </table>
+
+    <hr />
+
+    <h3>EOF(End Of File)</h3>
+    <p>운영체제에서 파일의 끝을 탐지하는 방법은 운영체제마다 약간씩 다릅니다.</p>
+    <p>하지만 C언어는 운영체제와 상관없이, 파일의 끝에 도달했을 때 언제나 특별한 값을 반환하도록 합니다.</p>
+    <p>그 값을 EOF(End Of File)라고 하며, 실제로 이 값은 -1을 나타냅니다.</p>
+    <p>&nbsp;</p>
+    <p>파일뿐만 아니라 키보드를 통한 입력 시에도 입력의 끝을 알려주는 방법이 필요합니다.</p>
+    <p>대부분의 유닉스(UNIX) 시스템에서는 라인의 시작 위치에서 Ctrl+D를 누르면 EOF를 발생시킬 수 있습니다.</p>
+    <p>윈도우 명령창에서는 해당 라인의 어디에서든 Ctrl+Z를 누르고 나서 Enter를 누르면 EOF를 발생시킬 수 있습니다.</p>
+    <p>&nbsp;</p>
+    <p>다음 예제는 사용자가 EOF를 입력할 때까지 계속해서 영문자를 한 문자씩 입력받는 예제입니다.</p>
+
+    <div class="syntax">
+      <h4>예제</h4>
+      <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+      <p class="textarea"><span style="color: #339933;"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></span></p>
+      <p class="textarea"><span style="color: #339933;"><span style="color: #009900;">{</span></span></p>
+      <p class="textarea">&nbsp;&nbsp; &nbsp;<span style="color: #993333;">char</span> ch<span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp;&nbsp; &nbsp;<span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;EOF가 입력될 때까지 영문자를 계속 입력받습니다 :<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp;&nbsp; &nbsp;<span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;(윈도우에서 EOF의 강제 발생은 Ctrl+Z를 누르고 나서 Enter를 누르면 됩니다)<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp;</p>
+      <p class="textarea">&nbsp;&nbsp; &nbsp;<span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span><span style="color: #009900;">(</span>ch <span style="color: #339933;">=</span> <span style="color: #000066;">getchar</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span> <span style="color: #339933;">!=</span> EOF<span style="color: #009900;">)</span></p>
+      <p class="textarea">&nbsp;&nbsp; &nbsp;<span style="color: #009900;">{</span></p>
+      <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; </span>&nbsp;&nbsp; &nbsp;<span style="color: #000066;">putchar</span><span style="color: #009900;">(</span>ch<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+      <p class="textarea">&nbsp;&nbsp; &nbsp;<span style="color: #009900;">}</span></p>
+      <p class="textarea"><span style="color: #339933;"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></span></p>
+      <p class="textarea"><span style="color: #339933;"><span style="color: #009900;">}</span> </span></p>
+    </div>
+
+    <div class="syntax">
+      <h4>실행 결과</h4>
+      <p class="textarea">EOF가 입력될 때까지 영문자를 계속 입력받습니다 :&nbsp;</p>
+      <p class="textarea">(윈도우에서 EOF의 강제 발생은 Ctrl+Z를 누르고 나서 Enter를 누르면 됩니다)</p>
+      <p class="textarea">a</p>
+      <p class="textarea">a</p>
+      <p class="textarea">b</p>
+      <p class="textarea">b</p>
+      <p class="textarea">-1</p>
+      <p class="textarea">-1</p>
+      <p class="textarea">^Z</p>
+    </div>
+
+    <hr />
+    <br/><br/>
+
+    <!-- 다음 강좌로 이동하는 버튼 -->
+    <a href="string_charFunc.html"><div class="button" id="next">다음 ▶</div></a>
+    <!-- 이전 강좌로 이동하는 버튼 -->
+    <a href="memory_malloc.html"><div class="button" id="prev">◀ 이전</div></a>
+
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+  </body>
+</html>

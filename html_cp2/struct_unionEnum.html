@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>공용체와 열거체</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+  section > div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+    height: 40px;
+    padding: 40px 0;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>43) 공용체와 열거체</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div id="now" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+        <!-- 다음 강좌로 이동하는 버튼 -->
+        <a href="io_console.html"><div class="button" id="next">다음 ▶</div></a>
+        <!-- 이전 강좌로 이동하는 버튼 -->
+        <a href="struct_application.html"><div class="button" id="prev">◀ 이전</div></a>
+        <br/><br/>
+
+        <!-- 강좌 내용 -->
+        <h2>공용체와 열거체</h2>
+        <hr />
+        <h3>공용체</h3>
+        <p>공용체(union)는 union 키워드를 사용하여 선언하며, 한 가지를 제외한 모든 면에서 구조체와 같습니다.</p>
+        <p>바로 모든 멤버 변수가 하나의 메모리 공간을 공유한다는 점만이 다릅니다.</p>
+        <p>모든 멤버 변수가 같은 메모리를 공유하므로, 공용체는 한 번에 하나의 멤버 변수밖에 사용할 수 없습니다.</p>
+        <p>&nbsp;</p>
+        <p><img src="../_images/11.43-1 img_c_struct_union.png" style="width: 308px; height: 288px;" />
+          <img src="../_images/11.43-2 img_c_struct_enum.png" style="width: 418px; height: 298px;" /></p>
+        <p>&nbsp;</p>
+        <p>공용체는 순서가 규칙적이지 않고, 미리 알 수 없는 다양한 타입의 데이터를 저장할 수 있도록 설계된 타입입니다.</p>
+        <p>이러한 공용체는 크기가 가장 큰 멤버 변수의 크기로 메모리를 할당받습니다.</p>
+        <p>따라서 공용체 배열을 사용하면, 같은 크기로 구성된 배열 요소에 다양한 크기의 데이터를 저장할 수 있습니다.</p>
+        <p>&nbsp;</p>
+        <p>다음 예제는 공용체의 멤버 변수를 단 하나만 초기화해도, 나머지 멤버 변수들이 모두 같은 데이터를 공유한다는 것을 보여주는 예제입니다.</p>
+
+        <div class="codding-test">
+          <h4>예제</h4>
+          <p class="textarea"><span style="color: #993333;">typedef</span> <span style="color: #993333;">union</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; unsigned</span> <span style="color: #993333;">char</span> a<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; unsigned</span> <span style="color: #993333;">short</span> b<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; unsigned</span> <span style="color: #993333;">int</span> c<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span> SHAREDATA<span style="color: #339933;">;</span></p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>SHAREDATA&nbsp;var<span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>var.<span style="color: #202020;">c</span> <span style="color: #339933;">=</span> <span style="color: #208080;">0x12345678</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%x<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> var.<span style="color: #202020;">a</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%x<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> var.<span style="color: #202020;">b</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%x<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> var.<span style="color: #202020;">c</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span></p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">78</p>
+          <p class="textarea">5678</p>
+          <p class="textarea">12345678</p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>공용체에 저장된 값의 의미는 값을 저장할 때 공용체의 어떤 멤버 변수를 사용했는지에 따라 전혀 달리 해석됩니다.</p>
+        <p>따라서 공용체의 어떤 멤버 변수를 사용하여 저장했는지를 별도로 저장하여, 접근할 때에도 같은 멤버 변수를 사용해야 합니다.</p>
+        <hr />
+        <h3>열거체</h3>
+        <p>열거체(enumerated types)는 새로운 타입을 선언하면서, 동시에 해당 타입이 가질 수 있는 정수형 상숫값도 같이 명시할 수 있는 타입입니다.</p>
+        <p>이러한 열거체를 이용하면 프로그램의 가독성이 높아지고, 변수가 지니는 값에 의미를 부여할 수도 있게 됩니다.</p>
+        <p>&nbsp;</p>
+
+        <div class="codding-test">
+          <h4>예제</h4>
+          <p class="textarea"><span style="color: #000000; font-weight: bold;">enum</span> Weather <span style="color: #009900;">{</span>SUNNY <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">,</span> CLOUD <span style="color: #339933;">=</span> <span style="color: #0000dd;">10</span><span style="color: #339933;">,</span> RAIN <span style="color: #339933;">=</span> <span style="color: #0000dd;">20</span><span style="color: #339933;">,</span> SNOW <span style="color: #339933;">=</span> <span style="color: #0000dd;">30</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">enum</span> Weather wt<span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>wt <span style="color: #339933;">=</span> SUNNY<span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">switch</span> <span style="color: #009900;">(</span>wt<span style="color: #009900;">)</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> SUNNY<span style="color: #339933;">:</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;오늘은 햇볕이 쨍쨍!&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> CLOUD<span style="color: #339933;">:</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;비가 올락말락하네요!&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> RAIN<span style="color: #339933;">:</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;비가 내려요.. 우산 챙기세요!&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">case</span> SNOW<span style="color: #339933;">:</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;오늘은 눈싸움하는 날!&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">default</span><span style="color: #339933;">:</span> <span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;도대체 무슨 날씨인건가요!!!&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;각각의 열거체에 해당하는 정수값은 다음과 같습니다.&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d %d %d %d<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> SUNNY<span style="color: #339933;">,</span> CLOUD<span style="color: #339933;">,</span> RAIN<span style="color: #339933;">,</span> SNOW<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span></p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">오늘은 햇볕이 쨍쨍!</p>
+          <p class="textarea">각각의 열거체 멤버에 해당하는 정수값은 다음과 같습니다.</p>
+          <p class="textarea">0 10 20 30</p>
+        </div>
+
+        <p>&nbsp;</p>
+        <p>C언어에서 열거체는 enum 키워드를 사용하여 선언합니다.</p>
+        <p>위의 예제처럼 사용자가 별도로 각 멤버에 해당하는 상숫값을 명시할 수 있습니다.</p>
+        <p>이때 상숫값을 따로 명시하지 않으면 0부터 시작되며, 그 다음 멤버의 값은 바로 앞 멤버의 값보다 1만큼 증가되며 정의됩니다.</p>
+        <p>&nbsp;</p>
+
+        <div class="codding-test">
+          <h4>예제</h4>
+          <p class="textarea"><span style="color: #000000; font-weight: bold;">enum</span> Days <span style="color: #009900;">{</span>MON<span style="color: #339933;">,</span> TUE<span style="color: #339933;">,</span> WED<span style="color: #339933;">,</span> THU<span style="color: #339933;">,</span> FRI<span style="color: #339933;">,</span> SAT<span style="color: #339933;">,</span> SUN<span style="color: #009900;">}</span><span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+          <p class="textarea"><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000000; font-weight: bold;">enum</span> Days today<span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>today <span style="color: #339933;">=</span> SAT<span style="color: #339933;">;</span> &nbsp;</p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>today <span style="color: #339933;">&gt;=</span> SAT <span style="color: #339933;">&amp;&amp;</span> today <span style="color: #339933;">&lt;=</span> SUN<span style="color: #009900;">)</span></p>
+          <p class="textarea">&nbsp; &nbsp;&nbsp;<span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;오늘은 주말이네요~ 주말에도 열심히 공부하는 여러분은 최고에요!&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #339933;">&nbsp;&nbsp; &nbsp;</span><span style="color: #009900;">}</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">else</span></p>
+          <p class="textarea"><span style="color: #b1b100;">&nbsp;&nbsp; &nbsp;</span><span style="color: #009900;">{</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;주말까지 %d일 남았어요~ 조금만 더 힘내자구요!&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">5</span> <span style="color: #339933;">-</span> today<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea">&nbsp; &nbsp;&nbsp;<span style="color: #009900;">}</span></p>
+          <p class="textarea">&nbsp;</p>
+          <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; puts</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;각각의 열거체에 해당하는 정수값은 다음과 같습니다.&quot;</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #000066;">&nbsp; &nbsp; printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;%d %d %d %d %d %d %d<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> MON<span style="color: #339933;">,</span> TUE<span style="color: #339933;">,</span> WED<span style="color: #339933;">,</span> THU<span style="color: #339933;">,</span> FRI<span style="color: #339933;">,</span> SAT<span style="color: #339933;">,</span> SUN<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+          <p class="textarea"><span style="color: #009900;">}</span></p>
+        </div>
+
+        <div class="syntax">
+          <h4>실행 결과</h4>
+          <p class="textarea">오늘은 주말이네요~ 주말에도 열심히 공부하는 여러분은 최고에요!</p>
+          <p class="textarea">각각의 열거체 멤버에 해당하는 정수값은 다음과 같습니다.</p>
+          <p class="textarea">0 1 2 3 4 5 6</p>
+        </div>
+
+        <hr/>
+        <br/><br/>
+        <a href="io_console.html"><div class="button" id="next">다음 ▶</div></a>
+        <a href="struct_application.html"><div class="button" id="prev">◀ 이전</div></a>
+
+        <!-- 댓글 -->
+        <div id="reply">
+          <textarea id="replycontent"></textarea>
+          <div id="submitreply">작성</div>
+        </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+  </body>
+</html>

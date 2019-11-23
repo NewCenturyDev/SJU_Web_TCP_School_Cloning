@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SCP School - C Programming Part 1</title>
+  <link rel="stylesheet" href="../_css/cp1.css" />
+  <link rel="stylesheet" href="../_css/modal.css">
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+    section>div:nth-child(1) {
+      height: 80px;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="title" onClick="window.location.href = './main.html';">
+      SCP School
+    </div>
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div id="subtitle" onclick="window.location.href = '1-1.html';">
+      일반 C
+    </div>
+    <div onclick="window.location.href = '../html_cp2/memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+  <section>
+    <div>28) 인수 전달 방법</div>
+    <div class="category">1. C언어 시작</div>
+    <div class="sub_category" onclick="window.location.href = './1-1.html';">&nbsp&nbsp1) C언어 개요</div>
+    <div class="sub_category" onclick="window.location.href = './1-2.html';">&nbsp&nbsp2) C언어 기초</div>
+    <div class="sub_category" onclick="window.location.href = './1-3.html';">&nbsp&nbsp3) C프로그래밍</div>
+    <div class="sub_category" onclick="window.location.href = './1-4.html';">&nbsp&nbsp4) C프로그램의 특징</div>
+    <div class="sub_category" onclick="window.location.href = './1-5.html';">&nbsp&nbsp5) printf() 함수</div>
+    <div class="sub_category" onclick="window.location.href = './1-6.html';">&nbsp&nbsp6) scanf() 함수</div>
+    <div class="category">2. 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-7.html';">&nbsp&nbsp7) 변수</div>
+    <div class="sub_category" onclick="window.location.href = './2-8.html';">&nbsp&nbsp8) 상수</div>
+    <div class="sub_category" onclick="window.location.href = './2-9.html';">&nbsp&nbsp9) 기본 타입</div>
+    <div class="sub_category" onclick="window.location.href = './2-10.html';">&nbsp&nbsp10) 타입 변환</div>
+    <div class="category">3. 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-11.html';">&nbsp&nbsp11) 산술 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-12.html';">&nbsp&nbsp12) 대입 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-13.html';">&nbsp&nbsp13) 증갑 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-14.html';">&nbsp&nbsp14) 비교 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-15.html';">&nbsp&nbsp15) 논리 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-16.html';">&nbsp&nbsp16) 비트 연산자</div>
+    <div class="sub_category" onclick="window.location.href = './3-17.html';">&nbsp&nbsp17) 기타 연산자</div>
+    <div class="category">4. 제어문</div>
+    <div class="sub_category" onclick="window.location.href = './4-18.html';">&nbsp&nbsp18) 조건문</div>
+    <div class="sub_category" onclick="window.location.href = './4-19.html';">&nbsp&nbsp19) 반복문</div>
+    <div class="sub_category" onclick="window.location.href = './4-20.html';">&nbsp&nbsp20) 기타 제어문</div>
+    <div class="category">5. 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-21.html';">&nbsp&nbsp21) C언어 함수</div>
+    <div class="sub_category" onclick="window.location.href = './5-22.html';">&nbsp&nbsp22) 변수의 유효 범위</div>
+    <div class="sub_category" onclick="window.location.href = './5-23.html';">&nbsp&nbsp23) 재귀 호출</div>
+    <div class="category">6. 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-24.html';">&nbsp&nbsp24) 2차원 배열</div>
+    <div class="sub_category" onclick="window.location.href = './6-25.html';">&nbsp&nbsp25) 다차원 배열</div>
+    <div class="category">7. 포인터</div>
+    <div class="sub_category" onclick="window.location.href = './7-26.html';">&nbsp&nbsp26) 포인터의 개념</div>
+    <div class="sub_category" onclick="window.location.href = './7-27.html';">&nbsp&nbsp27) 포인터 연산</div>
+    <div id="now" onclick="window.location.href = './7-28.html';">&nbsp&nbsp28) 인수 전달 방법</div>
+    <div class="sub_category" onclick="window.location.href = './7-29.html';">&nbsp&nbsp29) 다양한 포인터</div>
+    <div class="category">8. 포인터와 배열</div>
+    <div class="sub_category" onclick="window.location.href = './8-30.html';">&nbsp&nbsp30) 포인터와 배열의 관계</div>
+    <div class="sub_category" onclick="window.location.href = './8-31.html';">&nbsp&nbsp31) 포인터 배열과 배열 포인터</div>
+  </section>
+  <article>
+    <div>
+      <a href="./7-29.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./7-27.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <br /><br />
+      <h2>인수 전달 방법</h2>
+      <hr />
+
+      <h3>인수 전달 방법</h3>
+
+      <p>함수를 호출할 때에는 함수에 필요한 데이터를&nbsp;인수(argument)로&nbsp;전달해 줄 수&nbsp;있습니다.</p>
+
+      <p>이렇게 함수에&nbsp;인수를&nbsp;전달하는 방법에는 크게 다음과 같이 두 가지 방법이 있습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <p>1. 값에 의한 전달(call by value)</p>
+
+      <p>2. 참조에 의한 전달(call by reference)</p>
+
+      <hr />
+      <h3>값에 의한 전달(call by value)</h3>
+
+      <p>값에 의한 전달 방법은 인수로 전달되는&nbsp;변수가 가지고 있는 값을 함수 내의 매개변수에&nbsp;복사하는 방식입니다.</p>
+
+      <p>이렇게 복사된 값으로 초기화된 매개변수는 인수로 전달된 변수와는 완전히 별개의 변수가 됩니다.</p>
+
+      <p>따라서 함수 내에서의 매개변수&nbsp;조작은 인수로 전달되는&nbsp;변수에 아무런 영향을 미치지 않습니다.</p>
+
+      <p>&nbsp;</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span> &nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">void</span> local<span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> var <span style="color: #339933;">=</span> <span style="color: #0000dd;">10</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;변수 var의 초깃값은 %d입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> var<span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>local<span style="color: #009900;">(</span>var<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;local() 함수 호출 후 변수 var의 값은 %d입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> var<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">void</span> local<span style="color: #009900;">(</span><span style="color: #993333;">int</span> num<span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>num <span style="color: #339933;">+=</span> <span style="color: #0000dd;">10</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">변수 var의 초기값은 10입니다.</p>
+
+        <p class="textarea">local() 함수 호출 후 변수 var의 값은 10입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제에서 local() 함수의 매개변수 num는 인수로 변수 var의 값을&nbsp;전달받습니다.</p>
+
+      <p>따라서 함수 내에서 매개변수 num의 값을 아무리 변경하더라도 원래 인수로 전달된&nbsp;변수 var의 값은 절대 변경되지 않습니다.</p>
+
+      <hr />
+      <h3>참조에 의한 전달(call by reference)</h3>
+
+      <p>참조에 의한 전달 방법은 인수로 변수의 값을 전달하는 것이 아닌, 해당 변수의 주소값을 전달합니다.</p>
+
+      <p>즉 함수의 매개변수에 인수로 전달된 변수의 원래 주소값을 저장하는 것입니다.</p>
+
+      <p>이 방식을 사용하면&nbsp;인수로 전달된 변수의 값을 함수 내에서 변경할 수 있게 됩니다.</p>
+
+      <p>&nbsp;</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span> &nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">void</span> local<span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span><span style="color: #009900;">)</span><span
+            style="color: #339933;">;</span></p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> var <span style="color: #339933;">=</span> <span style="color: #0000dd;">10</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;변수 var의 초깃값은 %d입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> var<span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>local<span style="color: #009900;">(</span><span style="color: #339933;">&amp;</span>var<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;local() 함수 호출 후 변수 var의 값은 %d입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> var<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+
+        <p class="textarea">&nbsp;</p>
+
+        <p class="textarea"><span style="color: #993333;">void</span> local<span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span> num<span style="color: #009900;">)</span></p>
+
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #339933;">*</span>num <span style="color: #339933;">+=</span> <span style="color: #0000dd;">10</span><span style="color: #339933;">;</span></p>
+
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+
+        <p class="textarea">변수 var의 초기값은 10입니다.</p>
+
+        <p class="textarea">local() 함수 호출 후 변수 var의 값은 20입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <p>위의 예제에서 local() 함수의 매개변수 num는 인수로 변수 var의 주소값을&nbsp;전달받습니다.</p>
+
+      <p>따라서 함수 내에서 매개변수 num의 값을 변경하면, 원래 인수인 변수&nbsp;var의 값도&nbsp;같이 변경됩니다.</p>
+
+      <hr /><br /><br />
+      <a href="./7-29.html">
+        <div class="button" id="next">다음 ▶</div>
+      </a>
+      <a href="./7-27.html">
+        <div class="button" id="prev">◀ 이전</div>
+      </a>
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <script src="../_js/modal.js"></script>
+<div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div></body>
+
+</html>

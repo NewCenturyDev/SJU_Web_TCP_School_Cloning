@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="ko" dir="ltr">
+  <meta charset="utf-8">
+  <title>매크로 함수</title>
+  <link rel="stylesheet" href="../_css/cp2.css" /> <!-- 고급 C 관련 css -->
+  <link rel="stylesheet" href="../_css/modal.css"> <!-- 로그인 관련 css -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <style>
+    section>div:nth-child(1) { /* 사이드 메뉴에서 소제목 부분을 돋보이게 하기위한 처리 */
+      height: 40px;
+      padding: 40px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 상단 헤더(SCP School) 부분 -->
+  <header>
+    <div id="title" onClick="window.location.href = '../main.html';">
+      SCP School
+    </div>
+    <!-- 로그인 관련 부분 -->
+    <div id="regbtn" onClick="ShowReg();">회원가입</div>
+    <div id="resignbtn" onClick="resign();">회원탈퇴</div>
+    <div id="loginbtn" onClick="ShowAuth();">로그인</div>
+    <div id="logoutbtn" onClick="logout();">로그아웃</div>
+  </header>
+
+  <!-- 상단 탭 메뉴 -->
+  <nav>
+    <div onClick="window.location.href = '../main.html';">
+      SCP 메인
+    </div>
+    <div onclick="window.location.href = '../html_intro/intro_1.html';">
+      SCP 소개
+    </div>
+    <div onclick="window.location.href = '../html_cp1/1-1.html';">
+      일반 C
+    </div>
+    <div id="subtitle" onclick="window.location.href = 'memory_structure.html';">
+      고급 C
+    </div>
+    <div onclick="window.location.href = '../faq.html';">
+      FAQ
+    </div>
+    <div>
+    </div>
+  </nav>
+
+  <!-- 사이드(왼쪽) 메뉴 -->
+  <section>
+    <div>48) 매크로 함수</div>
+    <div class="category">9. 메모리의 관리</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_structure.html';">&nbsp&nbsp32) 메모리의 구조</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_stackframe.html';">&nbsp&nbsp33) 스택 프레임</div>
+    <div class="sub_category" onclick="window.location.href = 'memory_malloc.html';">&nbsp&nbsp34) 메모리의 동적 할당</div>
+    <div class="category">10. 문자와 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_io.html';">&nbsp&nbsp35) 기본적인 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'string_charFunc.html';">&nbsp&nbsp36) 문자 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_string.html';">&nbsp&nbsp37) 문자열</div>
+    <div class="sub_category" onclick="window.location.href = 'string_strFunc.html';">&nbsp&nbsp38) 문자열 입출력 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'string_handling.html';">&nbsp&nbsp39) 문자열 처리 함수</div>
+    <div class="category">11. 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_intro.html';">&nbsp&nbsp40) 구조체의 기본</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_pointer.html';">&nbsp&nbsp41) 포인터와 구조체</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_application.html';">&nbsp&nbsp42) 구조체의 활용</div>
+    <div class="sub_category" onclick="window.location.href = 'struct_unionEnum.html';">&nbsp&nbsp43) 공용체와 열거체</div>
+    <div class="category">12. 입력과 출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_console.html';">&nbsp&nbsp44) 콘솔 입출력</div>
+    <div class="sub_category" onclick="window.location.href = 'io_file.html';">&nbsp&nbsp45) 파일 입출력</div>
+    <div claas="sub_category" onclick="window.location.href = 'io_fileIOFunction.html';">&nbsp&nbsp46) 파일 입출력 함수</div>
+    <div class="category">13. 선행처리</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preprocessor.html';">&nbsp&nbsp47) 선행처리기</div>
+    <div id="now" onclick="window.location.href = 'prepro_macroFunc.html';">&nbsp&nbsp48) 매크로 함수</div>
+    <div class="sub_category" onclick="window.location.href = 'prepro_preMacro.html';">&nbsp&nbsp49) 미리 정의된 매크로</div>
+    <div class="category">14. 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_headerFile.html';">&nbsp&nbsp50) 헤더 파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_module.html';">&nbsp&nbsp51) 분할 컴파일</div>
+    <div class="sub_category" onclick="window.location.href = 'compile_condCompile.html';">&nbsp&nbsp52) 조건부 컴파일</div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <article>
+    <div>
+      <!-- 다음 강좌로 이동하는 버튼 -->
+      <a href="prepro_preMacro.html"><div class="button" id="next">다음 ▶</div></a>
+      <!-- 이전 강좌로 이동하는 버튼 -->
+      <a href="prepro_preprocessor.html"><div class="button" id="prev">◀ 이전</div></a>
+
+      <br /><br />
+
+      <!-- 강좌 내용 -->
+      <h2>매크로 함수</h2>
+
+      <hr />
+      <h3>매크로 함수란?</h3>
+      <p>C언어에서는 #define 선행처리 지시문에 인수로 함수의 정의를 전달함으로써, 함수처럼 동작하는 매크로를 만들 수 있습니다.</p>
+      <p>이러한 매크로를 함수 같은 매크로(function-like macro) 또는 매크로 함수라고 합니다.</p>
+      <p>&nbsp;</p>
+      <p>다음 예제는 SUB(X, Y)와 PRT(X)라는 매크로 함수를 정의하고 사용하는 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+        <p class="textarea"><span style="color: #339933;">#define SUB(X,Y) X-Y</span></p>
+        <p class="textarea"><span style="color: #339933;">#define PRT(X) printf(&quot;계산 결과는 %d입니다.\n&quot;, X)</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> result<span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> num_01 <span style="color: #339933;">=</span> <span style="color: #0000dd;">15</span><span style="color: #339933;">,</span> num_02 <span
+            style="color: #339933;">=</span> <span style="color: #0000dd;">7</span><span style="color: #339933;">;</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> SUB<span style="color: #009900;">(</span>num_01<span style="color: #339933;">,</span> num_02<span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PRT<span style="color: #009900;">(</span>result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">계산 결과는 8입니다.</p>
+      </div>
+
+      <hr />
+      <h3>함수와 매크로 함수</h3>
+      <p>매크로 함수는 일반 함수와는 달리 단순 치환만을 해주므로, 일반 함수와 완전히 똑같은 방식으로 동작하지는 않습니다.</p>
+      <p>&nbsp;</p>
+      <p>다음 예제는 일반 함수와 매크로 함수와의 차이를 보여주는 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+        <p class="textarea"><span style="color: #339933;">#define SQR(X) X*X</span></p>
+        <p class="textarea"><span style="color: #339933;">#define PRT(X) printf(&quot;계산 결과는 %d입니다.\n&quot;, X)</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> result<span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> x <span style="color: #339933;">=</span> <span style="color: #0000dd;">5</span><span style="color: #339933;">;</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> SQR<span style="color: #009900;">(</span><span style="color: #0000dd;">10</span><span style="color: #009900;">)</span><span
+            style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PRT<span style="color: #009900;">(</span>result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> SQR<span style="color: #009900;">(</span>x<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PRT<span style="color: #009900;">(</span>result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> SQR<span style="color: #009900;">(</span>x<span style="color: #339933;">+</span><span style="color: #0000dd;">3</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PRT<span style="color: #009900;">(</span>result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">계산 결과는 100입니다.</p>
+        <p class="textarea">계산 결과는 25입니다.</p>
+        <p class="textarea">계산 결과는 23입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>위의 예제에서 맨 마지막의 매크로 함수는 예상한 결과와는 전혀 다른 결괏값을 반환합니다.</p>
+      <p>선행처리기는 매크로 정의에서 모든 X를 X+3으로 대체합니다.</p>
+      <p>따라서 SQR(x+3)은 다음과 같이 대체되어 계산됩니다.</p>
+
+      <p>&nbsp;</p>
+      <p>x+3*x+3 = 5+3*5+3 = 5+15+3 = 23</p>
+
+      <p>&nbsp;</p>
+      <p>예상한 결괏값은 8*8=64였지만 전혀 다른 결괏값이 반환되는 것입니다.</p>
+      <p>일반 함수는 인수를 프로그램이 실행 중일 때 전달받지만, 매크로 함수는 인수를 컴파일 이전에 미리 치환하기 때문입니다.</p>
+      <p>&nbsp;</p>
+
+      <p>따라서 이와 같은 오류를 미리 방지하기 위해서는 다음 예제의 ①번 코드처럼 각 인수를 모두 괄호(())로 묶어줘야 합니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+        <p class="textarea"><strong><span style="color:#800000;">①&nbsp;</span></strong><span style="color: #339933;">#define SQR(X) ((X)*(X))&nbsp;</span><span style="color:#5a525f;font-style:italic">// 매크로 함수는 이처럼 모든&nbsp;인수를 괄호로 묶어줘야 함.</span></p>
+        <p class="textarea"><span style="color: #339933;">#define PRT(X) printf(&quot;계산 결과는 %d입니다.\n&quot;, X)</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> result<span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> x <span style="color: #339933;">=</span> <span style="color: #0000dd;">5</span><span style="color: #339933;">;</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> SQR<span style="color: #009900;">(</span><span style="color: #0000dd;">10</span><span style="color: #009900;">)</span><span
+            style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PRT<span style="color: #009900;">(</span>result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> SQR<span style="color: #009900;">(</span>x<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PRT<span style="color: #009900;">(</span>result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> SQR<span style="color: #009900;">(</span>x<span style="color: #339933;">+</span><span style="color: #0000dd;">3</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PRT<span style="color: #009900;">(</span>result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span></p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">계산 결과는 100입니다.</p>
+        <p class="textarea">계산 결과는 25입니다.</p>
+        <p class="textarea">계산 결과는 64입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>위의 예제는 앞선 예제를 수정하여 정상적인 결과를 반환하게 해주는 예제입니다.</p>
+      <p>이처럼 매크로 함수가 일반 함수와 같이 동작하기 위해서는 다음과 같은 사항에 주의하여 작성해야 합니다.</p>
+
+      <p>&nbsp;</p>
+      <p>1. 매크로 함수의 전체를 괄호(())로 감싸야 합니다.</p>
+      <p>2. 매크로 함수의 인수들도 각각 괄호로 감싸야 합니다.</p>
+      <p>3. 매크로 함수를 호출할 때에는 증감 연산자(++, --)나 복합 대입 연산자 등은 사용하지 않는 것이 좋습니다.</p>
+
+      <p>&nbsp;</p>
+      <div class="tip">매크로 함수는 얼핏 함수처럼 보이지만 일반 함수와는 전혀 다른 시간대에 이루어지는 다른 과정임을 명심해야 합니다.</div>
+
+      <hr />
+      <h3>매크로 함수의 장단점</h3>
+      <p>매크로 함수의 장점은 다음과 같습니다.</p>
+
+      <p>&nbsp;</p>
+      <p>1. 매크로 함수는 단순 치환만을 해주므로, 인수의 타입을 신경 쓰지 않습니다.</p>
+      <p>2. 매크로 함수를 사용하면 여러 개의 명령문을 동시에 포함할 수 있습니다.</p>
+      <p>3. 함수 호출에 의한 성능 저하가 일어나지 않으므로, 프로그램의 실행속도가 향상됩니다.</p>
+
+      <p>&nbsp;</p>
+      <p>매크로 함수의 단점은 다음과 같습니다.</p>
+
+      <p>&nbsp;</p>
+      <p>1. 원하는 결과를 얻는 정확한 매크로 함수의 구현은 어려우며, 따라서 디버깅 또한 매우 어렵습니다.</p>
+      <p>2. 매크로 함수의 크기가 증가하면 증가할수록 사용되는 괄호 또한 매우 많아져서 가독성이 떨어집니다.</p>
+
+      <p>&nbsp;</p>
+      <p>따라서 매크로 함수는 크기가 큰 함수보다는 간단한 함수를 대체하는 데 사용하는 것이 좋습니다.</p>
+
+      <hr />
+      <h3>#과 ## 연산자</h3>
+      <p>#과 ## 연산자는 선행처리기 연산자로 #define 선행처리 지시문에서만 사용되는 연산자입니다.</p>
+      <p>C언어에서 토큰(token)이란 컴파일러가 인식하는 최소 단위의 문자나 문자열을 의미합니다.</p>
+      <p>이 두 연산자는 바로 이러한 토큰 단위의 연산에서 사용됩니다.</p>
+
+      <hr />
+      <h3># 연산자</h3>
+      <p># 연산자는 매크로 함수의 대체 리스트 안의 인수 앞에 사용하여, 토큰을 문자열로 변환시켜줍니다.</p>
+      <p>해당 토큰은 실인수로 치환되면서 양쪽에 위치한 큰따옴표(&quot;&quot;)를 포함해 그대로 문자열 상수로 변환됩니다.</p>
+
+      <p># 연산자를 사용하면 문자열 안에 매크로 함수로 전달된 인수를 포함시킬 수 있습니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+        <p class="textarea"><span style="color: #339933;">#define SQR(X) printf(&quot;&quot;#X&quot;의 제곱은 %d입니다.\n&quot;, ((X)*(X)))</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> x <span style="color: #339933;">=</span> <span style="color: #0000dd;">5</span><span style="color: #339933;">;</span></p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>SQR<span style="color: #009900;">(</span>x<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>SQR<span style="color: #009900;">(</span><span style="color: #0000dd;">3</span><span style="color: #339933;">+</span><span style="color: #0000dd;">4</span><span
+            style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">x의 제곱은 25입니다.</p>
+        <p class="textarea">3+4의 제곱은 49입니다.</p>
+      </div>
+
+      <hr />
+      <h3>## 연산자</h3>
+      <p>## 연산자는 두 개의 토큰을 하나의 토큰으로 결합해 주는 선행처리기 연산자입니다.</p>
+      <p>이 연산자는 함수 같은 매크로뿐만 아니라 객체 같은 매크로의 대체 리스트에도 사용할 수 있습니다.</p>
+      <p>이 연산자를 사용하면 변수나 함수의 이름을 프로그램의 런타임에 정의할 수 있습니다.</p>
+
+      <p>&nbsp;</p>
+      <p>다음 예제에서는 XN(n)이라는 매크로 함수를 사용하여 변수의 이름을 동적으로 작성하고 있습니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+        <p class="textarea"><span style="color: #339933;">#define XN(n) x ## n</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> XN<span style="color: #009900;">(</span><span style="color: #0000dd;">1</span><span style="color: #009900;">)</span> <span style="color: #339933;">=</span> <span
+            style="color: #0000dd;">10</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> XN<span style="color: #009900;">(</span><span style="color: #0000dd;">2</span><span style="color: #009900;">)</span> <span style="color: #339933;">=</span> <span
+            style="color: #0000dd;">20</span><span style="color: #339933;">;</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;x1에 저장된 값은 %d입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> x1<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;x2에 저장된 값은 %d입니다.<span
+              style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> x2<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">x1에 저장된 값은 10입니다.</p>
+        <p class="textarea">x2에 저장된 값은 20입니다.</p>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>다음 예제는 # 연산자와 ## 연산자를 이용하여, 동적으로 작성한 변수의 이름에 접근하는 예제입니다.</p>
+
+      <div class="codding-test">
+        <h4>예제</h4>
+        <p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+        <p class="textarea"><span style="color: #339933;">#define XN(n) x ## n</span></p>
+        <p class="textarea"><span style="color: #339933;">#define PRT_XN(n) printf(&quot;x&quot;#n&quot;에 저장된 값은 %d입니다.\n&quot;, x ## n)</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+        <p class="textarea"><span style="color: #009900;">{</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> XN<span style="color: #009900;">(</span><span style="color: #0000dd;">1</span><span style="color: #009900;">)</span> <span style="color: #339933;">=</span> <span
+            style="color: #0000dd;">10</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> XN<span style="color: #009900;">(</span><span style="color: #0000dd;">2</span><span style="color: #009900;">)</span> <span style="color: #339933;">=</span> <span
+            style="color: #0000dd;">20</span><span style="color: #339933;">;</span> &nbsp;</p>
+        <p class="textarea">&nbsp;</p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PRT_XN<span style="color: #009900;">(</span><span style="color: #0000dd;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>PRT_XN<span style="color: #009900;">(</span><span style="color: #0000dd;">2</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+        <p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+      </div>
+
+      <div class="syntax">
+        <h4>실행 결과</h4>
+        <p class="textarea">x1에 저장된 값은 10입니다.</p>
+        <p class="textarea">x2에 저장된 값은 20입니다.</p>
+      </div>
+
+      <hr />
+      <br /><br />
+      
+      <!-- 다음 강좌로 이동하는 버튼 -->
+      <a href="prepro_preMacro.html"><div class="button" id="next">다음 ▶</div></a>
+      <!-- 이전 강좌로 이동하는 버튼 -->
+      <a href="prepro_preprocessor.html"><div class="button" id="prev">◀ 이전</div></a>
+
+      <!-- 댓글 -->
+      <div id="reply">
+        <textarea id="replycontent"></textarea>
+        <div id="submitreply">작성</div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- 로그인 모달창 -->
+  <div class="modal" id="auth">
+    <div class="auth-content">
+      <h2> SCP School - Login </h2>
+      <form>
+        <input id="authid" type="text" name="id" placeholder="아이디"></input>
+        <input id="authpw" type="password" name="pw" placeholder="비밀번호"></input>
+      </form>
+      <p>
+        아이디, 비밀번호를 잊어버렸을 경우 smyun99hyper@naver.com로 문의하세요.
+        </br>
+        <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+      </p>
+      <div onclick="login();">로그인</div>
+    </div>
+  </div>
+
+  <!-- 회원가입 모달창 -->
+  <div class="modal" id="reg">
+    <div class="reg-content">
+        <h2> SCP School - Register </h2>
+        <form>
+          <input id="regid" type="text" name="id" placeholder="아이디"></input>
+          <input id="regpw" type="password" name="pw" placeholder="비밀번호"></input>
+          <input id="regpwck" type="password" name="pwck" placeholder="비밀번호 확인"></input>
+          <input type="text" name="studentnum" placeholder="학번"></input>
+          <input type="text" name="studentname" placeholder="성명"></input>
+          <input type="text" name="studentdept" placeholder="학과"></input>
+        </form>
+        <p>
+          아이디, 비밀번호를 잊어버렸을 경우 다음 연락처로 문의 바랍니다.
+          <br/>
+          사이트 관리자 연락처 : smyun99hyper@naver.com
+          <br/>
+          <br/>
+          <b>주의: Internet Explorer에서는 회원가입 / 로그인이 불가능합니다</b>
+        </p>
+        <div onclick="register();">회원가입</div>
+    </div>
+  </div>
+  <div id="remoteup" onclick="location.href='#title'"></div><div id="remotedown" onclick="location.href='#reply'"></div>
+  <script src="../_js/modal.js"></script>
+</body>
+</html>
